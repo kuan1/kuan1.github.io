@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin:0;padding:0;}
+        body{background:#eee;}
+        header{height:100px;background:#1f1f1f;color:#fff;line-height:100px;text-align:center;}
+        #container{width:1000px;height:500px;background:#fff;margin:20px auto;overflow:hidden;position:relative;}
+        #bg{color:#fff;transition:color 0.5s;line-height:500px;text-align:center;font-size:70px;width:100%;height:100%;}
+        button{width:200px;height:50px;font-size:30px;display:block;position:absolute;bottom:60px;left:400px;}
+        #show{width:300px;height:300px;display:block;line-height:300px;text-align:center;font-size:50px;font-weight:bold;border:1px solid #ccc;box-shadow:2px 2px 5px #ccc;position:absolute;top:-310px;left:350px;transition:transform 1s,top 1s;}
+        #container .active{
+            transform:rotate(2turn);
+            -webkit-transform:rotate(2turn);
+            top:50px;
+            display:block;
+        }
+        #container .active02{
+            color:#f00;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>公司抽奖</h1>
+</header>
+<div id="container">
+    <div id="bg"></div>
+    <span id="show">等待...</span>
+    <button id="btn">开始抽奖</button>
+</div>
+</body>
+<script>
+    var _show = document.getElementById("show"),
+         _btn = document.getElementById("btn"),
+         _bg = document.getElementById("bg");
+         _names = ["杨洋","李静琦","李航飞","苗孟敏","雷厚阳","蒋学友","李圆圆","张玉峰","赵俊杰","刘冰杰","尚帅斌","张玉","李文博","沈孟召","杨成振","王曼","李聪聪","陈瑞","黄亚洲","刘爽","刘林杰","胡仁强","杨云普","赵焕玉","张宁","张进峰","杨洋","李静琦","李航飞","苗孟敏","雷厚阳","蒋学友","李圆圆","张玉峰","赵俊杰","刘冰杰","尚帅斌","张玉","李文博","沈孟召","杨成振","佳姐","王曼","佳姐","李聪聪","陈瑞","黄亚洲","刘爽","刘林杰","胡仁强","杨云普","赵焕玉","张宁","张进峰","杨洋","李静琦","李航飞","苗孟敏","雷厚阳","李勉","蒋学友","李圆圆","张玉峰","赵俊杰","刘冰杰","佳姐","尚帅斌","张玉","李文博","沈孟召","杨成振","王曼","李聪聪","陈瑞","黄亚洲","刘爽","刘林杰","雷厚阳","胡仁强","杨云普","赵焕玉","张宁","张进峰","佳姐"];
+
+    var flag = true;
+    var timer;
+    _btn.onclick = function(){
+        if(flag){
+            _show.className = "active";
+            _btn.textContent = "取消抽奖";
+            _bg.removeAttribute("class");
+            timer = setInterval(function(){
+                var _s = parseInt(Math.random() * _names.length);
+                var _name = _names[_s];
+                _show.innerHTML = _name;
+                _bg.textContent = _name;
+                //console.log(_name);
+            },50);
+            console.log(_show)
+        }else{
+            clearInterval(timer);
+            _btn.textContent = "开始抽奖";
+            _show.removeAttribute("class");
+            _bg.className = "active02";
+        }
+        flag = !flag;
+    }
+</script>
+</html>
