@@ -1,3 +1,3 @@
 let entry = {
-  'tuling': '找我聊天'
+  // 'tuling': '找我聊天'
 };
