@@ -3,16 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
+  <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/animate.min.css">
   <style>
     h1 {
       width: 70%;
-      height: 200px;
-      line-height: 200px;
-      font-size: 50px;
+      height: 100px;
+      line-height: 100px;
+      font-size: 30px;
       text-align: center;
       border: 1px solid #ccc;
-      box-shadow: 10px 10px 10px 5px #ccc;
+      box-shadow: 5px 5px 10px 5px #ccc;
       border-radius: 20px;
       margin: 50px auto;
     }
@@ -20,11 +21,46 @@
       float: right;
       transform: scale(0.5);
     }
+    .container{
+      width: 70%;
+      margin: 0 auto;
+    }
+    .item {
+      font-size: 16px;
+      width: 100px;
+      padding: 20px 30px;
+      border: 1px solid #eee;
+      -webkit-box-shadow: 2px 2px 5px 0px #cccccc;
+      -moz-box-shadow: 2px 2px 5px 0px #cccccc;
+      box-shadow: 2px 2px 5px 0px #cccccc;
+      cursor: pointer;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 10px;
+    }
+    .item a {
+      font-size: 20px;
+    }
   </style>
 </head>
 <body>
   <h1 class="animated zoomInDown">卢忠宽</h1>
+  <div class='container'></div>
 </body>
 <script src="js/line.js"></script>
 <script src="js/flower.js"></script>
+<script src="entry.js"></script>
+<script>
+  let _con = document.querySelector('.container');
+
+  Object.keys(entry).map((item, i) => {
+    let _div = document.createElement('div');
+    let _a = document.createElement('a');
+    _a.setAttribute('href', './pages/' + item);
+    _div.appendChild(_a);
+    _div.className = 'item';
+    _a.innerHTML = Object.values(entry)[i];
+    _con.appendChild(_div);
+  });
+</script>
 </html>
