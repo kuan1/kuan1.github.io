@@ -1,0 +1,23 @@
+---
+title: git下载仓库指定文件夹
+date: 2018-09-27 13:22:49
+---
+## git下载仓库指定文件夹
+
+```
+# 初始化仓库
+git init
+
+# 设置允许克隆子目录
+git config core.sparsecheckout true
+
+# 设置要克隆的仓库的子目录路径
+echo '文件夹名字/*' >> .git/info/sparse-checkout
+
+# 关联远程仓库
+git remote add origin -f git@github.com:mygithub/test.git
+
+# 下载
+git pull origin master  
+```
+  

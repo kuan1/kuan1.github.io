@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>vue中使用配置百度统计和微信分享 | 卢忠宽的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="微信1.4.0sdk分享 https://www.luzhongkuan.cn/detail/167 在路由的钩子函数中使用百度统计和微信分享 中间延迟300毫秒为了拿到正确的路径  1234567891011121314151617181920212223import wechatShare from &amp;apos;@/utils/wx/share&amp;apos;import statistics f">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue中使用配置百度统计和微信分享">
+<meta property="og:url" content="https://www.luzhongkuan.cn/2018/06/27/vue中使用配置百度统计和微信分享/index.html">
+<meta property="og:site_name" content="卢忠宽的个人博客">
+<meta property="og:description" content="微信1.4.0sdk分享 https://www.luzhongkuan.cn/detail/167 在路由的钩子函数中使用百度统计和微信分享 中间延迟300毫秒为了拿到正确的路径  1234567891011121314151617181920212223import wechatShare from &amp;apos;@/utils/wx/share&amp;apos;import statistics f">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-03-17T14:36:07.038Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vue中使用配置百度统计和微信分享">
+<meta name="twitter:description" content="微信1.4.0sdk分享 https://www.luzhongkuan.cn/detail/167 在路由的钩子函数中使用百度统计和微信分享 中间延迟300毫秒为了拿到正确的路径  1234567891011121314151617181920212223import wechatShare from &amp;apos;@/utils/wx/share&amp;apos;import statistics f">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">卢忠宽的个人博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一个普通的前端开发者</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://www.luzhongkuan.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-vue中使用配置百度统计和微信分享" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/27/vue中使用配置百度统计和微信分享/" class="article-date">
+  <time datetime="2018-06-27T06:32:19.000Z" itemprop="datePublished">2018-06-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      
+  
+    <h1 class="article-title" itemprop="name">
+      vue中使用配置百度统计和微信分享
+    </h1>
+  
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <p>微信1.4.0sdk分享 <a href="https://www.luzhongkuan.cn/detail/167">https://www.luzhongkuan.cn/detail/167</a></p>
+<h4 id="在路由的钩子函数中使用百度统计和微信分享"><a href="#在路由的钩子函数中使用百度统计和微信分享" class="headerlink" title="在路由的钩子函数中使用百度统计和微信分享"></a>在路由的钩子函数中使用百度统计和微信分享</h4><blockquote>
+<p>中间延迟300毫秒为了拿到正确的路径</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">import wechatShare from &apos;@/utils/wx/share&apos;</span><br><span class="line">import statistics from &apos;./statistics&apos; // 统计</span><br><span class="line"></span><br><span class="line">router.afterEach((route) =&gt; &#123;</span><br><span class="line">  // 设置路由title</span><br><span class="line">  if (route.meta.title) &#123;</span><br><span class="line">    setTitle(route.meta.title)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  // 拿到正确的路径，多以添加延迟</span><br><span class="line">  setTimeout(() =&gt; &#123;</span><br><span class="line">    statistics(route.fullPath) // 百度统计</span><br><span class="line"></span><br><span class="line">    // 分享</span><br><span class="line">    if (route.name === &apos;userBuyTickets&apos; || route.name === &apos;userRushBuy&apos;) &#123;</span><br><span class="line">      wechatShare(&#123; link: window.location.href &#125;)</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      wechatShare()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, 300)</span><br><span class="line"></span><br><span class="line">  NProgress.done()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="百度统计"><a href="#百度统计" class="headerlink" title="百度统计"></a>百度统计</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 百度统计</span><br><span class="line">const baiduAnalytics = (href) =&gt; &#123;</span><br><span class="line">  if (typeof _hmt === &apos;undefined&apos;) &#123;</span><br><span class="line">    // 服务端渲染时候, _hmt 是 undefined</span><br><span class="line">    return;</span><br><span class="line">  &#125;</span><br><span class="line">  _hmt.push([&apos;_trackPageview&apos;, href]);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">export default (href) =&gt; &#123;</span><br><span class="line">  baiduAnalytics(ref);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="微信分享"><a href="#微信分享" class="headerlink" title="微信分享"></a>微信分享</h4><blockquote>
+<p>分享到朋友圈没有标题，分享到朋友有标题和表述，所以配置分享朋友圈的时候使用分享朋友的描述，防止分享朋友圈内容过短（注意：最近看到微信文档上说可能会下线分享功能）</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">// 微信分享, 使用方法 【loadWechatJSSDK动态引入微信sdk js文件，getWechatConfig获取需要注入的参数】</span><br><span class="line">import &#123; loadWechatJSSDK, isWechat, getWechatConfig &#125; from &apos;./tools&apos;;</span><br><span class="line"></span><br><span class="line">// 微信分享的默认数据</span><br><span class="line">const getDefaultData = () =&gt; (&#123;</span><br><span class="line">  title: &apos;&apos;, // 分享标题</span><br><span class="line">  desc: &apos;&apos;, // 分享描述</span><br><span class="line">  link: window.location.origin, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致</span><br><span class="line">  imgUrl: &apos;&apos;, // 分享图标</span><br><span class="line">  type: &apos;link&apos;, // 分享类型,music、video 或 link，不填默认为link</span><br><span class="line">  dataUrl: &apos;&apos;, // 如果 type 是 music 或 video，则要提供数据链接，默认为空</span><br><span class="line">  success() &#123;&#125;, // 用户确认分享后执行的回调函数</span><br><span class="line">  cancel() &#123;&#125;, // 用户取消分享后执行的回调函数</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// 分享到朋友圈</span><br><span class="line">function menuShareTimeline(shareConfig) &#123;</span><br><span class="line">  const &#123; title, link, imgUrl, success &#125; = shareConfig;</span><br><span class="line">  const timeLineConfig = &#123;</span><br><span class="line">    title, // 分享标题</span><br><span class="line">    link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致</span><br><span class="line">    imgUrl, // 分享图标</span><br><span class="line">    success, // 用户确认分享后执行的回调函数</span><br><span class="line">  &#125;;</span><br><span class="line">  wx.onMenuShareTimeline(timeLineConfig);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 分享给朋友</span><br><span class="line">function menuShareAppMessage(shareConfig) &#123;</span><br><span class="line">  const &#123;</span><br><span class="line">    title,</span><br><span class="line">    link,</span><br><span class="line">    imgUrl,</span><br><span class="line">    success,</span><br><span class="line">    cancel,</span><br><span class="line">    desc,</span><br><span class="line">    type,</span><br><span class="line">    dataUrl,</span><br><span class="line">  &#125; = shareConfig;</span><br><span class="line">  const appMsgConfig = &#123;</span><br><span class="line">    title, // 分享标题</span><br><span class="line">    desc, // 分享描述</span><br><span class="line">    link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致</span><br><span class="line">    imgUrl, // 分享图标</span><br><span class="line">    type, // 分享类型,music、video 或 link，不填默认为link</span><br><span class="line">    dataUrl, // 如果 type 是 music 或 video，则要提供数据链接，默认为空</span><br><span class="line">    success, // 用户确认分享后执行的回调函数</span><br><span class="line">    cancel, // 用户取消分享后执行的回调函数</span><br><span class="line">  &#125;;</span><br><span class="line">  // 注意: 下个微信版本, 会取消[分享成功, 分享失败]的回调;</span><br><span class="line">  wx.onMenuShareAppMessage(appMsgConfig); // 分享给朋友</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 微信分享 export default</span><br><span class="line">export default async function wechatShare(shareData) &#123;</span><br><span class="line">  if (!isWechat) &#123;</span><br><span class="line">    // 服务器渲染时也是非微信浏览器, 非微信浏览器 不进行微信分享</span><br><span class="line">    return;</span><br><span class="line">  &#125;</span><br><span class="line">  // 同时获取 微信签名, 和 微信 JS-SDK</span><br><span class="line">  const [wechatConfig] = await Promise.all([</span><br><span class="line">    getWechatConfig(),</span><br><span class="line">    loadWechatJSSDK(),</span><br><span class="line">  ]);</span><br><span class="line">  wx.config(wechatConfig); // 配置微信参数, 为 jsapi 授权</span><br><span class="line">  const shareConfig = &#123; ...getDefaultData(), ...shareData &#125;;</span><br><span class="line">  wx.ready(() =&gt; &#123;</span><br><span class="line">    menuShareTimeline(shareConfig); // 分享到朋友圈</span><br><span class="line">    menuShareAppMessage(shareConfig); // 分享给朋友</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.luzhongkuan.cn/2018/06/27/vue中使用配置百度统计和微信分享/" data-id="cjtd0w6cf004nrfcfd6ng6kki" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+  
+<nav id="article-nav">
+  
+    <a href="/2018/07/16/vue自定义指令(元素出现在可视区域添加class)/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          vue自定义指令(元素出现在可视区域添加class)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/06/18/-js实现语音朗读/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">js实现语音朗读</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/03/08/node使用wechaty制作微信机器人每天给老婆发送暖心/">node使用wechaty制作微信机器人每天给老婆发送暖心</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/06/使用nodeJS爬取一些测试图片/">使用nodeJS爬取一些测试图片</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/14/linux中nginx、mysql安装碰到的问题/">linux中nginx、mysql安装碰到的问题</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/27/spark-md5获取文件md5唯一标识/">spark-md5获取文件md5唯一标识</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/24/vue-cli-Invalid-Host-Origin-header/">vue-cli Invalid Host/Origin header</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+  </div>
+</body>
+</html>

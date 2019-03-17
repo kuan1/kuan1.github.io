@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>js常见兼容 | 卢忠宽的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1)滚动条： 1document.documentElement.scrollTop||document.body.scrollTop  2) 获取样式兼容   12345function getStyle(dom, styleName)&amp;#123;return dom.currentStyle?dom.currentStyle[styleName]:getComputedStyle(dom)[">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js常见兼容">
+<meta property="og:url" content="https://www.luzhongkuan.cn/2016/06/30/js常见兼容/index.html">
+<meta property="og:site_name" content="卢忠宽的个人博客">
+<meta property="og:description" content="1)滚动条： 1document.documentElement.scrollTop||document.body.scrollTop  2) 获取样式兼容   12345function getStyle(dom, styleName)&amp;#123;return dom.currentStyle?dom.currentStyle[styleName]:getComputedStyle(dom)[">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-03-17T14:36:01.260Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="js常见兼容">
+<meta name="twitter:description" content="1)滚动条： 1document.documentElement.scrollTop||document.body.scrollTop  2) 获取样式兼容   12345function getStyle(dom, styleName)&amp;#123;return dom.currentStyle?dom.currentStyle[styleName]:getComputedStyle(dom)[">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">卢忠宽的个人博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一个普通的前端开发者</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://www.luzhongkuan.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-js常见兼容" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/30/js常见兼容/" class="article-date">
+  <time datetime="2016-06-30T15:22:47.000Z" itemprop="datePublished">2016-06-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      
+  
+    <h1 class="article-title" itemprop="name">
+      js常见兼容
+    </h1>
+  
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <ul>
+<li><p>1)滚动条：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.documentElement.scrollTop||document.body.scrollTop</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2) 获取样式兼容</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function getStyle(dom, styleName)&#123;</span><br><span class="line">return dom.currentStyle?</span><br><span class="line">dom.currentStyle[styleName]:</span><br><span class="line">getComputedStyle(dom)[styleName];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>3) 网页可视区域兼容<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">window.innerHeight || document.documentElement.clientHeight</span><br><span class="line">window.innerWidth || document.documentElement.clientWidth</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>4） 事件对象兼容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">evt = evt || window.event;</span><br><span class="line">event.target.className</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>5） 阻止事件冒泡兼容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">event.stopPropagation?</span><br><span class="line">event.stopPropagation():</span><br><span class="line">event.cancelBubble=true;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>6）阻止默认行为兼容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">evt.preventDefault?</span><br><span class="line">evt.preventDefault():</span><br><span class="line">evt.returnValue=false;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>7）事件监听兼容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">document.all?</span><br><span class="line">    dom.attachEvent(“onclick”, fn)：</span><br><span class="line">    dom.addEventListener(“click”, fn);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>8）事件委托目标对象兼容</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var t = event.target || event.srcElement;【if(t.nodeName.toLowerCase() == “li”)】</span><br></pre></td></tr></table></figure>
+<ul>
+<li>9）ajax请求的兼容<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var http;</span><br><span class="line">window.XMLHttpRequest?</span><br><span class="line">http = new XMLHttpRequest():</span><br><span class="line">http = new AtiveXObject(&apos;Microsoft.XMLHTTP&apos;);</span><br><span class="line">`</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.luzhongkuan.cn/2016/06/30/js常见兼容/" data-id="cjtd0w1xk003urfcfiad7a4de" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+  
+<nav id="article-nav">
+  
+    <a href="/2016/07/04/手写简单的贪吃蛇/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          手写简单的贪吃蛇
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/06/30/h5新的储存机制/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">h5新的储存机制</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/03/08/node使用wechaty制作微信机器人每天给老婆发送暖心/">node使用wechaty制作微信机器人每天给老婆发送暖心</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/06/使用nodeJS爬取一些测试图片/">使用nodeJS爬取一些测试图片</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/14/linux中nginx、mysql安装碰到的问题/">linux中nginx、mysql安装碰到的问题</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/27/spark-md5获取文件md5唯一标识/">spark-md5获取文件md5唯一标识</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/24/vue-cli-Invalid-Host-Origin-header/">vue-cli Invalid Host/Origin header</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+  </div>
+</body>
+</html>

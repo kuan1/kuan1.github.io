@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>canvas基础 | 卢忠宽的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="- 简介 在js中进行图片的绘制 往往用于全屏类的动画和小游戏的制作和图标的绘制  - 基本语法 &amp;lt;canvas width=&amp;#39;400&amp;#39; height=&amp;#39;500&amp;#39; id=&amp;#39;canvas&amp;#39;&amp;gt;&amp;lt;/canvas&amp;gt; var canvas = document.getElementById(‘canvas’); var ctx = ca">
+<meta property="og:type" content="article">
+<meta property="og:title" content="canvas基础">
+<meta property="og:url" content="https://www.luzhongkuan.cn/2016/08/14/canvas基础/index.html">
+<meta property="og:site_name" content="卢忠宽的个人博客">
+<meta property="og:description" content="- 简介 在js中进行图片的绘制 往往用于全屏类的动画和小游戏的制作和图标的绘制  - 基本语法 &amp;lt;canvas width=&amp;#39;400&amp;#39; height=&amp;#39;500&amp;#39; id=&amp;#39;canvas&amp;#39;&amp;gt;&amp;lt;/canvas&amp;gt; var canvas = document.getElementById(‘canvas’); var ctx = ca">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-03-17T14:35:57.937Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="canvas基础">
+<meta name="twitter:description" content="- 简介 在js中进行图片的绘制 往往用于全屏类的动画和小游戏的制作和图标的绘制  - 基本语法 &amp;lt;canvas width=&amp;#39;400&amp;#39; height=&amp;#39;500&amp;#39; id=&amp;#39;canvas&amp;#39;&amp;gt;&amp;lt;/canvas&amp;gt; var canvas = document.getElementById(‘canvas’); var ctx = ca">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">卢忠宽的个人博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一个普通的前端开发者</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://www.luzhongkuan.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-canvas基础" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/14/canvas基础/" class="article-date">
+  <time datetime="2016-08-14T07:57:34.000Z" itemprop="datePublished">2016-08-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      
+  
+    <h1 class="article-title" itemprop="name">
+      canvas基础
+    </h1>
+  
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <h2 id="简介"><a href="#简介" class="headerlink" title="- 简介"></a>- 简介</h2><ul>
+<li>在js中进行图片的绘制</li>
+<li>往往用于全屏类的动画和小游戏的制作和图标的绘制</li>
+</ul>
+<h2 id="基本语法"><a href="#基本语法" class="headerlink" title="- 基本语法"></a>- 基本语法</h2><ul>
+<li><code>&lt;canvas width=&#39;400&#39; height=&#39;500&#39; id=&#39;canvas&#39;&gt;&lt;/canvas&gt;</code></li>
+<li>var canvas = document.getElementById(‘canvas’);</li>
+<li>var ctx = canvas.getContext(‘2d’);</li>
+</ul>
+<h2 id="canvas常用方法"><a href="#canvas常用方法" class="headerlink" title="- canvas常用方法"></a>- canvas常用方法</h2><ul>
+<li>ctx.beginPath()：设置起始路径</li>
+<li>ctx.closePath()：自动闭合开始点和终点</li>
+<li>ctx.fillStyle = color：设置填充样式</li>
+<li>ctx.strokeStyle = color：设置描边样式</li>
+<li>ctx.fill()：声明填充</li>
+<li>ctx.stroke()：声明描边</li>
+<li><p>ctx.lineWidth = number：描边宽度</p>
+</li>
+<li><p>ctx.rect(x,yx,w,h)：绘制矩形</p>
+</li>
+<li>x，y：起始点坐标</li>
+<li>w：设定的宽度</li>
+<li><p>h：设定的高度</p>
+</li>
+<li><p>ctx.clearRect(x,y,w,h)：清除矩形</p>
+</li>
+<li><p>ctx.arc(x,y,r,start_point,end_point,countWise)：绘制圆形</p>
+</li>
+<li>x,y：圆心坐标</li>
+<li>r：圆心的半径</li>
+<li>start_point：起始点（0-2*math.PI）</li>
+<li>end_point：终止点（0-2*math.PI）</li>
+<li>countWise：绘制方向|true、flase</li>
+</ul>
+<p><strong>- 绘制线段</strong></p>
+<ul>
+<li>moveTo(x,y)：设定要开始线段的坐标</li>
+<li><p>lineTo(x,y)：目标线段坐标</p>
+</li>
+<li><p>arcTo(x1,y1,x2,y2,r)：绘制弧度</p>
+</li>
+<li>x1,y1：控制点坐标</li>
+<li>x2,y2：结束点坐标</li>
+<li><p>r：绘制弧度的半径</p>
+</li>
+<li><p>ctx.quadraticCurveTo(x1,y1,x2,y2)：绘制二次贝塞尔曲线</p>
+</li>
+<li>x1,y1：控制点坐标</li>
+<li>x2,y2：结束点坐标</li>
+<li>ctx.bezierCurveTo(x1,y1,x2,y2,x3,y3)：绘制三次贝塞尔曲线</li>
+<li>x1,y1：控制点坐标</li>
+<li>x2,y2：结束点坐标</li>
+<li>x3,y3：结束点坐标<br>-</li>
+<li>关于css3中的贝塞尔曲线</li>
+<li>贝塞尔曲线是指过渡效果</li>
+<li></li>
+<li>ctx.createLinearGradient(x1,y1,x2,y2)：设置线性渐变</li>
+<li>x1,y1：起点坐标</li>
+<li>x1,y1：起点坐标</li>
+<li>lg.addColorStop(p,color)：0-1设置颜色</li>
+<li>可以设置填充，描边：</li>
+<li>var lg = ctx.cteateLinearGradient(x1,y1,x2,y2)</li>
+<li><p>fillStyle = lg</p>
+</li>
+<li><p>ctx.createRadialGradient(x1,y1,r1,x2,y2,r2)：设置径向渐变</p>
+</li>
+<li>x1,y1,r1：內圆圆心的坐标和半径</li>
+<li><p>x2,y2,r2：外圆圆心的坐标和半径</p>
+</li>
+<li><p><strong>图形转换</strong></p>
+</li>
+<li>ctx.translate(x,y)：平移</li>
+<li>x,y：平移的坐标</li>
+<li>ctx.rotate(darg)：旋转</li>
+<li>darg：弧长 arg*Math.PI/180</li>
+<li>ctx.scale(w,h)：放大</li>
+<li><p>w：宽度方向上倍数 h：高度方向上倍数</p>
+</li>
+<li><p><strong>绘制阴影</strong></p>
+</li>
+<li>shadowOffsetX：水平平移距离</li>
+<li>shadowOffsetY：垂直平移距离</li>
+<li>shadowBlur：模糊大小</li>
+<li>shadowColor：阴影颜色</li>
+<li>v-shadow=distance*sin(180-角度）</li>
+<li>h-shadow=distance*cos(180-角度）</li>
+<li>spread=size-size*拓展</li>
+<li><p>blur=size-spread</p>
+</li>
+<li><p><strong>绘制文本属性</strong></p>
+</li>
+<li>ctx.font = ‘style size family’：设置文本样式</li>
+<li>ctx.textBaseline = ‘top|midde|bottom’：设置文本基线</li>
+<li>ctx.textAlign = ‘left|center|right’：设置水平对齐方式</li>
+<li>ctx.fillText = ‘text,x,y’：设置实心字体</li>
+<li>text：文字信息</li>
+<li>x,y：文字位置</li>
+<li>ctx.strokeText = ‘text,x,y’：设置空心字体</li>
+<li>text：文字信息</li>
+<li><p>x,y：文字位置</p>
+</li>
+<li><p><strong>绘制图片</strong></p>
+</li>
+<li>drawImage(img,sx,sy,sw,sh,x,y,w,h)</li>
+<li>sx,sy：裁剪坐标</li>
+<li>sw,sh：裁剪高度</li>
+<li>x,y：canvas中的坐标</li>
+<li>w,h：对象高度</li>
+<li>var img = new Image();img.src = ‘img/html.png’;img.onload = function(){    ctx.drawImage(img,0,0,399,302,0,0,800,800);}</li>
+</ul>
+<p> <strong>图像组合</strong></p>
+<ul>
+<li>globalCompositeOperation：设置图像组合</li>
+<li>sourse-over：新图像在原图像之上</li>
+<li>destination-over：原图上在新图像之上</li>
+<li>source-in：取交集部分显示新图像</li>
+<li>destination-in：取交集部分显示原图像</li>
+<li>sourse-atop：显示原图和交集部分 交集部分显示新图像</li>
+<li>destination-atop：显示新图像和交集部分 交集部分显示原图像</li>
+<li>sourse-out：显示新图像非交集部分</li>
+<li>destination-out：显示原图像非交集部分</li>
+<li>lighter：都显示，重叠部分颜色叠加</li>
+<li>xor：费交集部分显示</li>
+<li>copy：只显示新图像</li>
+<li></li>
+<li><strong>存入和读取</strong></li>
+<li>ctx.save()：存入</li>
+<li>ctx.restore()：读取</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.luzhongkuan.cn/2016/08/14/canvas基础/" data-id="cjtd0vzbh0038rfcfkitu1upn" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+  
+<nav id="article-nav">
+  
+    <a href="/2016/08/17/上手webstorm/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          上手webstorm
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/08/13/一个百度地图的例子/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">一个百度地图的例子</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/03/08/node使用wechaty制作微信机器人每天给老婆发送暖心/">node使用wechaty制作微信机器人每天给老婆发送暖心</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/06/使用nodeJS爬取一些测试图片/">使用nodeJS爬取一些测试图片</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/14/linux中nginx、mysql安装碰到的问题/">linux中nginx、mysql安装碰到的问题</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/27/spark-md5获取文件md5唯一标识/">spark-md5获取文件md5唯一标识</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/24/vue-cli-Invalid-Host-Origin-header/">vue-cli Invalid Host/Origin header</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+  </div>
+</body>
+</html>

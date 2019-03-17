@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>卢忠宽的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一个普通的前端开发者">
+<meta property="og:type" content="website">
+<meta property="og:title" content="卢忠宽的个人博客">
+<meta property="og:url" content="https://www.luzhongkuan.cn/page/6/index.html">
+<meta property="og:site_name" content="卢忠宽的个人博客">
+<meta property="og:description" content="一个普通的前端开发者">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="卢忠宽的个人博客">
+<meta name="twitter:description" content="一个普通的前端开发者">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">卢忠宽的个人博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一个普通的前端开发者</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://www.luzhongkuan.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-linux-mysql-安装" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/03/linux-mysql-安装/" class="article-date">
+  <time datetime="2017-08-03T14:58:35.000Z" itemprop="datePublished">2017-08-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/03/linux-mysql-安装/">linux mysql 安装</a>
+    </h1>
+  
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <h2 id="mysql安装"><a href="#mysql安装" class="headerlink" title="mysql安装"></a>mysql安装</h2><ul>
+<li><p>下载<br>wget <a href="http://repo.mysql.com/mysql-community-release-el6-5.noarch.rpm" target="_blank" rel="noopener">http://repo.mysql.com/mysql-community-release-el6-5.noarch.rpm</a><br>rpm -Uvh mysql-community-release-el6-5.noarch.rpm</p>
+</li>
+<li><p>安装<br>yum -y install mysql mysql-server</p>
+</li>
+<li><p>在配置文件中加入以下配置<br>vi /etc/my.cnf<br>lower_case_table_names=1<br>character_set_server=utf8<br>[client]<br>default-character-set=utf8</p>
+</li>
+<li><p>启动<br>service mysqld start</p>
+</li>
+<li><p>重启<br>service mysqld restart</p>
+</li>
+<li><p>创建用户和实例（注意加分号！！！)</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot -p</span><br><span class="line"></span><br><span class="line">&gt; use mysql;</span><br><span class="line">&gt; update user set password=PASSWORD(&apos;xxxx&apos;) where user=&apos;root&apos;;</span><br><span class="line">&gt; create user xxx@&apos;%&apos; identified by &apos;xxxx&apos;;</span><br><span class="line">&gt; create database xxxx;</span><br><span class="line">&gt; grant all privileges on *.* to xxxx@&apos;%&apos; identified by &apos;xxxx&apos;;</span><br><span class="line">&gt; flush privileges;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.luzhongkuan.cn/2017/08/03/linux-mysql-安装/" data-id="cjtd0w2p60040rfcff8lfmvo3" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-react富文本" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/23/react富文本/" class="article-date">
+  <time datetime="2017-07-23T15:25:45.000Z" itemprop="datePublished">2017-07-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/23/react富文本/">react富文本</a>
+    </h1>
+  
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <blockquote>
+<p>最近看了几个开源的富文本的库，quill 、react-draft-wysiwyg、braft-editor、braft-editor</p>
+</blockquote>
+<h3 id="自己用的简单的富文本"><a href="#自己用的简单的富文本" class="headerlink" title="自己用的简单的富文本"></a>自己用的简单的富文本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;;</span><br><span class="line">import PropTypes from &apos;prop-types&apos;;</span><br><span class="line">import &#123;connect&#125; from &apos;react-redux&apos;;</span><br><span class="line">import BraftEditor from &apos;braft-editor&apos;;</span><br><span class="line">import &apos;braft-editor/dist/braft.css&apos;;</span><br><span class="line">import * as FileAction from &apos;actions/FileAction&apos;;</span><br><span class="line">import &#123;message&#125; from &apos;antd&apos;;</span><br><span class="line">import &#123;onReceive&#125; from &apos;qy-react&apos;;</span><br><span class="line"></span><br><span class="line">class Editor extends React.Component &#123;</span><br><span class="line">  static propTypes = &#123;</span><br><span class="line">    dispatch: PropTypes.func,</span><br><span class="line">    sendHtml: PropTypes.func,</span><br><span class="line">    html: PropTypes.string,</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  componentWillReceiveProps(nextProps) &#123;</span><br><span class="line">    let &#123;html&#125; = nextProps;</span><br><span class="line">    if (html !== this.props.html) &#123;</span><br><span class="line">      this.editorInstance.setContent(html)</span><br><span class="line">    &#125;</span><br><span class="line">    onReceive.call(this, &#123;</span><br><span class="line">      key: &apos;file&apos;,</span><br><span class="line">      nextProps,</span><br><span class="line">      success: (&#123;result&#125;) =&gt; &#123;</span><br><span class="line">        message.destroy();</span><br><span class="line">        message.success(&apos;上传成功&apos;, 1);</span><br><span class="line">        this.param.success(&#123;</span><br><span class="line">          url: result,</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  handleHTMLChange = (html) =&gt; &#123;</span><br><span class="line">    this.html = html;</span><br><span class="line">    this.props.sendHtml(html);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  uploadFile = (param) =&gt; &#123;</span><br><span class="line">    this.param = param;</span><br><span class="line">    let fd = new FormData();</span><br><span class="line">    fd.append(&apos;file&apos;, param.file);</span><br><span class="line">    this.props.dispatch(FileAction.update(fd));</span><br><span class="line">    message.info(&apos;正在上传...&apos;, 1000);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    const editorProps = &#123;</span><br><span class="line">      placeholder: &apos;请输入内容!&apos;,</span><br><span class="line">      onHTMLChange: this.handleHTMLChange,</span><br><span class="line">      viewWrapper: &apos;#editor&apos;,</span><br><span class="line">      extendControls: [</span><br><span class="line">        &#123;</span><br><span class="line">          type: &apos;split&apos;,</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          type: &apos;button&apos;,</span><br><span class="line">          text: &apos;预览&apos;,</span><br><span class="line">          className: &apos;preview-button&apos;,</span><br><span class="line">          onClick: () =&gt; &#123;</span><br><span class="line">            window.open().document.write(this.html);</span><br><span class="line">          &#125;,</span><br><span class="line">        &#125;,</span><br><span class="line">      ],</span><br><span class="line">      media: &#123;</span><br><span class="line">        image: true,</span><br><span class="line">        video: false,</span><br><span class="line">        audio: false,</span><br><span class="line">        uploadFn: this.uploadFile,</span><br><span class="line">      &#125;,</span><br><span class="line">      contentFormat: &apos;html&apos;,</span><br><span class="line">      initialContent: this.props.html,</span><br><span class="line">    &#125;;</span><br><span class="line">    return (</span><br><span class="line">      &lt;div id=&apos;editor&apos;&gt;</span><br><span class="line">        &lt;BraftEditor ref=&#123;instance =&gt; this.editorInstance = instance&#125; &#123;...editorProps&#125; /&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function mapStateToProps(state) &#123;</span><br><span class="line">  return &#123;</span><br><span class="line">    file: state.file.upload,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default connect(mapStateToProps)(Editor);</span><br></pre></td></tr></table></figure>
+<h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><ul>
+<li>安装： npm install react-draft-wysiwyg draftjs-to-html </li>
+<li>引入样式： import ‘react-draft-wysiwyg/dist/react-draft-wysiwyg.css’</li>
+</ul>
+<p><a href="https://jpuri.github.io/react-draft-wysiwyg" target="_blank" rel="noopener">https://jpuri.github.io/react-draft-wysiwyg</a>  <a href="https://github.com/jpuri/react-draft-wysiwyg" target="_blank" rel="noopener">https://github.com/jpuri/react-draft-wysiwyg</a><br> <a href="https://github.com/margox/braft-editor" target="_blank" rel="noopener">https://github.com/margox/braft-editor</a></p>
+<h3 id="与html相互转换"><a href="#与html相互转换" class="headerlink" title="与html相互转换"></a>与html相互转换</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123;Component&#125; from &apos;react&apos;;</span><br><span class="line">import &#123;EditorState, convertToRaw, ContentState, convertFromHTML&#125; from &apos;draft-js&apos;;</span><br><span class="line">import &#123;Editor&#125; from &apos;react-draft-wysiwyg&apos;;</span><br><span class="line">import draftToHtml from &apos;draftjs-to-html&apos;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class App extends Component &#123;</span><br><span class="line">  state = &#123;</span><br><span class="line">    editorState: EditorState.createWithContent(</span><br><span class="line">        ContentState.createFromBlockArray(</span><br><span class="line">          convertFromHTML(&apos;&lt;p&gt;默认&lt;/p&gt;&apos;)</span><br><span class="line">        )</span><br><span class="line">      ),</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  onEditorStateChange = (editorState) =&gt; &#123;</span><br><span class="line">    this.setState(&#123;</span><br><span class="line">      editorState</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    const &#123;editorState&#125; = this.state;</span><br><span class="line">    return (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;Editor</span><br><span class="line">          editorState=&#123;editorState&#125;</span><br><span class="line">          wrapperClassName=&apos;demo-wrapper&apos;</span><br><span class="line">          editorClassName=&apos;demo-editor&apos;</span><br><span class="line">          onEditorStateChange=&#123;this.onEditorStateChange&#125;</span><br><span class="line">        /&gt;</span><br><span class="line">        &lt;textarea</span><br><span class="line">          disabled</span><br><span class="line">          value=&#123;draftToHtml(convertToRaw(editorState.getCurrentContent()))&#125;</span><br><span class="line">        /&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default App;</span><br></pre></td></tr></table></figure>
+<h3 id="转化JSON"><a href="#转化JSON" class="headerlink" title="转化JSON"></a>转化JSON</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; Component &#125; from &apos;react&apos;;</span><br><span class="line">import &#123; convertFromRaw &#125; from &apos;draft-js&apos;;</span><br><span class="line">import &#123; Editor &#125; from &apos;react-draft-wysiwyg&apos;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">const content = &#123;&apos;entityMap&apos;:&#123;&#125;,&apos;blocks&apos;:[&#123;&apos;key&apos;:&apos;637gr&apos;,&apos;text&apos;:&apos;Initialized from content state.&apos;,&apos;type&apos;:&apos;unstyled&apos;,&apos;depth&apos;:0,&apos;inlineStyleRanges&apos;:[],&apos;entityRanges&apos;:[],&apos;data&apos;:&#123;&#125;&#125;]&#125;;</span><br><span class="line"></span><br><span class="line">class App extends Component &#123;</span><br><span class="line">  constructor(props) &#123;</span><br><span class="line">    super(props);</span><br><span class="line">    const contentState = convertFromRaw(content);</span><br><span class="line">    this.state = &#123;</span><br><span class="line">      contentState,</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  onContentStateChange = (contentState) =&gt; &#123;</span><br><span class="line">    this.setState(&#123;</span><br><span class="line">      contentState,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    const &#123; contentState &#125; = this.state;</span><br><span class="line">    return (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;Editor</span><br><span class="line">          defaultContentState=&#123;content&#125;</span><br><span class="line">          wrapperClassName=&apos;demo-wrapper&apos;</span><br><span class="line">          editorClassName=&apos;demo-editor&apos;</span><br><span class="line">          onContentStateChange=&#123;this.onContentStateChange&#125;</span><br><span class="line">        /&gt;</span><br><span class="line">        &lt;textarea</span><br><span class="line">          disabled</span><br><span class="line">          value=&#123;JSON.stringify(contentState, null, 4)&#125;</span><br><span class="line">        /&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">export default App;</span><br></pre></td></tr></table></figure>
+<h3 id="拖拽上传图片"><a href="#拖拽上传图片" class="headerlink" title="拖拽上传图片"></a>拖拽上传图片</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;;</span><br><span class="line">import &#123; Editor &#125; from &apos;react-draft-wysiwyg&apos;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function uploadImageCallBack(file) &#123;</span><br><span class="line">  return new Promise(</span><br><span class="line">    (resolve, reject) =&gt; &#123;</span><br><span class="line">      const xhr = new XMLHttpRequest();</span><br><span class="line">      xhr.open(&apos;POST&apos;, &apos;https://api.imgur.com/3/image&apos;);</span><br><span class="line">      xhr.setRequestHeader(&apos;Authorization&apos;, &apos;Client-ID XXXXX&apos;);</span><br><span class="line">      const data = new FormData();</span><br><span class="line">      data.append(&apos;image&apos;, file);</span><br><span class="line">      xhr.send(data);</span><br><span class="line">      xhr.addEventListener(&apos;load&apos;, () =&gt; &#123;</span><br><span class="line">        const response = JSON.parse(xhr.responseText);</span><br><span class="line">        resolve(response);</span><br><span class="line">      &#125;);</span><br><span class="line">      xhr.addEventListener(&apos;error&apos;, () =&gt; &#123;</span><br><span class="line">        const error = JSON.parse(xhr.responseText);</span><br><span class="line">        reject(error);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const EditorImage = () =&gt; (</span><br><span class="line">  &lt;Editor</span><br><span class="line">    wrapperClassName=&apos;demo-wrapper&apos;</span><br><span class="line">    editorClassName=&apos;demo-editor&apos;</span><br><span class="line">    toolbar=&#123;&#123;</span><br><span class="line">      inline: &#123; inDropdown: true &#125;,</span><br><span class="line">      list: &#123; inDropdown: true &#125;,</span><br><span class="line">      textAlign: &#123; inDropdown: true &#125;,</span><br><span class="line">      link: &#123; inDropdown: true &#125;,</span><br><span class="line">      history: &#123; inDropdown: true &#125;,</span><br><span class="line">      image: &#123; uploadCallback: uploadImageCallBack, alt: &#123; present: true, mandatory: true &#125; &#125;,</span><br><span class="line">    &#125;&#125;</span><br><span class="line">  /&gt;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h3 id="自定义工具栏"><a href="#自定义工具栏" class="headerlink" title="自定义工具栏"></a>自定义工具栏</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; Component &#125; from &apos;react&apos;;</span><br><span class="line">import PropTypes from &apos;prop-types&apos;;</span><br><span class="line">import &#123; EditorState, Modifier &#125; from &apos;draft-js&apos;;</span><br><span class="line">import &#123; Editor &#125; from &apos;react-draft-wysiwyg&apos;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class CustomOption extends Component &#123;</span><br><span class="line">  static propTypes = &#123;</span><br><span class="line">    onChange: PropTypes.func,</span><br><span class="line">    editorState: PropTypes.object,</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  addStar = () =&gt; &#123;</span><br><span class="line">    const &#123; editorState, onChange &#125; = this.props;</span><br><span class="line">    const contentState = Modifier.replaceText(</span><br><span class="line">      editorState.getCurrentContent(),</span><br><span class="line">      editorState.getSelection(),</span><br><span class="line">      &apos;⭐&apos;,</span><br><span class="line">      editorState.getCurrentInlineStyle(),</span><br><span class="line">    );</span><br><span class="line">    onChange(EditorState.push(editorState, contentState, &apos;insert-characters&apos;));</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;div onClick=&#123;this.addStar&#125;&gt;⭐&lt;/div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const App = () =&gt; (</span><br><span class="line">  &lt;Editor</span><br><span class="line">    wrapperClassName=&apos;demo-wrapper&apos;</span><br><span class="line">    editorClassName=&apos;demo-editor&apos;</span><br><span class="line">    toolbarCustomButtons=&#123;[&lt;CustomOption /&gt;]&#125;</span><br><span class="line">  /&gt;</span><br><span class="line">);</span><br><span class="line">export default App;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.luzhongkuan.cn/2017/07/23/react富文本/" data-id="cjtd0w4tq004grfcfq85zozmd" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-linux-nodeJs-安装" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/15/linux-nodeJs-安装/" class="article-date">
+  <time datetime="2017-07-15T14:48:12.000Z" itemprop="datePublished">2017-07-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/15/linux-nodeJs-安装/">linux nodeJs 安装</a>
+    </h1>
+  
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <h2 id="linux-nodeJs-安装"><a href="#linux-nodeJs-安装" class="headerlink" title="linux nodeJs 安装"></a>linux nodeJs 安装</h2><h3 id="方法一："><a href="#方法一：" class="headerlink" title="方法一："></a>方法一：</h3><ul>
+<li>安装node：<blockquote>
+<p>curl –silent –location <a href="https://rpm.nodesource.com/setup_8.x" target="_blank" rel="noopener">https://rpm.nodesource.com/setup_8.x</a> | sudo bash -<br>yum install nodejs -y</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="方法二："><a href="#方法二：" class="headerlink" title="方法二："></a>方法二：</h3><ul>
+<li><p>下载<br>wget <a href="https://nodejs.org/dist/v8.1.2/node-v8.1.2-linux-x64.tar.xz" target="_blank" rel="noopener">https://nodejs.org/dist/v8.1.2/node-v8.1.2-linux-x64.tar.xz</a></p>
+</li>
+<li><p>解压<br>tar-xvf node-v8.1.2-linux-x64.tar.xz</p>
+</li>
+<li><p>设置环境变量<br>vi ~/.bashrc<br>在最下面加入<br>export PATH=$PATH:/opt/software/node-v8.1.2-linux-x64/bin<br>source ~/.bashrc</p>
+</li>
+<li><p>检查是否安装完成<br>node -v</p>
+</li>
+<li>安装pm2<br>npm install -g pm2</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.luzhongkuan.cn/2017/07/15/linux-nodeJs-安装/" data-id="cjtd0w2tn0041rfcfj713nrjo" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post--linux常用命令--" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/13/-linux常用命令--/" class="article-date">
+  <time datetime="2017-07-13T14:30:34.000Z" itemprop="datePublished">2017-07-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/13/-linux常用命令--/">linux常用命令</a>
+    </h1>
+  
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <h2 id="linux常用命令"><a href="#linux常用命令" class="headerlink" title="linux常用命令"></a>linux常用命令</h2><p><strong>shift + g</strong>：来到底部  </p>
+<p><strong>删除文件夹</strong>： rm -fr ‘文件夹名字’  </p>
+<p><strong>删除文件</strong>： rm ‘文件名字’ </p>
+<p><strong>重命名文件</strong>：mv （原文件） （新文件）</p>
+<p><strong>压缩文件</strong>：tar czvf a.tar ./*</p>
+<p><strong>解压文件</strong>： unzip ‘文件夹名字’   tar (z)xvf ‘‘文件夹名字’</p>
+<p><strong>查看内存使用</strong>： df -h</p>
+<p><strong>scp上传文件</strong>：  scp (-P  端口号)（上传文件路径） <a href="mailto:root@106.15.45.126" target="_blank" rel="noopener">root@106.15.45.126</a>:（上传路径）</p>
+<p><strong>ssh连接服务器</strong>： ssh （-p 端口号） <a href="mailto:root@106.15.45.126" target="_blank" rel="noopener">root@106.15.45.126</a></p>
+<p><strong>设置所有权限</strong>：chmod 777 文件名字</p>
+<p><strong>安装软件</strong>：sudo yum -y ‘软件’</p>
+<p><strong>选择目录：</strong> cd</p>
+<p><strong>npm仓库重启：</strong></p>
+<p>/root/verfaccio目录下<br> nohup verdaccio &amp;</p>
+<p><strong>nexus服务器重启：</strong></p>
+<p>cd /opt/software/nexus-3.2.1-01/bin<br>/opt/software/nexus-3.2.1-01/bin<br>或者<br>/bin/systemctl start nginx.service<br>./nexus restart</p>
+<p><strong>nginx重启：</strong><br>cd /etc/nginx/conf.d/default.conf<br>/usr/sbin/nginx -s reload 重启</p>
+<p> ps -ef | grep nginx 查看主进程号</p>
+<p><strong>数据库重启</strong>：service  mysql  reload </p>
+<ul>
+<li>列出所有处于监听状态的tcp端口<br>netstat -lt</li>
+<li><p>查看所有的端口信息, 包括 PID 和进程名称<br>netstat -tulpn</p>
+</li>
+<li><p>查看进程：<br>ps -ef | gref java</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.luzhongkuan.cn/2017/07/13/-linux常用命令--/" data-id="cjtd0vyxk0035rfcftumud7z4" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-js插件整理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/18/js插件整理/" class="article-date">
+  <time datetime="2017-06-18T05:15:54.000Z" itemprop="datePublished">2017-06-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/18/js插件整理/">js插件整理</a>
+    </h1>
+  
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <h2 id="js插件整理"><a href="#js插件整理" class="headerlink" title="js插件整理"></a>js插件整理</h2><ul>
+<li>whatwg-fetch    fetch请求数据</li>
+<li>blueimp-md5    md5加密</li>
+<li>Moment.js     日期处理</li>
+<li>lodash    js数据处理工具类</li>
+<li>echarts    图标</li>
+<li>swiper    轮播</li>
+<li>fullPage.js     全屏滚动</li>
+<li>iTyped    模拟打字效果</li>
+<li>Draggabilly – 轻松实现拖放功能</li>
+<li>Numeral.js – 格式化和操作数字的 JavaScript 库</li>
+<li>better-picker – 一款轻量级IOS风格的JavaScript选择器</li>
+<li>better-scroll.js         JavaScript 模拟滚动条的插件</li>
+<li>Lazyr.js     延迟加载图片</li>
+<li>SweetAlert    替代 Alert 的漂亮的提示效果</li>
+<li>Slideout.js     Web App 导航菜单</li>
+<li>Reveal.js   ppt    模拟ppt</li>
+<li>Video.js     播放器</li>
+<li>PhotoSwipe</li>
+<li>Hexo     静态博客</li>
+</ul>
+<p><strong> 富文本</strong></p>
+<ul>
+<li>braft-editor    </li>
+<li>quill</li>
+<li>medium-editor </li>
+<li><p>react-lz-editor</p>
+</li>
+<li><p>react-copy-to-clipboard(兼容问题)</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.luzhongkuan.cn/2017/06/18/js插件整理/" data-id="cjtd0w21p003vrfcfmvue01fs" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-antd-mobile中listView基本使用和碰到的问题（不想耽误人，这个只是很久前写的一个demo）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/09/antd-mobile中listView基本使用和碰到的问题（不想耽误人，这个只是很久前写的一个demo）/" class="article-date">
+  <time datetime="2017-06-09T15:26:28.000Z" itemprop="datePublished">2017-06-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/09/antd-mobile中listView基本使用和碰到的问题（不想耽误人，这个只是很久前写的一个demo）/">antd-mobile中listView基本使用和碰到的问题（不想耽误人，这个只是很久前写的一个demo）</a>
+    </h1>
+  
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <h2 id="（不想耽误人，这个只是很久前写的一个demo，没有技术含量）"><a href="#（不想耽误人，这个只是很久前写的一个demo，没有技术含量）" class="headerlink" title="（不想耽误人，这个只是很久前写的一个demo，没有技术含量）"></a>（不想耽误人，这个只是很久前写的一个demo，没有技术含量）</h2><p><a href="https://mobile.ant.design/components/list-view-cn" target="_blank" rel="noopener">前往-&gt;官网地址</a></p>
+<h4 id="在dataSourse中设置了很多数据，即使是本地静态的数据，页面上也只显示10条？"><a href="#在dataSourse中设置了很多数据，即使是本地静态的数据，页面上也只显示10条？" class="headerlink" title="在dataSourse中设置了很多数据，即使是本地静态的数据，页面上也只显示10条？"></a>在dataSourse中设置了很多数据，即使是本地静态的数据，页面上也只显示10条？</h4><blockquote>
+<p>listView默认把数据放在页面上10条，如果10条数据在页面显示高度不高过容器，就不会刷新，再次更新（最新文档有设置默认加载个数介绍）</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;</span><br><span class="line">import &#123;Flex, ListView&#125; from &apos;../../component&apos;</span><br><span class="line"></span><br><span class="line">const &#123;Component, PropTypes&#125; = React</span><br><span class="line"></span><br><span class="line">// 虚拟数据</span><br><span class="line">const dataItem = &#123;</span><br><span class="line">  img: &apos;https://zos.alipayobjects.com/rmsportal/dKbkpPXKfvZzWCM.png&apos;,</span><br><span class="line">  title: &apos;Meet hotel&apos;,</span><br><span class="line">  des: &apos;不是所有的兼职汪都需要风吹日晒&apos;,</span><br><span class="line">&#125;</span><br><span class="line">const data = []</span><br><span class="line">for (let i = 0; i &lt; 100; i++) &#123;</span><br><span class="line">  dataItem.key = i</span><br><span class="line">  data.push(dataItem)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Bargain extends Component &#123;</span><br><span class="line">  constructor (props) &#123;</span><br><span class="line">    super(props)</span><br><span class="line">    const dataSource = new ListView.DataSource(&#123;</span><br><span class="line">      rowHasChanged: (row1, row2) =&gt; row1 !== row2,</span><br><span class="line">    &#125;)</span><br><span class="line">    this.state = &#123;</span><br><span class="line">      dataSource: dataSource.cloneWithRows(&#123;&#125;),</span><br><span class="line">      isLoading: true,</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  componentDidMount () &#123;</span><br><span class="line">    this.setState(&#123;</span><br><span class="line">      dataSource: this.state.dataSource.cloneWithRows(data),</span><br><span class="line">      isLoading: false,</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  static propTypes = &#123;</span><br><span class="line">    dispatch: PropTypes.func</span><br><span class="line">  &#125;</span><br><span class="line">  renderList() &#123;</span><br><span class="line">    const row = (dataRow) =&gt; &#123;</span><br><span class="line">      return (</span><br><span class="line">        &lt;Flex style=&#123;&#123;height: 200&#125;&#125;&gt;</span><br><span class="line">          &lt;p&gt;&#123;dataRow.title&#125;&lt;/p&gt;</span><br><span class="line">          &#123;dataRow.des&#125;</span><br><span class="line">        &lt;/Flex&gt;</span><br><span class="line">      )</span><br><span class="line">    &#125;</span><br><span class="line">    return (</span><br><span class="line">      &lt;ListView</span><br><span class="line">        style=&#123;&#123;</span><br><span class="line">          height: document.documentElement.clientHeight,</span><br><span class="line">          overflow: &apos;auto&apos;,</span><br><span class="line">        &#125;&#125;</span><br><span class="line">        dataSource=&#123;this.state.dataSource&#125; // 渲染的数据源</span><br><span class="line">        renderFooter=&#123;() =&gt; (&lt;div style=&#123;&#123;padding: 30, textAlign: &apos;center&apos;&#125;&#125;&gt;</span><br><span class="line">          &#123;this.state.isLoading ? &apos;加载中&apos; : &apos;加载完成&apos;&#125;</span><br><span class="line">        &lt;/div&gt;)&#125;</span><br><span class="line">        renderRow=&#123;row&#125; // 单条数据</span><br><span class="line">        pageSize=&#123;4&#125; // 每次渲染的行数</span><br><span class="line">        scrollRenderAheadDistance=&#123;500&#125; // 当一个行接近屏幕范围多少像素之内的时候，就开始渲染这一行</span><br><span class="line">        scrollEventThrottle=&#123;20&#125; // 控制在滚动过程中，scroll事件被调用的频率</span><br><span class="line">        onEndReachedThreshold=&#123;10&#125; // 调用onEndReached之前的临界值，单位是像素</span><br><span class="line">				onEndReached=&#123;() =&gt; &#123;&#125;&#125; // 上拉加载事件</span><br><span class="line">      /&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">  render () &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;div</span><br><span class="line">        className=&apos;bargain-container&apos;</span><br><span class="line">      &gt;</span><br><span class="line">        &#123;data.length === 0 ? (&lt;h1&gt;暂时没有商品&lt;/h1&gt;) : this.renderList()&#125;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default Bargain</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.luzhongkuan.cn/2017/06/09/antd-mobile中listView基本使用和碰到的问题（不想耽误人，这个只是很久前写的一个demo）/" data-id="cjtd0vz8p0037rfcf6h8o16ff" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-禁止微信浏览器改变字体大小" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/03/禁止微信浏览器改变字体大小/" class="article-date">
+  <time datetime="2017-06-03T13:22:51.000Z" itemprop="datePublished">2017-06-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/03/禁止微信浏览器改变字体大小/">禁止微信浏览器改变字体大小</a>
+    </h1>
+  
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <blockquote>
+<p>禁止微信浏览器改变字体大小<br>碰到特殊类型的手机默认微信浏览器是放大字体的状态，会样式错乱</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">resetFontSize = () =&gt; &#123;</span><br><span class="line">  if (typeof WeixinJSBridge === &apos;object&apos; &amp;&amp; typeof WeixinJSBridge.invoke === &apos;function&apos;) &#123;</span><br><span class="line">    handleFontSize();</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    if (document.addEventListener) &#123;</span><br><span class="line">      document.addEventListener(&apos;WeixinJSBridgeReady&apos;, handleFontSize, false);</span><br><span class="line">    &#125; else if (document.attachEvent) &#123;</span><br><span class="line">      document.attachEvent(&apos;WeixinJSBridgeReady&apos;, handleFontSize);</span><br><span class="line">      document.attachEvent(&apos;onWeixinJSBridgeReady&apos;, handleFontSize);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  function handleFontSize() &#123;</span><br><span class="line">    WeixinJSBridge.invoke(&apos;setFontSizeCallback&apos;, &#123;</span><br><span class="line">      &apos;fontSize&apos;: 0</span><br><span class="line">    &#125;);</span><br><span class="line">    WeixinJSBridge.on(&apos;menu:setfont&apos;, function () &#123;</span><br><span class="line">      WeixinJSBridge.invoke(&apos;setFontSizeCallback&apos;, &#123;</span><br><span class="line">        &apos;fontSize&apos;: 0</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.luzhongkuan.cn/2017/06/03/禁止微信浏览器改变字体大小/" data-id="cjtd0wcc4005urfcfgshpvllj" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-react的几个问题" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/21/react的几个问题/" class="article-date">
+  <time datetime="2017-05-21T04:22:57.000Z" itemprop="datePublished">2017-05-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/21/react的几个问题/">react的几个问题</a>
+    </h1>
+  
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <blockquote>
+<p>临时整理的react的几个问题</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">- 定时器要在componentWillUnmount中清除</span><br><span class="line"></span><br><span class="line">- 遍历的时候需要唯一的key</span><br><span class="line"> </span><br><span class="line">- 操作真是dom需要再didmount中操作，比如echarts</span><br><span class="line"> </span><br><span class="line">- react中的this指向问题，使用箭头函数或者bind this</span><br><span class="line"> </span><br><span class="line">- 用setState才能改变页面，比如input的value在state中定义，这时候input是不能输入值的，只能通过改变state才能给state赋值（单向数据流）</span><br><span class="line"> </span><br><span class="line">- shouldComponentUpdate用来性能优化的时候必须返回true才会刷新页面，如果只写了生命周期，页面就不会刷新</span><br><span class="line"></span><br><span class="line">- babel-polyfill，转译es6的时候，项目中只能引入一次，否则部署上线会报错</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.luzhongkuan.cn/2017/05/21/react的几个问题/" data-id="cjtd0w582004hrfcfxpk46chm" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-操作手册" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/08/操作手册/" class="article-date">
+  <time datetime="2017-04-08T14:35:09.000Z" itemprop="datePublished">2017-04-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/08/操作手册/">操作手册</a>
+    </h1>
+  
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <h2 id="淘宝镜像设置"><a href="#淘宝镜像设置" class="headerlink" title="淘宝镜像设置"></a>淘宝镜像设置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">npm config set registry   http://registry.npm.taobao.org/  # 淘宝镜像</span><br><span class="line"></span><br><span class="line">npm config set registry   https://registry.npmjs.org/  # npm仓库</span><br><span class="line"></span><br><span class="line">npm install node-sass --sass-binary-site=http://npm.taobao.org/mirrors/node-sass # node-sass</span><br><span class="line"></span><br><span class="line"># yarn</span><br><span class="line">yarn config set registry https://registry.npm.taobao.org # 置淘宝镜像</span><br></pre></td></tr></table></figure>
+<h2 id="windows端口号占用"><a href="#windows端口号占用" class="headerlink" title="windows端口号占用"></a>windows端口号占用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 查看端口号占用  </span><br><span class="line">netstat -aon|findstr &quot;8080&quot;</span><br><span class="line"></span><br><span class="line">// 查看被那个程序占用  </span><br><span class="line">tasklist|findstr &quot;2448&quot;</span><br><span class="line"></span><br><span class="line">// 根据pid结束进程  </span><br><span class="line">taskkill /f /pid 2152</span><br></pre></td></tr></table></figure>
+<h2 id="linux-mac端口占用"><a href="#linux-mac端口占用" class="headerlink" title="linux\mac端口占用"></a>linux\mac端口占用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lsof -i tcp:8000</span><br><span class="line"></span><br><span class="line">kill 8000</span><br></pre></td></tr></table></figure>
+<h2 id="jsconfig-json"><a href="#jsconfig-json" class="headerlink" title="jsconfig.json"></a>jsconfig.json</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;compilerOptions&quot;: &#123;</span><br><span class="line">    &quot;baseUrl&quot;: &quot;.&quot;,</span><br><span class="line">    &quot;paths&quot;: &#123;</span><br><span class="line">      &quot;@/*&quot;: [&quot;src/*&quot;]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;allowSyntheticDefaultImports&quot;: true,</span><br><span class="line">  &quot;include&quot;: [&quot;./src/**/*&quot;],</span><br><span class="line">  &quot;exclude&quot;: [&quot;node_modules&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="gitignore"><a href="#gitignore" class="headerlink" title="gitignore"></a>gitignore</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">.DS_Store</span><br><span class="line">node_modules</span><br><span class="line">/dist</span><br><span class="line"></span><br><span class="line"># local env files</span><br><span class="line">.env.local</span><br><span class="line">.env.*.local</span><br><span class="line"></span><br><span class="line"># Log files</span><br><span class="line">npm-debug.log*</span><br><span class="line">yarn-debug.log*</span><br><span class="line">yarn-error.log*</span><br><span class="line"></span><br><span class="line"># Editor directories and files</span><br><span class="line">.idea</span><br><span class="line">.vscode</span><br><span class="line">*.suo</span><br><span class="line">*.ntvs*</span><br><span class="line">*.njsproj</span><br><span class="line">*.sln</span><br><span class="line">*.sw*</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.luzhongkuan.cn/2017/04/08/操作手册/" data-id="cjtd0wbma005prfcf4mvpy8uk" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ps快捷键" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/03/ps快捷键/" class="article-date">
+  <time datetime="2017-03-03T10:52:35.000Z" itemprop="datePublished">2017-03-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/03/ps快捷键/">ps快捷键</a>
+    </h1>
+  
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <h4 id="工具箱子"><a href="#工具箱子" class="headerlink" title="工具箱子"></a>工具箱子</h4><ul>
+<li>移动工具 【V】</li>
+<li>矩形、椭圆选框工具 【M】</li>
+<li>套索、多边形套索、磁性套索 【L】</li>
+<li>快速选择工具、魔棒工具 【W】 </li>
+<li>裁剪、透视裁剪、切片、切片选择工具 【C】</li>
+<li>吸管、颜色取样器、标尺、注释、123计数工具 【I】 </li>
+<li>污点修复画笔、修复画笔、修补、内容感知移动、红眼工具 【J】 </li>
+<li>画笔、铅笔、颜色替换、混合器画笔工具 【B】</li>
+<li>仿制图章、图案图章工具 【S】 </li>
+<li>历史记录画笔工具、历史记录艺术画笔工具 【Y】 </li>
+<li>像皮擦、背景橡皮擦、魔术橡皮擦工具 【E】</li>
+<li>渐变、油漆桶工具 【G】</li>
+<li>减淡、加深、海棉工具 【O】 </li>
+<li>钢笔、自由钢笔、添加锚点、删除锚点、转换点工具 【P】 </li>
+<li>横排文字、直排文字、横排文字蒙板、直排文字蒙板 【T】</li>
+<li>路径选择、直接选择工具 【A】 </li>
+<li>矩形、圆角矩形、椭圆、多边形、直线、自定义形状工具 【U】</li>
+<li>抓手工具 【H】</li>
+<li>旋转视图工具 【R】 </li>
+<li>缩放工具 【Z】 </li>
+<li>添加锚点工具 【+】</li>
+<li>删除锚点工具 【-】</li>
+<li>默认前景色和背景色 【D】</li>
+<li>切换前景色和背景色 【X】</li>
+<li>切换标准模式和快速蒙板模式 【Q】</li>
+<li>标准屏幕模式、带有菜单栏的全屏模式、全屏模式 【F】</li>
+<li>临时使用移动工具 【Ctrl】</li>
+<li>临时使用吸色工具 【Alt】</li>
+<li>临时使用抓手工具 【空格】</li>
+<li>打开工具选项面板 【Enter】</li>
+<li>快速输入工具选项(当前工具选项面板中至少有一个可调节数字) 【0】至【9】</li>
+<li>循环选择画笔 【[】或【]】</li>
+<li>选择第一个画笔 【Shift】+【[】</li>
+<li>选择最后一个画笔 【Shift】+【]】</li>
+<li>建立新渐变(在”渐变编辑器”中) 【Ctrl】+【N】</li>
+</ul>
+<h4 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h4><ul>
+<li>新建图形文件 【Ctrl】+【N】</li>
+<li>用默认设置创建新文件 【Ctrl】+【Alt】+【N】 </li>
+<li>打开已有的图像 【Ctrl】+【O】 </li>
+<li>打开为… 【Ctrl】+【Alt】+【O】 </li>
+<li>关闭当前图像 【Ctrl】+【W】 </li>
+<li>保存当前图像 【Ctrl】+【S】 </li>
+<li>另存为… 【Ctrl】+【Shift】+【S】 </li>
+<li>存储为Web所用格式 【Ctrl】+【Alt】+ 【Shift】+【S】 </li>
+<li>页面设置 【Ctrl】+【Shift】+【P】 </li>
+<li>打印 【Ctrl】+【P】 </li>
+<li>打开“预置”对话框 【Ctrl】+【K】</li>
+<li><h4 id="视图操作"><a href="#视图操作" class="headerlink" title="视图操作"></a>视图操作</h4></li>
+<li>显示彩色通道 【Ctrl】+【2】 </li>
+<li>显示单色通道 【Ctrl】+【数字】</li>
+<li>以CMYK方式预览(开关) 【Ctrl】+【Y】</li>
+<li>放大视图 【Ctrl】+【+】</li>
+<li>缩小视图 【Ctrl】+【-】</li>
+<li>满画布显示 【Ctrl】+【0】</li>
+<li>实际象素显示 【Ctrl】+【Alt】+【0】</li>
+<li>左对齐或顶对齐 【Ctrl】+【Shift】+【L】 </li>
+<li>中对齐 【Ctrl】+【Shift】+【C】 </li>
+<li>右对齐或底对齐 【Ctrl】+【Shift】+【R】</li>
+<li>左／右选择 1 个字符 【Shift】+【←】/【→】 </li>
+<li>下／上选择 1 行 【Shift】+【↑】/【↓】<h4 id="编辑操作"><a href="#编辑操作" class="headerlink" title="编辑操作"></a>编辑操作</h4></li>
+<li>还原/重做前一步操作 【Ctrl】+【Z】 </li>
+<li>还原两步以上操作 【Ctrl】+【Alt】+【Z】 </li>
+<li>重做两步以上操作 【Ctrl】+【Shift】+【Z】 </li>
+<li>剪切选取的图像或路径 【Ctrl】+【X】或【F2】 </li>
+<li>拷贝选取的图像或路径 【Ctrl】+【C】 </li>
+<li>合并拷贝 【Ctrl】+【Shift】+【C】 </li>
+<li>将剪贴板的内容粘到当前图形中 【Ctrl】+【V】或【F4】 </li>
+<li>将剪贴板的内容粘到选框中 【Ctrl】+【Shift】+【V】 </li>
+<li>自由变换 【Ctrl】+【T】 </li>
+<li>应用自由变换(在自由变换模式下) 【Enter】 </li>
+<li>从中心或对称点开始变换 (在自由变换模式下) 【Alt】 </li>
+<li>限制(在自由变换模式下) 【Shift】 </li>
+<li>扭曲(在自由变换模式下) 【Ctrl】 </li>
+<li>取消变形(在自由变换模式下) 【Esc】 </li>
+<li>自由变换复制的象素数据 【Ctrl】+【Shift】+【T】 </li>
+<li>再次变换复制的象素数据并建立一个副本 【Ctrl】+【Shift】+【Alt】+【T】 </li>
+<li>删除选框中的图案或选取的路径 【DEL】 </li>
+<li>用背景色填充所选区域或整个图层 【Ctrl】+【BackSpace】或【Ctrl】+【Del】 </li>
+<li>用前景色填充所选区域或整个图层 【Alt】+【BackSpace】或【Alt】+【Del】 </li>
+<li>弹出“填充”对话框 【Shift】+【BackSpace】 </li>
+<li>从历史记录中填充 【Alt】+【Ctrl】+【Backspace】<h4 id="图像调整"><a href="#图像调整" class="headerlink" title="图像调整"></a>图像调整</h4></li>
+<li>调整色阶 【Ctrl】+【L】 </li>
+<li>自动调整色阶 【Ctrl】+【Shift】+【L】 </li>
+<li>打开曲线调整对话框 【Ctrl】+【M】 </li>
+<li>打开“色彩平衡”对话框 【Ctrl】+【B】 </li>
+<li>打开“色相/饱和度”对话框 【Ctrl】+【U】 </li>
+<li>去色 【Ctrl】+【Shift】+【U】 </li>
+<li>反相 【Ctrl】+【I】</li>
+</ul>
+<h4 id="图层操作"><a href="#图层操作" class="headerlink" title="图层操作"></a>图层操作</h4><ul>
+<li>从对话框新建一个图层 【Ctrl】+【Shift】+【N】 </li>
+<li>以默认选项建立一个新的图层 【Ctrl】+【Alt】+【Shift】+【N】 </li>
+<li>通过拷贝建立一个图层 【Ctrl】+【J】 </li>
+<li>通过剪切建立一个图层 【Ctrl】+【Shift】+【J】 </li>
+<li>与前一图层编组 【Ctrl】+【G】 </li>
+<li>取消编组 【Ctrl】+【Shift】+【G】 </li>
+<li>向下合并或合并联接图层 【Ctrl】+【E】 </li>
+<li>合并可见图层 【Ctrl】+【Shift】+【E】 </li>
+<li>盖印或盖印联接图层 【Ctrl】+【Alt】+【E】 </li>
+<li>盖印可见图层 【Ctrl】+【Alt】+【Shift】+【E】 </li>
+<li>将当前层下移一层 【Ctrl】+【[】 </li>
+<li>将当前层上移一层 【Ctrl】+【]】 </li>
+<li>将当前层移到最下面 【Ctrl】+【Shift】+【[】 </li>
+<li>将当前层移到最上面 【Ctrl】+【Shift】+【]】 </li>
+<li>激活下一个图层 【Alt】+【[】 </li>
+<li>激活上一个图层 【Alt】+【]】 </li>
+<li>激活底部图层 【Shift】+【Alt】+【[】 </li>
+<li>激活顶部图层 【Shift】+【Alt】+【]】</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.luzhongkuan.cn/2017/03/03/ps快捷键/" data-id="cjtd0w4nl004erfcfoup1k43a" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/5/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/7/">Next &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/03/08/node使用wechaty制作微信机器人每天给老婆发送暖心/">node使用wechaty制作微信机器人每天给老婆发送暖心</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/06/使用nodeJS爬取一些测试图片/">使用nodeJS爬取一些测试图片</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/14/linux中nginx、mysql安装碰到的问题/">linux中nginx、mysql安装碰到的问题</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/27/spark-md5获取文件md5唯一标识/">spark-md5获取文件md5唯一标识</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/24/vue-cli-Invalid-Host-Origin-header/">vue-cli Invalid Host/Origin header</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+  </div>
+</body>
+</html>

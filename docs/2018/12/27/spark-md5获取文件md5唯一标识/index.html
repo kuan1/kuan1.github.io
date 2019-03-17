@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>spark-md5获取文件md5唯一标识 | 卢忠宽的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="获取文件md5唯一标识spark-md5： https://github.com/satazor/js-spark-md5示例：https://github.com/kuan1/kuan-utils/blob/master/src/uploader.js 123456789101112131415161718192021222324252627282930313233343536373839404">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spark-md5获取文件md5唯一标识">
+<meta property="og:url" content="https://www.luzhongkuan.cn/2018/12/27/spark-md5获取文件md5唯一标识/index.html">
+<meta property="og:site_name" content="卢忠宽的个人博客">
+<meta property="og:description" content="获取文件md5唯一标识spark-md5： https://github.com/satazor/js-spark-md5示例：https://github.com/kuan1/kuan-utils/blob/master/src/uploader.js 123456789101112131415161718192021222324252627282930313233343536373839404">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-03-17T14:36:06.021Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="spark-md5获取文件md5唯一标识">
+<meta name="twitter:description" content="获取文件md5唯一标识spark-md5： https://github.com/satazor/js-spark-md5示例：https://github.com/kuan1/kuan-utils/blob/master/src/uploader.js 123456789101112131415161718192021222324252627282930313233343536373839404">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">卢忠宽的个人博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一个普通的前端开发者</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://www.luzhongkuan.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-spark-md5获取文件md5唯一标识" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/12/27/spark-md5获取文件md5唯一标识/" class="article-date">
+  <time datetime="2018-12-27T03:11:52.000Z" itemprop="datePublished">2018-12-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      
+  
+    <h1 class="article-title" itemprop="name">
+      spark-md5获取文件md5唯一标识
+    </h1>
+  
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <h4 id="获取文件md5唯一标识"><a href="#获取文件md5唯一标识" class="headerlink" title="获取文件md5唯一标识"></a>获取文件md5唯一标识</h4><p>spark-md5： <a href="https://github.com/satazor/js-spark-md5" target="_blank" rel="noopener">https://github.com/satazor/js-spark-md5</a><br>示例：<a href="https://github.com/kuan1/kuan-utils/blob/master/src/uploader.js" target="_blank" rel="noopener">https://github.com/kuan1/kuan-utils/blob/master/src/uploader.js</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line">import SparkMD5 from &apos;spark-md5&apos;</span><br><span class="line"></span><br><span class="line">// 获取文件MD5</span><br><span class="line">export function getFileMD5(file, processFn) &#123;</span><br><span class="line">  return new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">    const fileReader = new FileReader() //分块读取文件对象</span><br><span class="line"></span><br><span class="line">    //file的slice方法，注意它的兼容性，在不同浏览器的写法不同</span><br><span class="line">    const blobSlice =</span><br><span class="line">      File.prototype.mozSlice ||</span><br><span class="line">      File.prototype.webkitSlice ||</span><br><span class="line">      File.prototype.slice</span><br><span class="line"></span><br><span class="line">    const chunkSize = 10 * 1024 * 1024 //分块大小，20M</span><br><span class="line">    const chunks = Math.ceil(file.size / chunkSize) //总块数</span><br><span class="line">    let currentChunk = 0 //当前块数</span><br><span class="line">    const spark = new SparkMD5() //获取MD5对象</span><br><span class="line"></span><br><span class="line">    fileReader.onload = e =&gt; &#123;</span><br><span class="line">      //数据加载完毕事件</span><br><span class="line">      let binaryStr = &apos;&apos;</span><br><span class="line">      const bytes = new Uint8Array(e.target.result)</span><br><span class="line">      const length = bytes.byteLength</span><br><span class="line">      for (let i = 0; i &lt; length; i++) &#123;</span><br><span class="line">        binaryStr += String.fromCharCode(bytes[i]) //二进制转换字符串</span><br><span class="line">      &#125;</span><br><span class="line">      spark.appendBinary(binaryStr)</span><br><span class="line">      currentChunk++</span><br><span class="line">      if (processFn) &#123;</span><br><span class="line">        processFn(`$&#123;Math.ceil((currentChunk / chunks) * 100)&#125;%`)</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">        console.log(&apos;读取文件&apos;, `$&#123;Math.ceil((currentChunk / chunks) * 100)&#125;%`)</span><br><span class="line">      &#125;</span><br><span class="line">      if (currentChunk &lt; chunks) &#123;</span><br><span class="line">        loadNext() //读取下一块数据</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">        const fileMd5 = spark.end() //得到文件MD5值</span><br><span class="line">        resolve(fileMd5)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    fileReader.onerror = e =&gt; &#123;</span><br><span class="line">      reject(e)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function loadNext() &#123;</span><br><span class="line">      const start = currentChunk * chunkSize</span><br><span class="line">      const end = start + chunkSize &gt;= file.size ? file.size : start + chunkSize</span><br><span class="line">      //根据开始和结束位置，切割文件</span><br><span class="line">      const b = blobSlice.call(file, start, end)</span><br><span class="line">      //readAsBinaryString ie浏览器不兼容此方法</span><br><span class="line">      //fileReader.readAsBinaryString(blobSlice.call(file, start, end));</span><br><span class="line">      fileReader.readAsArrayBuffer(b) //ie，chrome，firefox等主流浏览器兼容此方法</span><br><span class="line">    &#125;</span><br><span class="line">    loadNext()</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 选择文件</span><br><span class="line">export function selectFile() &#123;</span><br><span class="line">  const id = &apos;kuan-upload-input&apos;</span><br><span class="line">  let uploadInput = document.getElementById(id)</span><br><span class="line">  if (!uploadInput) &#123;</span><br><span class="line">    uploadInput = document.createElement(&apos;input&apos;)</span><br><span class="line">    uploadInput.id = id</span><br><span class="line">    uploadInput.type = &apos;file&apos;</span><br><span class="line">    uploadInput.style.display = &apos;none&apos;</span><br><span class="line">    document.body.appendChild(uploadInput)</span><br><span class="line">  &#125;</span><br><span class="line">  uploadInput.click()</span><br><span class="line"></span><br><span class="line">  return new Promise(resolve =&gt; &#123;</span><br><span class="line">    uploadInput.onchange = () =&gt; &#123;</span><br><span class="line">      const [file] = uploadInput.files</span><br><span class="line">      uploadInput.value = &apos;&apos;</span><br><span class="line">      resolve(file)</span><br><span class="line">    &#125;</span><br><span class="line">    setTimeout(() =&gt; &#123;&#125;, 100)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export async function getFile(&#123; needMD5 = true, readProcess &#125; = &#123;&#125;) &#123;</span><br><span class="line">  const file = await selectFile()</span><br><span class="line">  let md5 = &apos;&apos;</span><br><span class="line">  if (needMD5) &#123;</span><br><span class="line">    md5 = await getFileMD5(file, readProcess)</span><br><span class="line">  &#125;</span><br><span class="line">  return &#123;</span><br><span class="line">    file,</span><br><span class="line">    md5</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default &#123;</span><br><span class="line">  getFileMD5,</span><br><span class="line">  selectFile,</span><br><span class="line">  getFile</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.luzhongkuan.cn/2018/12/27/spark-md5获取文件md5唯一标识/" data-id="cjtd0w5ma004irfcfe310tekv" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+  
+<nav id="article-nav">
+  
+    <a href="/2019/01/14/linux中nginx、mysql安装碰到的问题/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          linux中nginx、mysql安装碰到的问题
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/12/24/vue-cli-Invalid-Host-Origin-header/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">vue-cli Invalid Host/Origin header</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/03/08/node使用wechaty制作微信机器人每天给老婆发送暖心/">node使用wechaty制作微信机器人每天给老婆发送暖心</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/06/使用nodeJS爬取一些测试图片/">使用nodeJS爬取一些测试图片</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/14/linux中nginx、mysql安装碰到的问题/">linux中nginx、mysql安装碰到的问题</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/27/spark-md5获取文件md5唯一标识/">spark-md5获取文件md5唯一标识</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/24/vue-cli-Invalid-Host-Origin-header/">vue-cli Invalid Host/Origin header</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+  </div>
+</body>
+</html>

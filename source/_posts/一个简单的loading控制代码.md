@@ -1,0 +1,33 @@
+---
+title: 一个简单的loading控制代码
+date: 2018-05-07 21:44:57
+---
+### 一个简单的loading控制封装
+
+> 防止多条请求发送出去，有一条请求返回取消loading状态
+
+
+```
+import { Loading } from 'element-ui';
+
+/**
+ *  loading控制
+ */
+export default {
+  num: 0,
+  show() {
+    this.num += 1;
+    if (this.num === 1) {
+      Loading.service(); // 显示loading
+    }
+  },
+  hide() {
+    // 等待发出去的请求返回结果后结束loading
+    if (this.num > 0) this.num -= 1;
+    if (this.num === 0) {
+      Loading.service().close(); // 结束loading
+    }
+  },
+};
+```
+  

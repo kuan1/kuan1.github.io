@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>上手sublime | 卢忠宽的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="快捷键： Ctrl+P：快速打开文件 Ctrl+K+B : 开启/关闭侧边栏 Ctrl + Shift + P：调出命令板（Command Palette） Ctrl + `：打开控制台 Ctrl + Shift + N：新建窗口 Ctrl + N：创建标签 ctril+F || ctrl + H：搜索替换 F3：下一个 Ctrl + Enter：在当前行下面新增一行然后跳至该行 Ctrl+K+L">
+<meta property="og:type" content="article">
+<meta property="og:title" content="上手sublime">
+<meta property="og:url" content="https://www.luzhongkuan.cn/2016/07/07/上手sublime/index.html">
+<meta property="og:site_name" content="卢忠宽的个人博客">
+<meta property="og:description" content="快捷键： Ctrl+P：快速打开文件 Ctrl+K+B : 开启/关闭侧边栏 Ctrl + Shift + P：调出命令板（Command Palette） Ctrl + `：打开控制台 Ctrl + Shift + N：新建窗口 Ctrl + N：创建标签 ctril+F || ctrl + H：搜索替换 F3：下一个 Ctrl + Enter：在当前行下面新增一行然后跳至该行 Ctrl+K+L">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-03-17T14:36:09.468Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="上手sublime">
+<meta name="twitter:description" content="快捷键： Ctrl+P：快速打开文件 Ctrl+K+B : 开启/关闭侧边栏 Ctrl + Shift + P：调出命令板（Command Palette） Ctrl + `：打开控制台 Ctrl + Shift + N：新建窗口 Ctrl + N：创建标签 ctril+F || ctrl + H：搜索替换 F3：下一个 Ctrl + Enter：在当前行下面新增一行然后跳至该行 Ctrl+K+L">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">卢忠宽的个人博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一个普通的前端开发者</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://www.luzhongkuan.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-上手sublime" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/07/上手sublime/" class="article-date">
+  <time datetime="2016-07-07T05:25:04.000Z" itemprop="datePublished">2016-07-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      
+  
+    <h1 class="article-title" itemprop="name">
+      上手sublime
+    </h1>
+  
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <h2 id="快捷键："><a href="#快捷键：" class="headerlink" title="快捷键："></a>快捷键：</h2><ul>
+<li>Ctrl+P：快速打开文件</li>
+<li>Ctrl+K+B : 开启/关闭侧边栏</li>
+<li>Ctrl + Shift + P：调出命令板（Command Palette）</li>
+<li>Ctrl + `：打开控制台</li>
+<li>Ctrl + Shift + N：新建窗口</li>
+<li>Ctrl + N：创建标签</li>
+<li>ctril+F || ctrl + H：搜索替换</li>
+<li>F3：下一个</li>
+<li>Ctrl + Enter：在当前行下面新增一行然后跳至该行</li>
+<li>Ctrl+K+L : 改为小写</li>
+<li>Ctrl+K+U : 改为大写</li>
+<li>Alt + Shift + 2：左右分屏</li>
+<li></li>
+<li>快捷键设置（预览代码、格式化、删除整行）</li>
+<li>在sublime text3首选项菜单（preferences）下找到“按键-用户”（key bindings user）选项<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">	&#123; &apos;keys&apos;: [&apos;f12&apos;], &apos;command&apos;: &apos;open_in_browser&apos; &#125;,</span><br><span class="line">	&#123; &apos;keys&apos;: [&apos;ctrl+alt+l&apos;], &apos;command&apos;: &apos;reindent&apos; &#125;,</span><br><span class="line">	&#123; &apos;keys&apos;: [&apos;ctrl+d&apos;], &apos;command&apos;: &apos;run_macro_file&apos;, &apos;args&apos;: &#123;&apos;file&apos;: &apos;res://Packages/Default/Delete Line.sublime-macro&apos;&#125; &#125;,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="安装插件："><a href="#安装插件：" class="headerlink" title="- 安装插件："></a>- 安装插件：</h2><ul>
+<li>html5</li>
+<li>emmet</li>
+<li>SideBarEnhancements： 右键增强</li>
+<li>autofilename：路径自动补全</li>
+<li>import urllib.request,os,hashlib; h = ‘df21e130d211cfc94d9b0905775a7c0f’ + ‘1e3d39e33b79698005270310898eea76’; pf = ‘Package Control.sublime-package’; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( ‘<a href="http://packagecontrol.io/&#39;" target="_blank" rel="noopener">http://packagecontrol.io/&#39;</a> + pf.replace(‘ ‘, ‘%20’)).read(); dh = hashlib.sha256(by).hexdigest(); print(‘Error validating download (got %s instead of %s), please try manual install’ % (dh, h)) if dh != h else open(os.path.join( ipp, pf), ‘wb’ ).write(by)</li>
+<li></li>
+</ul>
+<h2 id="全部快捷键"><a href="#全部快捷键" class="headerlink" title="全部快捷键"></a>全部快捷键</h2><ul>
+<li>Ctrl+D : 选择单词，重复可增加选择下一个相同的单词</li>
+<li>Ctrl+F : 查找内容</li>
+<li>Ctrl+G : 跳转到指定行</li>
+<li>Ctrl+H : 替换    </li>
+<li>Ctrl+J : 合并行（已选择需要合并的多行时）</li>
+<li>Ctrl+K0 : 展开所有</li>
+<li>Ctrl+K+T : 折叠属性</li>
+<li>Ctrl+K+B : 开启/关闭侧边栏</li>
+<li>Ctrl+K+K : 从光标处删除至行尾</li>
+<li>Ctrl+K+Backspace : 从光标处删除至行首</li>
+<li>Ctrl+K+L : 改为小写</li>
+<li>Ctrl+K+U : 改为大写</li>
+<li>Ctrl+L : 选择整行，重复可依次增加选择下一行</li>
+<li>Ctrl+M : 跳转到对应括号</li>
+<li>Ctrl+N : 新建窗口</li>
+<li>Ctrl+P : 搜索项目中的文件</li>
+<li>Ctrl+R : 搜索指定文件的函数标签</li>
+<li>Ctrl+T : 词互换</li>
+<li>Ctrl+U : 软撤销，撤销光标位置</li>
+<li>Ctrl+W : 关闭当前打开文件</li>
+<li>Ctrl+X : 删除当前行</li>
+<li>Ctrl+Y : 恢复撤销</li>
+<li>Ctrl+Z : 撤销</li>
+<li>Ctrl+/ : 注释当前行</li>
+<li>Ctrl+F2 : 设置/删除标记</li>
+<li>Ctrl+Enter : 插入行后（快速换行）</li>
+<li>Ctrl+Tab : 当前窗口中的标签页切换</li>
+<li>Ctrl+PageDown 、Ctrl+PageUp : 文件按开启的前后顺序切换</li>
+<li>Ctrl+鼠标左键 : 可以同时选择要编辑的多处文本</li>
+<li>Ctrl+Shift+A : 选择当前标签前后，修改标签用的</li>
+<li>Ctrl+Shift+D : 复制光标所在整行，插入在该行之前</li>
+<li>Ctrl+Shift+F : 查找并替换，在文件夹内查找，sublime允许添加多个文件夹进行查找</li>
+<li>Ctrl+Shift+K : 删除整行</li>
+<li>Ctrl+Shift+L : 鼠标选中多行（按下快捷键），即可同时编辑这些行</li>
+<li>Ctrl+Shift+M : 选择括号内的内容（按住-继续选择父括号）    </li>
+<li>Ctrl+Shift+P : 打开命令面板</li>
+<li></li>
+<li>Ctrl+Shift+W : 关闭所有打开文件</li>
+<li>Ctrl+Shift+V : 粘贴并格式化</li>
+<li>Ctrl+Shift+/ : 注释已选择内容, 或在当前位置插入块注释，并Focus到首行，写注释说明用的</li>
+<li>Ctrl+Shift+Enter : 在当前行前插入新行</li>
+<li>Ctrl+Shift+↑ : 可以移动此行代码，与上行互换</li>
+<li>Ctrl+Shift+↓ : 可以移动此行代码，与下行互换</li>
+<li>Ctrl+Shift+[ : 折叠代码</li>
+<li>Ctrl+Shift+] : 展开代码</li>
+<li>Ctrl+Shift+分屏序号 : 将当前焦点页分配到分屏序号页</li>
+<li></li>
+<li>Shift+F2 : 上一个书签</li>
+<li>Shift+F11 : 全屏免打扰模式，只编辑当前文件</li>
+<li>Shift+鼠标右键（或使用鼠标中键） : 可以用鼠标进行竖向多行选择</li>
+<li>Shift+Tab : 去除缩进</li>
+<li></li>
+<li>Alt+Shift+1 : （非小键盘）窗口分屏，恢复默认1屏</li>
+<li>Alt+Shift+2 : 左右分屏-2列</li>
+<li>Alt+Shift+3 : 左右分屏-3列</li>
+<li>Alt+Shift+4 : 左右分屏-4列</li>
+<li>Alt+Shift+5 : 等分4屏</li>
+<li>Alt+Shift+8 : 垂直分屏-2屏</li>
+<li>Alt+Shift+9 : 垂直分屏-3屏        </li>
+<li></li>
+<li>F2 : 下一个书签</li>
+<li>F6 : 检测语法错误    </li>
+<li>F9 : 行排序(按a-z)</li>
+<li>F11 : 全屏模式</li>
+<li></li>
+<li>Alt+F3 : 选中文本，按下快捷键，即可一次性选择全部的相同文本进行同时编辑</li>
+<li>Alt+. : 闭合当前标签</li>
+<li>Alt+数字 :　切换打开第N个文件</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.luzhongkuan.cn/2016/07/07/上手sublime/" data-id="cjtd0w8840052rfcfbfjjupl3" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+  
+<nav id="article-nav">
+  
+    <a href="/2016/07/09/js基础数据操作/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          js基础数据操作
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/07/05/html兼容问题/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">html兼容问题</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/03/08/node使用wechaty制作微信机器人每天给老婆发送暖心/">node使用wechaty制作微信机器人每天给老婆发送暖心</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/06/使用nodeJS爬取一些测试图片/">使用nodeJS爬取一些测试图片</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/14/linux中nginx、mysql安装碰到的问题/">linux中nginx、mysql安装碰到的问题</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/27/spark-md5获取文件md5唯一标识/">spark-md5获取文件md5唯一标识</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/24/vue-cli-Invalid-Host-Origin-header/">vue-cli Invalid Host/Origin header</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+  </div>
+</body>
+</html>

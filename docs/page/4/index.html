@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>卢忠宽的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一个普通的前端开发者">
+<meta property="og:type" content="website">
+<meta property="og:title" content="卢忠宽的个人博客">
+<meta property="og:url" content="https://www.luzhongkuan.cn/page/4/index.html">
+<meta property="og:site_name" content="卢忠宽的个人博客">
+<meta property="og:description" content="一个普通的前端开发者">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="卢忠宽的个人博客">
+<meta name="twitter:description" content="一个普通的前端开发者">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">卢忠宽的个人博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一个普通的前端开发者</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://www.luzhongkuan.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-使用koa，knex操作数据库" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/10/使用koa，knex操作数据库/" class="article-date">
+  <time datetime="2018-06-10T02:23:36.000Z" itemprop="datePublished">2018-06-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/10/使用koa，knex操作数据库/">使用koa，knex操作数据库</a>
+    </h1>
+  
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <h4 id="使用koa，knex操作数据库"><a href="#使用koa，knex操作数据库" class="headerlink" title="使用koa，knex操作数据库"></a>使用koa，knex操作数据库</h4><blockquote>
+<p>重新整理了一下增删改查的方法，中间没有做任何安全判断，但是个人使用感觉很方便</p>
+</blockquote>
+<ul>
+<li><a href="/detail/55">另一篇knex入门</a></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * mysql helper</span><br><span class="line"> * author: luzhongk@126.com</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">const db = require(&apos;../utils/mysql.js&apos;) // knex</span><br><span class="line">const moment = require(&apos;moment&apos;)</span><br><span class="line"></span><br><span class="line">function formatData(data = []) &#123;</span><br><span class="line">  const FORMAT = &apos;YYYY-MM-DD HH:mm:ss&apos;</span><br><span class="line">  data.forEach(item =&gt; &#123;</span><br><span class="line">    if (item.create_time) &#123;</span><br><span class="line">      item.create_time = moment(item.create_time).format(FORMAT)</span><br><span class="line">    &#125;</span><br><span class="line">    if (item.update_time) &#123;</span><br><span class="line">      item.update_time = moment(item.update_time).format(FORMAT)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">  return data</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 分页查询</span><br><span class="line"> * @param ctx (koa ctx对象)</span><br><span class="line"> * @param dbName （数据库名字）</span><br><span class="line"> * @param condition (查询条件)</span><br><span class="line"> * @returns &#123;Promise&lt;Object&gt;&#125;</span><br><span class="line"> */</span><br><span class="line">const list = async (ctx, dbName, condition = &#123;&#125;) =&gt; &#123;</span><br><span class="line">  let &#123; page = 1, size = 1000 &#125; = ctx.query</span><br><span class="line">	if (page &lt; 1) page = 1</span><br><span class="line">  const getContent = db(dbName)</span><br><span class="line">    .select()</span><br><span class="line">    .limit(size)</span><br><span class="line">    .offset((page - 1) * size)</span><br><span class="line">    .where(condition)</span><br><span class="line">    .orderBy(&apos;create_time&apos;, &apos;desc&apos;)</span><br><span class="line">  const getTotal = db(dbName).where(condition).count(&apos;id as total&apos;)</span><br><span class="line">  const [content, total] = await Promise.all([getContent, getTotal])</span><br><span class="line"></span><br><span class="line">  const data = &#123; content: formatData(content), total: total.length ? total[0].total : 0 &#125;</span><br><span class="line">  ctx.state.data = data</span><br><span class="line">  return data</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 添加数据</span><br><span class="line"> * @param ctx</span><br><span class="line"> * @param dbName (数据库成功)</span><br><span class="line"> * @param body (插入内容，或者使用发送的body)</span><br><span class="line"> * @returns &#123;Promise&lt;Number&gt;&#125; (id)</span><br><span class="line"> */</span><br><span class="line">const add = async (ctx, dbName, body) =&gt; &#123;</span><br><span class="line">  const data = await db(dbName).insert(body || ctx.request.body)</span><br><span class="line">  ctx.state.data = data</span><br><span class="line">  return data</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 更新数据</span><br><span class="line"> * @param ctx</span><br><span class="line"> * @param dbName</span><br><span class="line"> * @param body (插入内容，或者使用发送的body)</span><br><span class="line"> * @returns &#123;Promise&lt;null Number&gt;&#125;</span><br><span class="line"> */</span><br><span class="line">const update = async (ctx, dbName, body) =&gt; &#123;</span><br><span class="line">  const data = body || ctx.request.body</span><br><span class="line">  const &#123; id &#125; = data</span><br><span class="line">  if (!id) ctx.throw(400, &apos;id not found&apos;)</span><br><span class="line">  delete data.id</span><br><span class="line">  const res = await db(dbName).update(data).where(&#123; id &#125;)</span><br><span class="line">  ctx.state.data = res</span><br><span class="line">  return res</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 删除数据</span><br><span class="line"> * @param ctx</span><br><span class="line"> * @param dbName</span><br><span class="line"> * @param removeId</span><br><span class="line"> * @returns &#123;Promise&lt;*&gt;&#125;</span><br><span class="line"> */</span><br><span class="line">const remove = async (ctx, dbName, removeId) =&gt; &#123;</span><br><span class="line">  const &#123; id &#125; = &#123;removeId&#125; || ctx.params || ctx.query</span><br><span class="line">  if (!id) ctx.throw(400, &apos;id not found&apos;)</span><br><span class="line">  if (id === &apos;all&apos;) &#123;</span><br><span class="line">    const data = await db(dbName).truncate() // 清空表</span><br><span class="line">    ctx.state.data = &apos;成功&apos;</span><br><span class="line">    return data</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    const data = await db(dbName).where(&apos;id&apos;, id).del()</span><br><span class="line">    ctx.state.data = data</span><br><span class="line">    return data</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">  list,</span><br><span class="line">  add,</span><br><span class="line">  update,</span><br><span class="line">  remove</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><blockquote>
+<p>在koa实例对象app中注入</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 注入工具类</span><br><span class="line">app.context.dbHelper = dbHelper</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>使用demo</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 临时日志</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">const dbName = &apos;kuan_logger&apos;;</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">  async list(ctx) &#123;</span><br><span class="line">    await ctx.dbHelper.list(ctx, dbName);</span><br><span class="line">  &#125;,</span><br><span class="line">  async remove(ctx) &#123;</span><br><span class="line">    await ctx.dbHelper.remove(ctx, dbName);</span><br><span class="line">  &#125;,</span><br><span class="line">  async add(ctx) &#123;</span><br><span class="line">    await ctx.dbHelper.add(ctx, dbName);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.luzhongkuan.cn/2018/06/10/使用koa，knex操作数据库/" data-id="cjtd0w8wb0056rfcfo61cvjlv" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-windows配置本地域名" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/08/windows配置本地域名/" class="article-date">
+  <time datetime="2018-06-08T01:43:04.000Z" itemprop="datePublished">2018-06-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/08/windows配置本地域名/">windows配置本地域名</a>
+    </h1>
+  
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <blockquote>
+<p>本地配置域名，可以能进行的微信sdk测试</p>
+</blockquote>
+<h4 id="找到hosts文件"><a href="#找到hosts文件" class="headerlink" title="找到hosts文件"></a>找到hosts文件</h4><blockquote>
+<p>C:WindowsSystem32driversetc</p>
+</blockquote>
+<h4 id="底部加入"><a href="#底部加入" class="headerlink" title="底部加入"></a>底部加入</h4><blockquote>
+<p>127.0.0.1  <a href="http://www.test.com" target="_blank" rel="noopener">www.test.com</a></p>
+</blockquote>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><ul>
+<li>没有权限？拖到桌面上，修改之后，拖到文件夹下，会提示使用管理权权限</li>
+<li>不需要重启，可以直接访问</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.luzhongkuan.cn/2018/06/08/windows配置本地域名/" data-id="cjtd0w7e6004vrfcf2ouhysy6" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-swiper4.0配置" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/29/swiper4.0配置/" class="article-date">
+  <time datetime="2018-05-29T10:20:55.000Z" itemprop="datePublished">2018-05-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/29/swiper4.0配置/">swiper4.0配置</a>
+    </h1>
+  
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <h4 id="swiper4-0配置"><a href="#swiper4-0配置" class="headerlink" title="swiper4.0配置"></a>swiper4.0配置</h4><blockquote>
+<p>一个项目中使用到了swiper4.0，配置和3.0有些差别，记录一下</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"> const config = &#123;</span><br><span class="line">  slidesPerView: &apos;auto&apos;, // 宽度自适应</span><br><span class="line">	spaceBetween: 30, // 间隙</span><br><span class="line">	centeredSlides: true, // 居中显示</span><br><span class="line">  autoplay: &#123;</span><br><span class="line">    delay: 3000, // 延迟时间</span><br><span class="line">    disableOnInteraction: false // 用户操作后不停止播放</span><br><span class="line">  &#125;,</span><br><span class="line">	 navigation: &#123;</span><br><span class="line">        nextEl: &apos;.swiper-button-next&apos;,</span><br><span class="line">        prevEl: &apos;.swiper-button-prev&apos;,</span><br><span class="line">      &#125;,</span><br><span class="line">  speed: 1000, // 速度</span><br><span class="line">  // loop: true, // 最后一页事件不能绑定</span><br><span class="line">  // initialSlide: this.pageIndex, // 默认页面</span><br><span class="line">  direction: &apos;horizontal&apos;, // 垂直滚动</span><br><span class="line">  // 注意不要跟 vue-router 的 hash 模式冲突了, 两者不可共用</span><br><span class="line">  // hashNavigation: &#123;</span><br><span class="line">  //   replaceState: true, // 翻页不产生历史记录</span><br><span class="line">  //   watchState: true,</span><br><span class="line">  // &#125;,</span><br><span class="line">  hashNavigation: false,</span><br><span class="line">  observer: true, // 子元素发生变化自动初始化swiper</span><br><span class="line">  observeParents: true, // 父元素发生变化自动初始化swiper</span><br><span class="line">  on: &#123;</span><br><span class="line">    init() &#123; // 初始化</span><br><span class="line">    &#125;,</span><br><span class="line">		slideChangeTransitionEnd() &#123;&#125;,</span><br><span class="line">    slideChange() &#123; // 页面改变</span><br><span class="line">			console.log(this.realIndex) // 当前轮播页面</span><br><span class="line">    &#125;,</span><br><span class="line">    resize() &#123; // 页面宽度改变</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line">this.mySwiper = new Swiper(container, config);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>取消拖动：<br>swiper-no-swiping</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.luzhongkuan.cn/2018/05/29/swiper4.0配置/" data-id="cjtd0w5ql004jrfcfctjzbjtx" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-云凤蝶项目模板开发(随手笔记)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/29/云凤蝶项目模板开发(随手笔记)/" class="article-date">
+  <time datetime="2018-05-29T08:23:07.000Z" itemprop="datePublished">2018-05-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/29/云凤蝶项目模板开发(随手笔记)/">云凤蝶项目模板开发(随手笔记)</a>
+    </h1>
+  
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <h2 id="云凤蝶项目模板开发-随手笔记"><a href="#云凤蝶项目模板开发-随手笔记" class="headerlink" title="云凤蝶项目模板开发(随手笔记)"></a>云凤蝶项目模板开发(随手笔记)</h2><h4 id="根目录下package-config"><a href="#根目录下package-config" class="headerlink" title="根目录下package.config"></a>根目录下package.config</h4><blockquote>
+<p>entry中的.css改成.less，讲css文件改成less文件，在项目中可以使用less。 </p>
+</blockquote>
+<blockquote>
+<ul>
+<li>页面中还是引入css(虽然项目中没有css文件)</li>
+<li>提交前注意修改版本号</li>
+</ul>
+</blockquote>
+<h4 id="组件下package-json"><a href="#组件下package-json" class="headerlink" title="组件下package.json"></a>组件下package.json</h4><blockquote>
+<p>组件名称,在编辑的时候查看个性组件时候看到的组件名字</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &apos;fengdie&apos;: &#123;</span><br><span class="line">    &apos;name&apos;: &apos;HomeDetail&apos;,</span><br><span class="line">    &apos;title&apos;: &apos;描述列表&apos;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="fengdie-config"><a href="#fengdie-config" class="headerlink" title="fengdie.config"></a>fengdie.config</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  title: &apos;测试开发模板&apos;, // 版本名字</span><br><span class="line">  reload: false, // 是否重新刷新页面</span><br><span class="line">  security: &#123;</span><br><span class="line">    xframe: &#123;</span><br><span class="line">      enable: false // 设置安全配置头，可以关闭</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="跳转页面"><a href="#跳转页面" class="headerlink" title="跳转页面"></a>跳转页面</h4><blockquote>
+<p>/pages/{pages}/index.html</p>
+</blockquote>
+<h4 id="snapshot-png"><a href="#snapshot-png" class="headerlink" title="snapshot.png"></a>snapshot.png</h4><blockquote>
+<p>根目录下图片是模板列表展示的图片，组件目录下图片会在编辑的时候会显示组件快照</p>
+</blockquote>
+<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><blockquote>
+<p>在使用编辑的时候，通过定位全屏高度，页面显示不全。通过检查发现iframe有一个bodyoverflow-y：hidden的属性，全局在项目中没有找到这个属性，加入下面一句代码解决问题</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">html, body &#123;</span><br><span class="line">  min-height: 100%;</span><br><span class="line">  height: 100%;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.luzhongkuan.cn/2018/05/29/云凤蝶项目模板开发(随手笔记)/" data-id="cjtd0w8jl0054rfcfwts5sbva" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-高德地图（vue组件）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/11/高德地图（vue组件）/" class="article-date">
+  <time datetime="2018-05-11T02:38:20.000Z" itemprop="datePublished">2018-05-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/11/高德地图（vue组件）/">高德地图（vue组件）</a>
+    </h1>
+  
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <h3 id="高德地图（vue组件）"><a href="#高德地图（vue组件）" class="headerlink" title="高德地图（vue组件）"></a>高德地图（vue组件）</h3><blockquote>
+<p>搜索提示，添加maker，拖拽maker</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class=&quot;my-map&quot;&gt;</span><br><span class="line">    &lt;el-button&gt;&#123;&#123; buttonText &#125;&#125;&lt;/el-button&gt;</span><br><span class="line">    &lt;div class=&quot;control-container&quot;&gt;</span><br><span class="line">      &lt;div id=&quot;map-container&quot; class=&quot;map-container&quot;&gt;&lt;/div&gt;</span><br><span class="line">      &lt;el-button @click=&quot;visible = !visible&quot; class=&quot;confirm-btn&quot; type=&quot;success&quot;&gt;确定位置&lt;/el-button&gt;</span><br><span class="line">      &lt;div class=&quot;search-box&quot;&gt;</span><br><span class="line">        &lt;el-input id=&quot;search-input&quot; :value=&quot;keyword&quot; @change=&quot;search&quot; suffix-icon=&quot;el-icon-search&quot; placeholder=&quot;请输入地址&quot;&gt;&lt;/el-input&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">  // 父组件通过 select 获取到经纬度</span><br><span class="line">  // search 方法获取到地理位置</span><br><span class="line">  const key = &apos;***&apos;</span><br><span class="line">  const BEIJING = [116.39, 39.9]</span><br><span class="line">  export default &#123;</span><br><span class="line">    name: &apos;amap&apos;,</span><br><span class="line">    props: &#123;</span><br><span class="line">      shouldSelect: &#123; // 是否添加marker选择地址</span><br><span class="line">        type: Boolean,</span><br><span class="line">        default: true</span><br><span class="line">      &#125;,</span><br><span class="line">      value: &#123;</span><br><span class="line">        type: Array,</span><br><span class="line">        default() &#123;</span><br><span class="line">          return BEIJING</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      keyword: &#123;</span><br><span class="line">        type: String,</span><br><span class="line">        default: &apos;天安门&apos;</span><br><span class="line">      &#125;,</span><br><span class="line">      city: &#123;</span><br><span class="line">        type: [String, Number],</span><br><span class="line">        default: &apos;&apos;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    data() &#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        visible: false,</span><br><span class="line">        buttonText: this.value.join(&apos;、&apos;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    watch: &#123;</span><br><span class="line">      value(value) &#123;</span><br><span class="line">        if (!value || !value.length) return</span><br><span class="line">        this.buttonText = value.join(&apos;、&apos;)</span><br><span class="line">        this.addMarker(&#123;</span><br><span class="line">          lng: value[0],</span><br><span class="line">          lat: value[1],</span><br><span class="line">          O: value[0],</span><br><span class="line">          P: value[1]</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">      savePos(lnglat) &#123;</span><br><span class="line">        const posArr = [lnglat.lng, lnglat.lat]</span><br><span class="line">        this.buttonText = posArr.join(&apos;、&apos;)</span><br><span class="line">        this.$emit(&apos;select&apos;, lnglat)</span><br><span class="line">        this.$emit(&apos;input&apos;, posArr)</span><br><span class="line">        this.$emit(&apos;update:value&apos;, posArr)</span><br><span class="line">        this.addMarker(lnglat)</span><br><span class="line">      &#125;,</span><br><span class="line">      // 加载sdk</span><br><span class="line">      loadSdk() &#123;</span><br><span class="line">        return new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">          if (!window.AMap) &#123;</span><br><span class="line">            const script = document.createElement(&apos;script&apos;)</span><br><span class="line">            script.src = `//webapi.amap.com/maps?v=1.4.6&amp;key=$&#123;key&#125;`</span><br><span class="line">            document.head.appendChild(script)</span><br><span class="line">            script.onload = resolve</span><br><span class="line">            script.onerror = reject</span><br><span class="line">          &#125; else &#123;</span><br><span class="line">            resolve()</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;,</span><br><span class="line">      // 初始化地图</span><br><span class="line">      async initMap() &#123;</span><br><span class="line">        await this.loadSdk()</span><br><span class="line">        this.map = new window.AMap.Map(&apos;map-container&apos;, &#123;</span><br><span class="line">          zoom: 10,</span><br><span class="line">          center: this.value &amp;&amp; this.value.length ? this.value : BEIJING</span><br><span class="line">        &#125;)</span><br><span class="line">        const &#123;city&#125; = this</span><br><span class="line">        window.AMap.plugin(&apos;AMap.Autocomplete&apos;, function()&#123;</span><br><span class="line">          // 实例化Autocomplete</span><br><span class="line">          var autoOptions = &#123;</span><br><span class="line">            //city 限定城市，默认全国</span><br><span class="line">            city: city || &apos;全国&apos;,</span><br><span class="line">            input: &apos;search-input&apos;</span><br><span class="line">          &#125;</span><br><span class="line">          new AMap.Autocomplete(autoOptions);</span><br><span class="line">          // const autoComplete= new AMap.Autocomplete(autoOptions);</span><br><span class="line">          // autoComplete.search(keyword, function(status, result) &#123;</span><br><span class="line">            // 搜索成功时，result即是对应的匹配数据</span><br><span class="line">          // &#125;)</span><br><span class="line">        &#125;)</span><br><span class="line">        // 手动选择</span><br><span class="line">        if (this.shouldSelect) &#123;</span><br><span class="line">          AMap.event.addListener(this.map, &apos;click&apos;, (&#123;lnglat&#125;) =&gt; &#123;</span><br><span class="line">            this.savePos(lnglat)</span><br><span class="line">          &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      // 设置地图中心</span><br><span class="line">      setCenter(pointer) &#123;</span><br><span class="line">        if (!pointer) return</span><br><span class="line">        </span><br><span class="line">        // this.map.setZoom(14);</span><br><span class="line">        this.map.setCenter(pointer)</span><br><span class="line">      &#125;,</span><br><span class="line">      // 覆盖物</span><br><span class="line">      addMarker(position = &#123;&#125;) &#123;</span><br><span class="line">        // 设置居中</span><br><span class="line">        this.setCenter(position)</span><br><span class="line"></span><br><span class="line">        if (this.marker) &#123;</span><br><span class="line">          this.map.remove(this.marker)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 添加marker</span><br><span class="line">        const &#123;lat, lng&#125; = position</span><br><span class="line">        this.marker = new AMap.Marker(&#123;</span><br><span class="line">          position: [lng, lat], // marker所在的位置</span><br><span class="line">          map: this.map, // 创建时直接赋予map属性</span><br><span class="line">          draggable: true,  //是否可拖动</span><br><span class="line">          icon: new AMap.Icon(&#123;</span><br><span class="line">            image: &apos;http://webapi.amap.com/images/0.png&apos;,</span><br><span class="line">            size: new AMap.Size(36, 36),</span><br><span class="line">            imageOffset: new AMap.Pixel(-0, -0)</span><br><span class="line">          &#125;)</span><br><span class="line">        &#125;)</span><br><span class="line">        this.marker.on(&apos;dragend&apos;, (&#123;lnglat&#125;) =&gt; &#123;</span><br><span class="line">            this.savePos(lnglat)</span><br><span class="line">          &#125;)</span><br><span class="line">      &#125;,</span><br><span class="line">      // 搜索 return Promise&lt;array&gt;</span><br><span class="line">      search(keyword = this.keyword, city = this.city) &#123;</span><br><span class="line">        if (!keyword) &#123;</span><br><span class="line">          keyword = &apos;天安门&apos;</span><br><span class="line">        &#125;</span><br><span class="line">        const searchOptions = &#123;</span><br><span class="line">          pageSize: 5,</span><br><span class="line">          pageIndex: 1,</span><br><span class="line">          city</span><br><span class="line">        &#125;</span><br><span class="line">        return new Promise(resolve =&gt; &#123;</span><br><span class="line">          AMap.service(&apos;AMap.PlaceSearch&apos;, () =&gt; &#123;</span><br><span class="line">            const placeSearch = new AMap.PlaceSearch(searchOptions)</span><br><span class="line">            placeSearch.search(keyword, (status, result) =&gt; &#123;</span><br><span class="line">              // 搜索到结果</span><br><span class="line">              if (result.info !== &apos;OK&apos;) &#123;</span><br><span class="line">                resolve(null)</span><br><span class="line">                return</span><br><span class="line">              &#125;</span><br><span class="line">              // 结果列表</span><br><span class="line">              const &#123;poiList: &#123;pois = []&#125;&#125; = result</span><br><span class="line">              const res = pois[0]</span><br><span class="line">              console.log(&apos;搜索结果&apos;, res)</span><br><span class="line">              this.savePos(res.location)</span><br><span class="line">            &#125;)</span><br><span class="line">          &#125;)</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    mounted() &#123;</span><br><span class="line">      this.initMap()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style lang=&apos;scss&apos; scoped&gt;</span><br><span class="line">.my-map &#123;</span><br><span class="line">  display: inline-block;</span><br><span class="line">  width: 100%;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.control-container &#123;</span><br><span class="line">  height: 350px;</span><br><span class="line">  position: relative;</span><br><span class="line">  margin: 20px 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.map-container &#123;</span><br><span class="line">  width: 100%;</span><br><span class="line">  height: 100%;</span><br><span class="line">  position: absolute;</span><br><span class="line">  left: 0;</span><br><span class="line">  top: 0;</span><br><span class="line">  z-index: 10000;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.confirm-btn,</span><br><span class="line">.search-box &#123;</span><br><span class="line">  position: absolute;</span><br><span class="line">  right: 10px;</span><br><span class="line">  top: 20px;</span><br><span class="line">  z-index: 10000;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.search-box &#123;</span><br><span class="line">  right: 100px;</span><br><span class="line">  width: 300px;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line"></span><br><span class="line">&lt;style&gt;</span><br><span class="line">.amap-sug-result &#123;</span><br><span class="line">  z-index: 10000;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.luzhongkuan.cn/2018/05/11/高德地图（vue组件）/" data-id="cjtd0wd9z0060rfcffaug79dt" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-一个简单的loading控制代码" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/07/一个简单的loading控制代码/" class="article-date">
+  <time datetime="2018-05-07T13:44:57.000Z" itemprop="datePublished">2018-05-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/07/一个简单的loading控制代码/">一个简单的loading控制代码</a>
+    </h1>
+  
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <h3 id="一个简单的loading控制封装"><a href="#一个简单的loading控制封装" class="headerlink" title="一个简单的loading控制封装"></a>一个简单的loading控制封装</h3><blockquote>
+<p>防止多条请求发送出去，有一条请求返回取消loading状态</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">import &#123; Loading &#125; from &apos;element-ui&apos;;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  loading控制</span><br><span class="line"> */</span><br><span class="line">export default &#123;</span><br><span class="line">  num: 0,</span><br><span class="line">  show() &#123;</span><br><span class="line">    this.num += 1;</span><br><span class="line">    if (this.num === 1) &#123;</span><br><span class="line">      Loading.service(); // 显示loading</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  hide() &#123;</span><br><span class="line">    // 等待发出去的请求返回结果后结束loading</span><br><span class="line">    if (this.num &gt; 0) this.num -= 1;</span><br><span class="line">    if (this.num === 0) &#123;</span><br><span class="line">      Loading.service().close(); // 结束loading</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.luzhongkuan.cn/2018/05/07/一个简单的loading控制代码/" data-id="cjtd0w7uw004zrfcfndu9r89m" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-判断手机横屏还是竖屏" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/09/判断手机横屏还是竖屏/" class="article-date">
+  <time datetime="2018-04-09T15:36:34.000Z" itemprop="datePublished">2018-04-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/09/判断手机横屏还是竖屏/">判断手机横屏还是竖屏</a>
+    </h1>
+  
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <blockquote>
+<p>判断手机方向，第二三种受锁屏影响，指的是文档排布方向</p>
+</blockquote>
+<h4 id="1-不受锁屏影响"><a href="#1-不受锁屏影响" class="headerlink" title="1. 不受锁屏影响"></a>1. 不受锁屏影响</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">function maskControl(callback) &#123;</span><br><span class="line">  if (!callback) &#123;</span><br><span class="line">    console.error(&apos;callback is Not Found&apos;);</span><br><span class="line">    return;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  let shouldStart = true;</span><br><span class="line"></span><br><span class="line">  const handleOrientation = (&#123; gamma, beta &#125;) =&gt; &#123;</span><br><span class="line">    // 监听手机方向函数多次触发，性能优化</span><br><span class="line">    if (!shouldStart) return;</span><br><span class="line">    shouldStart = false;</span><br><span class="line">    setTimeout(() =&gt; &#123;</span><br><span class="line">      shouldStart = true;</span><br><span class="line">    &#125;, 500);</span><br><span class="line"></span><br><span class="line">    // 是否隐藏遮罩 （横屏竖屏不是决定的横屏竖屏）</span><br><span class="line">    const isHorizontal = ((beta &lt; 20 || beta &gt; -20) &amp;&amp; (gamma &gt; 45 || gamma &lt; 0)) || gamma === null;</span><br><span class="line">    const isVertical = (gamma &gt; -30 &amp;&amp; gamma &lt; 30) || gamma === null;</span><br><span class="line"></span><br><span class="line">    // 回掉方法</span><br><span class="line">    callback(&#123;</span><br><span class="line">      isHorizontal, isVertical, gamma, beta,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  // 监听手机方向</span><br><span class="line">  window.addEventListener(&apos;deviceorientation&apos;, handleOrientation);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-受锁屏影响"><a href="#2-受锁屏影响" class="headerlink" title="2. 受锁屏影响"></a>2. 受锁屏影响</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">window.addEventListener(&apos;onorientationchange&apos; in window ? &apos;orientationchange&apos; : &apos;resize&apos;, () =&gt; &#123;</span><br><span class="line">  if (window.orientation === 180 || window.orientation === 0) &#123;</span><br><span class="line">    //alert(&apos;竖屏状态！&apos;);  </span><br><span class="line">  &#125;</span><br><span class="line">  if (window.orientation === 90 || window.orientation === -90) &#123;</span><br><span class="line">    //alert(&apos;横屏状态！&apos;);  </span><br><span class="line">  &#125;</span><br><span class="line">&#125;, false);</span><br></pre></td></tr></table></figure>
+<h4 id="3-css媒体查询"><a href="#3-css媒体查询" class="headerlink" title="3.css媒体查询"></a>3.css媒体查询</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@media all and (orientation : landscape) &#123; </span><br><span class="line">   &lt;!--横屏--&gt;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">@media all and (orientation : portrait) &#123; </span><br><span class="line">    &lt;!--竖屏--&gt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.luzhongkuan.cn/2018/04/09/判断手机横屏还是竖屏/" data-id="cjtd0w9bk0059rfcfmvovndgm" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-windows设置免密码登陆linux" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/11/windows设置免密码登陆linux/" class="article-date">
+  <time datetime="2018-03-11T09:45:48.000Z" itemprop="datePublished">2018-03-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/11/windows设置免密码登陆linux/">windows设置免密码登陆linux</a>
+    </h1>
+  
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <h2 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h2><ol>
+<li>安装git（gitbash可以试用ssh，scp等）</li>
+<li><code>ssh-keygen -t rsa -C &#39;邮箱&#39;</code> ，然后三下enter键</li>
+<li>在当前用户文件夹下地./ssh文件中找到<code>id_rsa.pub</code></li>
+</ol>
+<h2 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h2><ol>
+<li>检查用户文件夹（root）的.ssh有没有<code>authorized_keys</code>，没有话手动创建</li>
+<li><code>vi authorized_keys</code>，打开文件复制，<code>wq</code>退出</li>
+<li>重启ssh服务<code>service sshd restart</code></li>
+</ol>
+<blockquote>
+<p>NaNundefined在云服务器 ECS Linux CentOS 7 下重启服务不再通过 service，[Redirecting to /bin/systemctl restart sshd.service]，使用下边命令  </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    1. systemctl start sshd.service</span><br><span class="line">   </span><br><span class="line">    2. systemctl restart sshd.service</span><br><span class="line"></span><br><span class="line">3. systemctl enable sshd.service</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.luzhongkuan.cn/2018/03/11/windows设置免密码登陆linux/" data-id="cjtd0w79i004urfcf90cdb7st" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-node爬虫偷取笑话上传数据库" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/09/node爬虫偷取笑话上传数据库/" class="article-date">
+  <time datetime="2018-03-09T13:52:59.000Z" itemprop="datePublished">2018-03-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/09/node爬虫偷取笑话上传数据库/">node爬虫偷取笑话上传数据库</a>
+    </h1>
+  
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <h4 id="node爬虫（笑话）"><a href="#node爬虫（笑话）" class="headerlink" title="node爬虫（笑话）"></a>node爬虫（笑话）</h4><blockquote>
+<p>很喜欢async、await</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">const fs = require(&apos;fs&apos;);</span><br><span class="line">const fetch = require(&apos;node-fetch&apos;);</span><br><span class="line">const cheerio = require(&apos;cheerio&apos;);</span><br><span class="line"></span><br><span class="line">// 目标地址</span><br><span class="line">let url = &apos;http://www.budejie.com/text/&apos;;</span><br><span class="line"></span><br><span class="line">const mysql = require(&apos;knex&apos;)(&#123;</span><br><span class="line">  client: &apos;mysql&apos;,</span><br><span class="line">  connection: &#123;</span><br><span class="line">    host: &apos;118.25.43.168&apos;,</span><br><span class="line">    port: &apos;3306&apos;,</span><br><span class="line">    user: &apos;***&apos;,</span><br><span class="line">    password: &apos;***&apos;,</span><br><span class="line">    database: &apos;***&apos;,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">let joke = [];</span><br><span class="line"></span><br><span class="line">// 开始</span><br><span class="line">start();</span><br><span class="line"></span><br><span class="line">async function start() &#123;</span><br><span class="line">  for (let i = 0; i &lt; 50; i++) &#123;</span><br><span class="line">    let res = await runHelper(spider(i));</span><br><span class="line">    if (res) &#123;</span><br><span class="line">      console.log(i, res.name); // 方便观察进度</span><br><span class="line">      joke = joke.concat(res);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  upload(joke); // 上传数据库</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">async function spider(page) &#123;</span><br><span class="line">  let currentUrl = url + page;</span><br><span class="line">  let html = await fetch(currentUrl).then(res =&gt; res.text());</span><br><span class="line">  let $ = cheerio.load(html);</span><br><span class="line">  let ls = $(&apos;.j-r-list&gt;ul&gt;li&apos;);</span><br><span class="line">  let data = [];</span><br><span class="line">  ls.map((i, item) =&gt; &#123;</span><br><span class="line">    let avatar = $(item).find(&apos;img&apos;).attr(&apos;data-original&apos;);</span><br><span class="line">    let name = $(item).find(&apos;.u-user-name&apos;).text();</span><br><span class="line">    let joke = $(item).find(&apos;.j-r-list-c-desc a&apos;).text();</span><br><span class="line">    data.push(&#123;</span><br><span class="line">      name, avatar, joke</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">  return data;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function runHelper(fn, time = 2000) &#123;</span><br><span class="line">  const limit = new Promise((resolve) =&gt; &#123;</span><br><span class="line">    setTimeout(() =&gt; &#123;</span><br><span class="line">      resolve(null);</span><br><span class="line">    &#125;, time);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  return Promise.race([limit, fn]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">async function upload(joke) &#123;</span><br><span class="line">  for (let i = 0; i &lt; joke.length; i++) &#123;</span><br><span class="line">    let res = await mysql(&apos;kuan_joke&apos;).insert(joke[i]);</span><br><span class="line">    console.log(res);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.luzhongkuan.cn/2018/03/09/node爬虫偷取笑话上传数据库/" data-id="cjtd0w3sm0048rfcf93xvsyo6" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-一个简单的弹窗" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/06/一个简单的弹窗/" class="article-date">
+  <time datetime="2018-03-06T04:50:28.000Z" itemprop="datePublished">2018-03-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/06/一个简单的弹窗/">一个简单的弹窗</a>
+    </h1>
+  
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <blockquote>
+<p>原来只用css也可以写出来一个漂亮的弹窗</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;title&gt;&lt;/title&gt;</span><br><span class="line">	&lt;style type=&apos;text/css&apos;&gt;</span><br><span class="line">	.overlay &#123;</span><br><span class="line">		position: fixed;</span><br><span class="line">		top: 0;</span><br><span class="line">		bottom: 0;</span><br><span class="line">		left: 0;</span><br><span class="line">		right: 0;</span><br><span class="line">		background: rgba(0, 0, 0, 0.7);</span><br><span class="line">		transition: opacity .5s;</span><br><span class="line">		visibility: hidden;</span><br><span class="line">		opacity: 0;</span><br><span class="line">		z-index: 10000</span><br><span class="line">	&#125;</span><br><span class="line">	.overlay:target &#123;</span><br><span class="line">		visibility: visible;</span><br><span class="line">		opacity: 1;</span><br><span class="line">	&#125;</span><br><span class="line">	.modal &#123;</span><br><span class="line">		min-width:400px;</span><br><span class="line">		max-width: 45%;</span><br><span class="line">		position: relative;</span><br><span class="line">		margin: auto;</span><br><span class="line">		padding: 1.5rem;</span><br><span class="line">		background: #fff;</span><br><span class="line">		border-radius: 4px;</span><br><span class="line">		-webkit-border-radius: 4px;</span><br><span class="line">		-moz-border-radius: 4px;</span><br><span class="line">		transition: .5s;</span><br><span class="line">		opacity: 0;</span><br><span class="line">		transform: scale(1.1);</span><br><span class="line">	&#125;</span><br><span class="line">	.overlay:target &gt; .modal &#123;</span><br><span class="line">		transform: translateY(60%) scale(1);</span><br><span class="line">		transition-timing-function: cubic-bezier(0.8, 0, 0, 1.5);</span><br><span class="line">		opacity: 1;</span><br><span class="line">	&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;div class=&apos;overlay&apos; id=&apos;pop&apos;&gt;</span><br><span class="line">		&lt;div class=&apos;modal&apos;&gt;</span><br><span class="line">			&lt;a href=&apos;#&apos;&gt;关闭&lt;/a&gt;</span><br><span class="line">		&lt;/div&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">	&lt;a href=&apos;#pop&apos;&gt;显示&lt;/a&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.luzhongkuan.cn/2018/03/06/一个简单的弹窗/" data-id="cjtd0w7z70050rfcfzqsk2015" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/03/08/node使用wechaty制作微信机器人每天给老婆发送暖心/">node使用wechaty制作微信机器人每天给老婆发送暖心</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/06/使用nodeJS爬取一些测试图片/">使用nodeJS爬取一些测试图片</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/14/linux中nginx、mysql安装碰到的问题/">linux中nginx、mysql安装碰到的问题</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/27/spark-md5获取文件md5唯一标识/">spark-md5获取文件md5唯一标识</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/24/vue-cli-Invalid-Host-Origin-header/">vue-cli Invalid Host/Origin header</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+  </div>
+</body>
+</html>
