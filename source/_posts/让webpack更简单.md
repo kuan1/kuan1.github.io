@@ -1,6 +1,6 @@
 ---
 title: 让webpack更简单
-date: 2018-09-22 21:42:24
+date: 2018-09-22
 ---
 # 让webpack更简单
 > 根据自己习惯将webpack封装成一个npm包，不再需要安装任何webpack相关包，甚至不需要任何配置。思路借鉴`webpack-cli3`和`umi`

@@ -1,6 +1,6 @@
 ---
 title: 使用nodeJS爬取一些测试图片
-date: 2019-03-06 15:12:20
+date: 2019-03-06
 ---
 ```
 const fs = require('fs')

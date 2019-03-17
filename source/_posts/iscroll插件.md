@@ -1,6 +1,6 @@
 ---
 title: iscroll插件
-date: 2016-10-23 13:38:53
+date: 2016-10-23
 ---
 #### IScroll：滚动划屏类插件
 > 原理就是css3的transform属性来模拟除了渐进原生的滚动插件  

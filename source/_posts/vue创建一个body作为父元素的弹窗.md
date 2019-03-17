@@ -1,6 +1,6 @@
 ---
 title: vue创建一个body作为父元素的弹窗
-date: 2018-07-16 23:42:31
+date: 2018-07-16
 ---
 > 分别借鉴elementui的dialog和mint-ui的toast组件
 

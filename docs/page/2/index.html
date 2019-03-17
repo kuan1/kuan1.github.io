@@ -68,7 +68,7 @@
     <article id="post-支付宝分享" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/10/15/支付宝分享/" class="article-date">
-  <time datetime="2018-10-15T02:56:36.000Z" itemprop="datePublished">2018-10-15</time>
+  <time datetime="2018-10-14T16:00:00.000Z" itemprop="datePublished">2018-10-15</time>
 </a>
     
   </div>
@@ -93,7 +93,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.luzhongkuan.cn/2018/10/15/支付宝分享/" data-id="cjtd0wbqo005qrfcfy5afng9s" class="article-share-link">Share</a>
+      <a data-url="https://www.luzhongkuan.cn/2018/10/15/支付宝分享/" data-id="cjtd1jels002p8ycfdwomyavp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -106,7 +106,7 @@
     <article id="post-WebViewJavascriptBridge使用" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/10/08/WebViewJavascriptBridge使用/" class="article-date">
-  <time datetime="2018-10-08T10:27:32.000Z" itemprop="datePublished">2018-10-08</time>
+  <time datetime="2018-10-07T16:00:00.000Z" itemprop="datePublished">2018-10-08</time>
 </a>
     
   </div>
@@ -134,48 +134,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.luzhongkuan.cn/2018/10/08/WebViewJavascriptBridge使用/" data-id="cjtd0w70y004srfcfstzgu3p6" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-nuxt-部署" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/10/03/nuxt-部署/" class="article-date">
-  <time datetime="2018-10-03T15:36:21.000Z" itemprop="datePublished">2018-10-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <header class="article-header">
-      
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/03/nuxt-部署/">nuxt 部署</a>
-    </h1>
-  
-
-    </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      <h2 id="部署碰到了一个问题"><a href="#部署碰到了一个问题" class="headerlink" title="部署碰到了一个问题"></a>部署碰到了一个问题</h2><p>刚开始的部署步骤：通过git整个将项目下载到服务器上，在服务器上边进行build，然后运行pm2进行部署。</p>
-<p>后来出现了问题：在服务器上build是一直出现<em>processing killed</em>，（服务器一核2G的配置，刚开始的时候没有碰到这个问题，最近修改build才出现了这个问题）。</p>
-<h2 id="修改方案"><a href="#修改方案" class="headerlink" title="修改方案"></a>修改方案</h2><p>在本地部build，然后将文件上传到服务器，需要上传文件<code>.nuxt static nuxt.config.js package.json process.json</code>，其他的不说了，直接上一个shell。</p>
-<h4 id="上传shell"><a href="#上传shell" class="headerlink" title="上传shell"></a>上传shell</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line"></span><br><span class="line">remoteIp=这里是服务器地址;</span><br><span class="line">remoteDir=所在文件夹;</span><br><span class="line"></span><br><span class="line"># 远程文件夹</span><br><span class="line">clearRemote()&#123;</span><br><span class="line">   echo &quot;[exec]删除远程文件:$remoteIp $remoteDir&quot;</span><br><span class="line">   ssh root@$remoteIp &quot;rm -rf $remoteDir/.nuxt&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 上传文件</span><br><span class="line">uploadDist()&#123;</span><br><span class="line">   echo &quot;[exec]正在上传文件:$remoteIp $remoteDir&quot;</span><br><span class="line"></span><br><span class="line">   # 文件列表</span><br><span class="line">   uploadDir=&apos;.nuxt static nuxt.config.js package.json process.json&apos;</span><br><span class="line">   scp -r $uploadDir root@$remoteIp:$remoteDir</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 脚本运行起点</span><br><span class="line">echo &quot;[exec]开始自动部署...&quot;</span><br><span class="line">clearRemote</span><br><span class="line">uploadDist</span><br><span class="line">echo &quot;文件上传结束--&quot;</span><br><span class="line"></span><br><span class="line"># 启动服务</span><br><span class="line">npm install --production</span><br><span class="line">pm2 restart process.json # pm2配置文件</span><br></pre></td></tr></table></figure>
-<h4 id="process-json-pm2配置"><a href="#process-json-pm2配置" class="headerlink" title="process.json pm2配置"></a>process.json pm2配置</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;apps&quot;: [</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;name&quot;: &quot;kuan-nuxt-blog&quot;,</span><br><span class="line">      &quot;script&quot;: &quot;npm&quot;,</span><br><span class="line">      &quot;args&quot; : &quot;start&quot;,</span><br><span class="line">      &quot;watch&quot;: false,</span><br><span class="line">      &quot;instances&quot;: 1,</span><br><span class="line">      &quot;exec_mode&quot;: &quot;fork&quot;,</span><br><span class="line">      &quot;env&quot;: &#123;</span><br><span class="line">        &quot;NODE_ENV&quot;: &quot;production&quot;,</span><br><span class="line">        &quot;port&quot;: 9001</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://www.luzhongkuan.cn/2018/10/03/nuxt-部署/" data-id="cjtd0w406004arfcfayequo73" class="article-share-link">Share</a>
+      <a data-url="https://www.luzhongkuan.cn/2018/10/08/WebViewJavascriptBridge使用/" data-id="cjtd1jejb00078ycfwsj24huj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -188,7 +147,7 @@
     <article id="post-css-object-fit" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/10/03/css-object-fit/" class="article-date">
-  <time datetime="2018-10-03T14:39:43.000Z" itemprop="datePublished">2018-10-03</time>
+  <time datetime="2018-10-02T16:00:00.000Z" itemprop="datePublished">2018-10-03</time>
 </a>
     
   </div>
@@ -235,7 +194,48 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.luzhongkuan.cn/2018/10/03/css-object-fit/" data-id="cjtd0vzg70039rfcfqu8jda1z" class="article-share-link">Share</a>
+      <a data-url="https://www.luzhongkuan.cn/2018/10/03/css-object-fit/" data-id="cjtd1jeji000b8ycffti8xocd" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-nuxt-部署" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/10/03/nuxt-部署/" class="article-date">
+  <time datetime="2018-10-02T16:00:00.000Z" itemprop="datePublished">2018-10-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/03/nuxt-部署/">nuxt 部署</a>
+    </h1>
+  
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <h2 id="部署碰到了一个问题"><a href="#部署碰到了一个问题" class="headerlink" title="部署碰到了一个问题"></a>部署碰到了一个问题</h2><p>刚开始的部署步骤：通过git整个将项目下载到服务器上，在服务器上边进行build，然后运行pm2进行部署。</p>
+<p>后来出现了问题：在服务器上build是一直出现<em>processing killed</em>，（服务器一核2G的配置，刚开始的时候没有碰到这个问题，最近修改build才出现了这个问题）。</p>
+<h2 id="修改方案"><a href="#修改方案" class="headerlink" title="修改方案"></a>修改方案</h2><p>在本地部build，然后将文件上传到服务器，需要上传文件<code>.nuxt static nuxt.config.js package.json process.json</code>，其他的不说了，直接上一个shell。</p>
+<h4 id="上传shell"><a href="#上传shell" class="headerlink" title="上传shell"></a>上传shell</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line"></span><br><span class="line">remoteIp=这里是服务器地址;</span><br><span class="line">remoteDir=所在文件夹;</span><br><span class="line"></span><br><span class="line"># 远程文件夹</span><br><span class="line">clearRemote()&#123;</span><br><span class="line">   echo &quot;[exec]删除远程文件:$remoteIp $remoteDir&quot;</span><br><span class="line">   ssh root@$remoteIp &quot;rm -rf $remoteDir/.nuxt&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 上传文件</span><br><span class="line">uploadDist()&#123;</span><br><span class="line">   echo &quot;[exec]正在上传文件:$remoteIp $remoteDir&quot;</span><br><span class="line"></span><br><span class="line">   # 文件列表</span><br><span class="line">   uploadDir=&apos;.nuxt static nuxt.config.js package.json process.json&apos;</span><br><span class="line">   scp -r $uploadDir root@$remoteIp:$remoteDir</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 脚本运行起点</span><br><span class="line">echo &quot;[exec]开始自动部署...&quot;</span><br><span class="line">clearRemote</span><br><span class="line">uploadDist</span><br><span class="line">echo &quot;文件上传结束--&quot;</span><br><span class="line"></span><br><span class="line"># 启动服务</span><br><span class="line">npm install --production</span><br><span class="line">pm2 restart process.json # pm2配置文件</span><br></pre></td></tr></table></figure>
+<h4 id="process-json-pm2配置"><a href="#process-json-pm2配置" class="headerlink" title="process.json pm2配置"></a>process.json pm2配置</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;apps&quot;: [</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;name&quot;: &quot;kuan-nuxt-blog&quot;,</span><br><span class="line">      &quot;script&quot;: &quot;npm&quot;,</span><br><span class="line">      &quot;args&quot; : &quot;start&quot;,</span><br><span class="line">      &quot;watch&quot;: false,</span><br><span class="line">      &quot;instances&quot;: 1,</span><br><span class="line">      &quot;exec_mode&quot;: &quot;fork&quot;,</span><br><span class="line">      &quot;env&quot;: &#123;</span><br><span class="line">        &quot;NODE_ENV&quot;: &quot;production&quot;,</span><br><span class="line">        &quot;port&quot;: 9001</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.luzhongkuan.cn/2018/10/03/nuxt-部署/" data-id="cjtd1jekm001a8ycfjdt3gan3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -248,7 +248,7 @@
     <article id="post-window10好用快捷键：-`window键`-+-`w`组合" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/09/30/window10好用快捷键：-`window键`-+-`w`组合/" class="article-date">
-  <time datetime="2018-09-30T15:22:12.000Z" itemprop="datePublished">2018-09-30</time>
+  <time datetime="2018-09-29T16:00:00.000Z" itemprop="datePublished">2018-09-30</time>
 </a>
     
   </div>
@@ -275,7 +275,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.luzhongkuan.cn/2018/09/30/window10好用快捷键：-`window键`-+-`w`组合/" data-id="cjtd0w75v004trfcfkl5955vm" class="article-share-link">Share</a>
+      <a data-url="https://www.luzhongkuan.cn/2018/09/30/window10好用快捷键：-`window键`-+-`w`组合/" data-id="cjtd1jeky001s8ycfp1xmut14" class="article-share-link">Share</a>
       
       
     </footer>
@@ -288,7 +288,7 @@
     <article id="post-git下载仓库指定文件夹" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/09/27/git下载仓库指定文件夹/" class="article-date">
-  <time datetime="2018-09-27T05:22:49.000Z" itemprop="datePublished">2018-09-27</time>
+  <time datetime="2018-09-26T16:00:00.000Z" itemprop="datePublished">2018-09-27</time>
 </a>
     
   </div>
@@ -312,7 +312,47 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.luzhongkuan.cn/2018/09/27/git下载仓库指定文件夹/" data-id="cjtd0vzxd003erfcf2o31lc4e" class="article-share-link">Share</a>
+      <a data-url="https://www.luzhongkuan.cn/2018/09/27/git下载仓库指定文件夹/" data-id="cjtd1jejr000f8ycfas66l2id" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-前端-简化后台项目【增删该查禁用启用】" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/09/22/前端-简化后台项目【增删该查禁用启用】/" class="article-date">
+  <time datetime="2018-09-21T16:00:00.000Z" itemprop="datePublished">2018-09-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/09/22/前端-简化后台项目【增删该查禁用启用】/">前端 简化后台项目【增删该查禁用启用】</a>
+    </h1>
+  
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <h2 id="request-js-http封装（此处仅用于测试）"><a href="#request-js-http封装（此处仅用于测试）" class="headerlink" title="request.js http封装（此处仅用于测试）"></a>request.js http封装（此处仅用于测试）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">export default const request = (params) =&gt; &#123;</span><br><span class="line">  return new Promise(resolve =&gt; &#123;</span><br><span class="line">    setTimeout(() =&gt; &#123;</span><br><span class="line">      resolve(params)</span><br><span class="line">    &#125;, 1000)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="BaseApi-基础增删该查类"><a href="#BaseApi-基础增删该查类" class="headerlink" title="BaseApi 基础增删该查类"></a>BaseApi 基础增删该查类</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">import request from &apos;./request.js</span><br><span class="line">&apos;</span><br><span class="line">/**</span><br><span class="line"> * 基础增删该查类</span><br><span class="line"> * @params object &#123;baseUrl: 和后台约定接口地址&#125;</span><br><span class="line"> * 列表 get：baseUrl</span><br><span class="line"> * 添加 post: baseUrl</span><br><span class="line"> * 修改 put: `$&#123;baseUrl&#125;/$&#123;&apos;当前数据id&apos;&#125;`</span><br><span class="line"> * 删除 delete: `$&#123;baseUrl&#125;/$&#123;&apos;当前数据id&apos;&#125;`</span><br><span class="line"> * 状态更改 patch: `$&#123;baseUrl&#125;/$&#123;当前数据id&#125;/$&#123;&apos;当前状态&apos; ? &apos;forbid&apos; : &apos;resume&apos;&#125;`</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">export default class BaseApi &#123;</span><br><span class="line">  constructor(baseUrl) &#123;</span><br><span class="line">    if (!baseUrl) throw `baseApi params need a baseUrl`</span><br><span class="line">    this.baseUrl = baseUrl</span><br><span class="line">    this.request = request</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  list(params) &#123;</span><br><span class="line">    return this.request(&#123;</span><br><span class="line">      baseUrl: this.baseUrl,</span><br><span class="line">      params</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  add(data) &#123;</span><br><span class="line">    return this.request(&#123;</span><br><span class="line">      baseUrl: this.baseUrl,</span><br><span class="line">      method: &apos;post&apos;,</span><br><span class="line">      data</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  update(data) &#123;</span><br><span class="line">    return this.request(&#123;</span><br><span class="line">      baseUrl: `$&#123;this.baseUrl&#125;/$&#123;data.id&#125;`,</span><br><span class="line">      method: &apos;put&apos;,</span><br><span class="line">      data</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  remove(id) &#123;</span><br><span class="line">    return this.request(&#123;</span><br><span class="line">      baseUrl: `$&#123;this.baseUrl&#125;/$&#123;id&#125;`,</span><br><span class="line">      method: &apos;delete&apos;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  changeStatus(data) &#123;</span><br><span class="line">    // 根据状态拼接禁用启用地址</span><br><span class="line">    const url = `$&#123;this.baseUrl&#125;/$&#123;data.id&#125;/$&#123;data.status ? &apos;resume&apos; : &apos;forbid&apos;&#125;`</span><br><span class="line">    return this.request(&#123;</span><br><span class="line">      url,</span><br><span class="line">      data,</span><br><span class="line">      method: &apos;patch&apos;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="继承基础类【例如用户管理】"><a href="#继承基础类【例如用户管理】" class="headerlink" title="继承基础类【例如用户管理】"></a>继承基础类【例如用户管理】</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">// 继承基础类，有特殊规则可以在子类中复写，或者添加其他接口管理</span><br><span class="line">class UserApi extends baseApi &#123;</span><br><span class="line">  constructor(props) &#123;</span><br><span class="line">    super(props)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  addInfo(data) &#123; // 增删改查禁用启用之外得其他接口</span><br><span class="line">    return this.request(&#123;</span><br><span class="line">      url: &apos;http://baidu.com&apos;,</span><br><span class="line">      method: &apos;post&apos;,</span><br><span class="line">      data</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line"> * @param1 baseUrl string</span><br><span class="line"> * @param2 自定义参数</span><br><span class="line"> */</span><br><span class="line">const userApi = new UserApi(&apos;http://www.baidu.com&apos;)</span><br><span class="line"></span><br><span class="line">export default userApi</span><br></pre></td></tr></table></figure>
+<h2 id="项目内部调用接口"><a href="#项目内部调用接口" class="headerlink" title="项目内部调用接口"></a>项目内部调用接口</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import userApi from &apos;./userApi&apos;</span><br><span class="line">// 测试使用</span><br><span class="line">async function test() &#123;</span><br><span class="line">  const list = await userApi.list(&#123;page: 1, size: 10&#125;)</span><br><span class="line">  console.log(&apos;查询用户列表&apos;, list)</span><br><span class="line"></span><br><span class="line">  const addRes = await userApi.addInfo(&#123; age: 25 &#125;)</span><br><span class="line">  console.log(&apos;其他自定义接口&apos;, addRes)</span><br><span class="line">&#125;</span><br><span class="line">test()</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.luzhongkuan.cn/2018/09/22/前端-简化后台项目【增删该查禁用启用】/" data-id="cjtd1jelc00298ycfrpyl0rql" class="article-share-link">Share</a>
       
       
     </footer>
@@ -325,7 +365,7 @@
     <article id="post-让webpack更简单" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/09/22/让webpack更简单/" class="article-date">
-  <time datetime="2018-09-22T13:42:24.000Z" itemprop="datePublished">2018-09-22</time>
+  <time datetime="2018-09-21T16:00:00.000Z" itemprop="datePublished">2018-09-22</time>
 </a>
     
   </div>
@@ -403,47 +443,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.luzhongkuan.cn/2018/09/22/让webpack更简单/" data-id="cjtd0wcrf005xrfcfuiw44mwe" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-前端-简化后台项目【增删该查禁用启用】" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/09/22/前端-简化后台项目【增删该查禁用启用】/" class="article-date">
-  <time datetime="2018-09-22T08:23:36.000Z" itemprop="datePublished">2018-09-22</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <header class="article-header">
-      
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/22/前端-简化后台项目【增删该查禁用启用】/">前端 简化后台项目【增删该查禁用启用】</a>
-    </h1>
-  
-
-    </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      <h2 id="request-js-http封装（此处仅用于测试）"><a href="#request-js-http封装（此处仅用于测试）" class="headerlink" title="request.js http封装（此处仅用于测试）"></a>request.js http封装（此处仅用于测试）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">export default const request = (params) =&gt; &#123;</span><br><span class="line">  return new Promise(resolve =&gt; &#123;</span><br><span class="line">    setTimeout(() =&gt; &#123;</span><br><span class="line">      resolve(params)</span><br><span class="line">    &#125;, 1000)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="BaseApi-基础增删该查类"><a href="#BaseApi-基础增删该查类" class="headerlink" title="BaseApi 基础增删该查类"></a>BaseApi 基础增删该查类</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">import request from &apos;./request.js</span><br><span class="line">&apos;</span><br><span class="line">/**</span><br><span class="line"> * 基础增删该查类</span><br><span class="line"> * @params object &#123;baseUrl: 和后台约定接口地址&#125;</span><br><span class="line"> * 列表 get：baseUrl</span><br><span class="line"> * 添加 post: baseUrl</span><br><span class="line"> * 修改 put: `$&#123;baseUrl&#125;/$&#123;&apos;当前数据id&apos;&#125;`</span><br><span class="line"> * 删除 delete: `$&#123;baseUrl&#125;/$&#123;&apos;当前数据id&apos;&#125;`</span><br><span class="line"> * 状态更改 patch: `$&#123;baseUrl&#125;/$&#123;当前数据id&#125;/$&#123;&apos;当前状态&apos; ? &apos;forbid&apos; : &apos;resume&apos;&#125;`</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">export default class BaseApi &#123;</span><br><span class="line">  constructor(baseUrl) &#123;</span><br><span class="line">    if (!baseUrl) throw `baseApi params need a baseUrl`</span><br><span class="line">    this.baseUrl = baseUrl</span><br><span class="line">    this.request = request</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  list(params) &#123;</span><br><span class="line">    return this.request(&#123;</span><br><span class="line">      baseUrl: this.baseUrl,</span><br><span class="line">      params</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  add(data) &#123;</span><br><span class="line">    return this.request(&#123;</span><br><span class="line">      baseUrl: this.baseUrl,</span><br><span class="line">      method: &apos;post&apos;,</span><br><span class="line">      data</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  update(data) &#123;</span><br><span class="line">    return this.request(&#123;</span><br><span class="line">      baseUrl: `$&#123;this.baseUrl&#125;/$&#123;data.id&#125;`,</span><br><span class="line">      method: &apos;put&apos;,</span><br><span class="line">      data</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  remove(id) &#123;</span><br><span class="line">    return this.request(&#123;</span><br><span class="line">      baseUrl: `$&#123;this.baseUrl&#125;/$&#123;id&#125;`,</span><br><span class="line">      method: &apos;delete&apos;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  changeStatus(data) &#123;</span><br><span class="line">    // 根据状态拼接禁用启用地址</span><br><span class="line">    const url = `$&#123;this.baseUrl&#125;/$&#123;data.id&#125;/$&#123;data.status ? &apos;resume&apos; : &apos;forbid&apos;&#125;`</span><br><span class="line">    return this.request(&#123;</span><br><span class="line">      url,</span><br><span class="line">      data,</span><br><span class="line">      method: &apos;patch&apos;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="继承基础类【例如用户管理】"><a href="#继承基础类【例如用户管理】" class="headerlink" title="继承基础类【例如用户管理】"></a>继承基础类【例如用户管理】</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">// 继承基础类，有特殊规则可以在子类中复写，或者添加其他接口管理</span><br><span class="line">class UserApi extends baseApi &#123;</span><br><span class="line">  constructor(props) &#123;</span><br><span class="line">    super(props)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  addInfo(data) &#123; // 增删改查禁用启用之外得其他接口</span><br><span class="line">    return this.request(&#123;</span><br><span class="line">      url: &apos;http://baidu.com&apos;,</span><br><span class="line">      method: &apos;post&apos;,</span><br><span class="line">      data</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line"> * @param1 baseUrl string</span><br><span class="line"> * @param2 自定义参数</span><br><span class="line"> */</span><br><span class="line">const userApi = new UserApi(&apos;http://www.baidu.com&apos;)</span><br><span class="line"></span><br><span class="line">export default userApi</span><br></pre></td></tr></table></figure>
-<h2 id="项目内部调用接口"><a href="#项目内部调用接口" class="headerlink" title="项目内部调用接口"></a>项目内部调用接口</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import userApi from &apos;./userApi&apos;</span><br><span class="line">// 测试使用</span><br><span class="line">async function test() &#123;</span><br><span class="line">  const list = await userApi.list(&#123;page: 1, size: 10&#125;)</span><br><span class="line">  console.log(&apos;查询用户列表&apos;, list)</span><br><span class="line"></span><br><span class="line">  const addRes = await userApi.addInfo(&#123; age: 25 &#125;)</span><br><span class="line">  console.log(&apos;其他自定义接口&apos;, addRes)</span><br><span class="line">&#125;</span><br><span class="line">test()</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://www.luzhongkuan.cn/2018/09/22/前端-简化后台项目【增删该查禁用启用】/" data-id="cjtd0w9kr005arfcfgbkaao3t" class="article-share-link">Share</a>
+      <a data-url="https://www.luzhongkuan.cn/2018/09/22/让webpack更简单/" data-id="cjtd1jely002w8ycfsdyz0f29" class="article-share-link">Share</a>
       
       
     </footer>
@@ -456,7 +456,7 @@
     <article id="post-使用webpack发布npm包" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/09/17/使用webpack发布npm包/" class="article-date">
-  <time datetime="2018-09-17T02:21:30.000Z" itemprop="datePublished">2018-09-17</time>
+  <time datetime="2018-09-16T16:00:00.000Z" itemprop="datePublished">2018-09-17</time>
 </a>
     
   </div>
@@ -504,7 +504,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.luzhongkuan.cn/2018/09/17/使用webpack发布npm包/" data-id="cjtd0w95u0058rfcf9mbv87ix" class="article-share-link">Share</a>
+      <a data-url="https://www.luzhongkuan.cn/2018/09/17/使用webpack发布npm包/" data-id="cjtd1jela00278ycfgb78gl0y" class="article-share-link">Share</a>
       
       
     </footer>
@@ -517,7 +517,7 @@
     <article id="post-js下载方法整理" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/08/22/js下载方法整理/" class="article-date">
-  <time datetime="2018-08-22T03:03:45.000Z" itemprop="datePublished">2018-08-22</time>
+  <time datetime="2018-08-21T16:00:00.000Z" itemprop="datePublished">2018-08-22</time>
 </a>
     
   </div>
@@ -544,7 +544,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.luzhongkuan.cn/2018/08/22/js下载方法整理/" data-id="cjtd0w1cb003qrfcfrjapl9ic" class="article-share-link">Share</a>
+      <a data-url="https://www.luzhongkuan.cn/2018/08/22/js下载方法整理/" data-id="cjtd1jek5000q8ycfqf7y1z9k" class="article-share-link">Share</a>
       
       
     </footer>

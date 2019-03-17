@@ -1,6 +1,6 @@
 ---
 title: windows设置免密码登陆linux
-date: 2018-03-11 17:45:48
+date: 2018-03-11
 ---
 ## windows
 1. 安装git（gitbash可以试用ssh，scp等）

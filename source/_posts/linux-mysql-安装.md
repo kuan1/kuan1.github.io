@@ -1,6 +1,6 @@
 ---
 title: linux mysql 安装
-date: 2017-08-03 22:58:35
+date: 2017-08-03
 ---
 ## mysql安装
 - 下载  

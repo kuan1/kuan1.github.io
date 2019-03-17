@@ -1,6 +1,6 @@
 ---
 title: css object-fit
-date: 2018-10-03 22:39:43
+date: 2018-10-03
 ---
 
 ## 把图片像背景(background-size)一样使用

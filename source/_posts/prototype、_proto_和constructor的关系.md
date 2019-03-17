@@ -1,6 +1,6 @@
 ---
 title: prototype、_proto_和constructor的关系
-date: 2016-12-15 17:29:48
+date: 2016-12-15
 ---
 #### 构造函数创建对象  
 ```

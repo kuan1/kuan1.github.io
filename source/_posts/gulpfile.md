@@ -1,6 +1,6 @@
 ---
 title: gulpfile
-date: 2016-09-15 16:35:34
+date: 2016-09-15
 ---
 > 我项目中使用的gulpfile配置
 

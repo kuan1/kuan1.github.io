@@ -1,6 +1,6 @@
 ---
 title: echarts demo
-date: 2016-08-24 21:32:13
+date: 2016-08-24
 ---
 > 注意：使用echarts的时候，不要直接给所有的div设置宽度！！
 

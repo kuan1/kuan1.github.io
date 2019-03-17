@@ -1,6 +1,6 @@
 ---
 title: js工具类(kuan-utils)
-date: 2017-12-19 17:14:18
+date: 2017-12-19
 ---
 
 > <来自https://mp.weixin.qq.com/s/HytDNo6rbp1oxEguaHP0mA>

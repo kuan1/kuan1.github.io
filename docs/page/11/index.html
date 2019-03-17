@@ -68,7 +68,7 @@
     <article id="post-手写简单的贪吃蛇" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/07/04/手写简单的贪吃蛇/" class="article-date">
-  <time datetime="2016-07-04T15:11:00.000Z" itemprop="datePublished">2016-07-04</time>
+  <time datetime="2016-07-03T16:00:00.000Z" itemprop="datePublished">2016-07-04</time>
 </a>
     
   </div>
@@ -95,7 +95,51 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.luzhongkuan.cn/2016/07/04/手写简单的贪吃蛇/" data-id="cjtd0wbhb005orfcfgtg8g2u3" class="article-share-link">Share</a>
+      <a data-url="https://www.luzhongkuan.cn/2016/07/04/手写简单的贪吃蛇/" data-id="cjtd1jelq002n8ycf940lj1ks" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-h5新的储存机制" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/30/h5新的储存机制/" class="article-date">
+  <time datetime="2016-06-29T16:00:00.000Z" itemprop="datePublished">2016-06-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <header class="article-header">
+      
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/30/h5新的储存机制/">h5新的储存机制</a>
+    </h1>
+  
+
+    </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      <blockquote>
+<p>html4时候：cookies<br>cookies存储只有4kb；<br>利用http来进行传输，受带宽影响很大<br>正确设置cookies时间很麻烦的事情  </p>
+</blockquote>
+<blockquote>
+<p>h5引入了web storage存储机制 ——<br>sessionStorage/localStorage(5M)：两种存储机制<br>localStorage：永久存储，只要不销毁就一直存在；<br>sessionStorage：临时储存，时效是当开打窗口到窗口关闭</p>
+</blockquote>
+<h4 id="localstorage基础操作"><a href="#localstorage基础操作" class="headerlink" title="localstorage基础操作"></a>localstorage基础操作</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">localStorage.setItem(key,value)：//存入信息</span><br><span class="line">localStorage.getItem(key)  // localStorage.key：获取value值</span><br><span class="line">localStorage.key(index)：// 获取key值</span><br><span class="line">localStorage.length：// 获取长度</span><br><span class="line">localStorage.removeItem(key)：// 根据key值进行删除</span><br><span class="line">localStorage.clear()：//清空所有</span><br></pre></td></tr></table></figure>
+<h4 id="jquery-cookie简单语法"><a href="#jquery-cookie简单语法" class="headerlink" title="jquery-cookie简单语法"></a>jquery-cookie简单语法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//创建cookie</span><br><span class="line">$.cookie(&apos;the_cookie&apos;, &apos;the_value&apos;, &#123; expires: 7, path: &apos;/&apos; &#125;);</span><br><span class="line">//读取cookie</span><br><span class="line">$.cookie(&apos;the_cookie&apos;);</span><br><span class="line">//删除cookie</span><br><span class="line">$.cookie(&apos;the_cookie&apos;, null);</span><br><span class="line">$.removeCookie(&apos;&apos;,&#123;&#125;)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.luzhongkuan.cn/2016/06/30/h5新的储存机制/" data-id="cjtd1jejy000j8ycf9pc2p5nb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -108,7 +152,7 @@
     <article id="post-js常见兼容" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/06/30/js常见兼容/" class="article-date">
-  <time datetime="2016-06-30T15:22:47.000Z" itemprop="datePublished">2016-06-30</time>
+  <time datetime="2016-06-29T16:00:00.000Z" itemprop="datePublished">2016-06-30</time>
 </a>
     
   </div>
@@ -166,51 +210,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.luzhongkuan.cn/2016/06/30/js常见兼容/" data-id="cjtd0w1xk003urfcfiad7a4de" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-h5新的储存机制" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/06/30/h5新的储存机制/" class="article-date">
-  <time datetime="2016-06-30T12:20:18.000Z" itemprop="datePublished">2016-06-30</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <header class="article-header">
-      
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/06/30/h5新的储存机制/">h5新的储存机制</a>
-    </h1>
-  
-
-    </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      <blockquote>
-<p>html4时候：cookies<br>cookies存储只有4kb；<br>利用http来进行传输，受带宽影响很大<br>正确设置cookies时间很麻烦的事情  </p>
-</blockquote>
-<blockquote>
-<p>h5引入了web storage存储机制 ——<br>sessionStorage/localStorage(5M)：两种存储机制<br>localStorage：永久存储，只要不销毁就一直存在；<br>sessionStorage：临时储存，时效是当开打窗口到窗口关闭</p>
-</blockquote>
-<h4 id="localstorage基础操作"><a href="#localstorage基础操作" class="headerlink" title="localstorage基础操作"></a>localstorage基础操作</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">localStorage.setItem(key,value)：//存入信息</span><br><span class="line">localStorage.getItem(key)  // localStorage.key：获取value值</span><br><span class="line">localStorage.key(index)：// 获取key值</span><br><span class="line">localStorage.length：// 获取长度</span><br><span class="line">localStorage.removeItem(key)：// 根据key值进行删除</span><br><span class="line">localStorage.clear()：//清空所有</span><br></pre></td></tr></table></figure>
-<h4 id="jquery-cookie简单语法"><a href="#jquery-cookie简单语法" class="headerlink" title="jquery-cookie简单语法"></a>jquery-cookie简单语法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//创建cookie</span><br><span class="line">$.cookie(&apos;the_cookie&apos;, &apos;the_value&apos;, &#123; expires: 7, path: &apos;/&apos; &#125;);</span><br><span class="line">//读取cookie</span><br><span class="line">$.cookie(&apos;the_cookie&apos;);</span><br><span class="line">//删除cookie</span><br><span class="line">$.cookie(&apos;the_cookie&apos;, null);</span><br><span class="line">$.removeCookie(&apos;&apos;,&#123;&#125;)</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://www.luzhongkuan.cn/2016/06/30/h5新的储存机制/" data-id="cjtd0w0c3003irfcfi0vx8ogx" class="article-share-link">Share</a>
+      <a data-url="https://www.luzhongkuan.cn/2016/06/30/js常见兼容/" data-id="cjtd1jek9000v8ycfjufjw1mj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -223,7 +223,7 @@
     <article id="post-jquery简单的滚动加载动画" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/06/29/jquery简单的滚动加载动画/" class="article-date">
-  <time datetime="2016-06-29T15:04:32.000Z" itemprop="datePublished">2016-06-29</time>
+  <time datetime="2016-06-28T16:00:00.000Z" itemprop="datePublished">2016-06-29</time>
 </a>
     
   </div>
@@ -247,7 +247,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.luzhongkuan.cn/2016/06/29/jquery简单的滚动加载动画/" data-id="cjtd0w18h003prfcf6nihqpx7" class="article-share-link">Share</a>
+      <a data-url="https://www.luzhongkuan.cn/2016/06/29/jquery简单的滚动加载动画/" data-id="cjtd1jek4000p8ycfsv9birxo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -260,7 +260,7 @@
     <article id="post-简单了解闭包" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/06/20/简单了解闭包/" class="article-date">
-  <time datetime="2016-06-20T14:19:44.000Z" itemprop="datePublished">2016-06-20</time>
+  <time datetime="2016-06-19T16:00:00.000Z" itemprop="datePublished">2016-06-20</time>
 </a>
     
   </div>
@@ -316,7 +316,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.luzhongkuan.cn/2016/06/20/简单了解闭包/" data-id="cjtd0wcmc005wrfcfa25mifdl" class="article-share-link">Share</a>
+      <a data-url="https://www.luzhongkuan.cn/2016/06/20/简单了解闭包/" data-id="cjtd1jelx002v8ycfi4u8o7t2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -329,7 +329,7 @@
     <article id="post-git手册" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/06/18/git手册/" class="article-date">
-  <time datetime="2016-06-18T09:10:21.000Z" itemprop="datePublished">2016-06-18</time>
+  <time datetime="2016-06-17T16:00:00.000Z" itemprop="datePublished">2016-06-18</time>
 </a>
     
   </div>
@@ -410,7 +410,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.luzhongkuan.cn/2016/06/18/git手册/" data-id="cjtd0w005003frfcfho0bmmg1" class="article-share-link">Share</a>
+      <a data-url="https://www.luzhongkuan.cn/2016/06/18/git手册/" data-id="cjtd1jejs000g8ycfskkr4woc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -423,7 +423,7 @@
     <article id="post-前端入门" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/06/18/前端入门/" class="article-date">
-  <time datetime="2016-06-18T04:52:46.000Z" itemprop="datePublished">2016-06-18</time>
+  <time datetime="2016-06-17T16:00:00.000Z" itemprop="datePublished">2016-06-18</time>
 </a>
     
   </div>
@@ -458,7 +458,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.luzhongkuan.cn/2016/06/18/前端入门/" data-id="cjtd0w9uh005crfcf9q6vl22g" class="article-share-link">Share</a>
+      <a data-url="https://www.luzhongkuan.cn/2016/06/18/前端入门/" data-id="cjtd1jeld002b8ycfcyi7imp0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -471,7 +471,7 @@
     <article id="post-Hello-World-终于要完成了" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/06/17/Hello-World-终于要完成了/" class="article-date">
-  <time datetime="2016-06-17T03:22:14.000Z" itemprop="datePublished">2016-06-17</time>
+  <time datetime="2016-06-16T16:00:00.000Z" itemprop="datePublished">2016-06-17</time>
 </a>
     
   </div>
@@ -497,7 +497,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.luzhongkuan.cn/2016/06/17/Hello-World-终于要完成了/" data-id="cjtd0w0er003jrfcf8h2o89nr" class="article-share-link">Share</a>
+      <a data-url="https://www.luzhongkuan.cn/2016/06/17/Hello-World-终于要完成了/" data-id="cjtd1jej500068ycfhao5laov" class="article-share-link">Share</a>
       
       
     </footer>

@@ -1,6 +1,6 @@
 ---
 title: vue中使用钉钉群接受运维警报
-date: 2018-06-12 12:20:14
+date: 2018-06-12
 ---
 #### #使用钉钉机器人发送错误信息到钉钉群  [==官网api入口](https://open-doc.dingtalk.com/docs/doc.htm?spm=a219a.7629140.0.0.p2lr6t&treeId=257&articleId=105733&docType=1)
 

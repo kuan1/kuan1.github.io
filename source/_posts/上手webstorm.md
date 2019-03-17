@@ -1,6 +1,6 @@
 ---
 title: 上手webstorm
-date: 2016-08-17 13:26:28
+date: 2016-08-17
 ---
 ##  好用命令：
 - shift+enter：切换下一行

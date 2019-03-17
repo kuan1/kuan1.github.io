@@ -1,6 +1,6 @@
 ---
 title: html兼容问题
-date: 2016-07-05 12:08:40
+date: 2016-07-05
 ---
 #### 透明属性：
 opacity：0.5；filter：alpha（opacity=50）

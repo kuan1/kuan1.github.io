@@ -1,6 +1,6 @@
 ---
 title: 基于jquery的Toast
-date: 2016-07-17 23:00:16
+date: 2016-07-17
 ---
 > 基于jquery的Toast  
 

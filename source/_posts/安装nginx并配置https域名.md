@@ -1,6 +1,6 @@
 ---
 title: 安装nginx并配置https域名
-date: 2017-11-23 23:02:49
+date: 2017-11-23
 ---
 #### 安装nginx：
 > yum install nginx -y

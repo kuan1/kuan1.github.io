@@ -1,6 +1,6 @@
 ---
 title: nuxt中使用dplayer播放m3u8视频
-date: 2018-10-26 14:31:39
+date: 2018-10-26
 ---
 # nuxt中使用dplayer播放m3u8视频
 dplayer是一个很强大的h5视频播放库，有很多直接可以使用的api，支持播放弹幕、字母、流畅度切换等等。中文文档地址：http://dplayer.js.org/#/zh-Hans/?id=%E5%85%A5%E9%97%A8

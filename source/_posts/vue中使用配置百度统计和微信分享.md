@@ -1,6 +1,6 @@
 ---
 title: vue中使用配置百度统计和微信分享
-date: 2018-06-27 14:32:19
+date: 2018-06-27
 ---
 微信1.4.0sdk分享 https://www.luzhongkuan.cn/detail/167
 

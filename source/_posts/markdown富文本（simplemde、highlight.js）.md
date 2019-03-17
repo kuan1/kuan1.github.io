@@ -1,6 +1,6 @@
 ---
 title: markdown富文本（simplemde、highlight.js）
-date: 2018-02-13 14:54:42
+date: 2018-02-13
 ---
 >  碰到了一个很满意的markdown富文本编辑器
 

@@ -1,6 +1,6 @@
 ---
 title: kuan-vue-photoswipe
-date: 2018-10-24 13:50:36
+date: 2018-10-24
 ---
 # [kuan-vue-photoswipe](https://github.com/kuan1/kuan-vue-photoswipe)
 

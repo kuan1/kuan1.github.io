@@ -1,6 +1,6 @@
 ---
 title: nodejs上传文件到七牛云
-date: 2017-08-25 13:20:02
+date: 2017-08-25
 ---
 ```
 const qiniu = require('qiniu');

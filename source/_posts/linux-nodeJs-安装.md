@@ -1,6 +1,6 @@
 ---
 title: linux nodeJs 安装
-date: 2017-07-15 22:48:12
+date: 2017-07-15
 ---
 ## linux nodeJs 安装
 ### 方法一：

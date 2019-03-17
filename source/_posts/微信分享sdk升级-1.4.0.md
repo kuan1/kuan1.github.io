@@ -1,6 +1,6 @@
 ---
 title: 微信分享sdk升级 1.4.0
-date: 2018-12-20 16:52:46
+date: 2018-12-20
 ---
 官网地址：https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421141115
 

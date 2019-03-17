@@ -1,6 +1,6 @@
 ---
 title: 阿里oss断点续传(vue组件)
-date: 2018-08-14 17:42:02
+date: 2018-08-14
 ---
 ## [点击查看官方文档](https://help.aliyun.com/document_detail/32068.html?spm=a2c4g.11186623.6.833.JCLacP)  (简单demo)
 > 官网sdk介绍中js使用的库和node使用的是同一个包，ali-oss。   

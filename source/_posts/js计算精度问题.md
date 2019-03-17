@@ -1,6 +1,6 @@
 ---
 title: js计算精度问题
-date: 2016-11-18 23:16:56
+date: 2016-11-18
 ---
 >  来自 <https://segmentfault.com/q/1010000005641246>
 > 引入插件numbers.js、math.js、decimal.js(比较影响编译速度)

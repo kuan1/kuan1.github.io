@@ -1,6 +1,6 @@
 ---
 title: css媒体查询
-date: 2016-09-17 06:27:05
+date: 2016-09-17
 ---
 ```
 <link rel='stylesheet' type='text/css' media='screen and (max-width:960px)' href='style.css'>

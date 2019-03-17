@@ -1,6 +1,6 @@
 ---
 title:  async/await && promise
-date: 2017-01-20 13:19:04
+date: 2017-01-20
 ---
 ```
 <!DOCTYPE html>

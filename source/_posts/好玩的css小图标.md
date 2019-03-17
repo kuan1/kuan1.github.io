@@ -1,6 +1,6 @@
 ---
 title: 好玩的css小图标
-date: 2017-01-13 13:21:02
+date: 2017-01-13
 ---
 > https://css-tricks.com/snippets/html/glyphs/
 ```

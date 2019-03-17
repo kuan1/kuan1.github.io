@@ -1,6 +1,6 @@
 ---
 title: webpack4打包vendor过大问题
-date: 2018-07-28 10:57:40
+date: 2018-07-28
 ---
 ## webpack4 vendor过大解决方案
 > webpack.config中optimization配置多个cacheGroups，对库进行分类打包  

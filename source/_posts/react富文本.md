@@ -1,6 +1,6 @@
 ---
 title: react富文本
-date: 2017-07-23 23:25:45
+date: 2017-07-23
 ---
 > 最近看了几个开源的富文本的库，quill 、react-draft-wysiwyg、braft-editor、braft-editor
 
