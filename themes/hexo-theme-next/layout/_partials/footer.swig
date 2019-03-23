@@ -36,8 +36,8 @@
   #}</span>
   {% endif %}
 </div>
-
-<div class="copyright">
+<a style="color: #999; font-size: 12px; border: none" href="https://www.luzhongkuan.cn">友情链接：luzhongkuan.cn</a>
+<div>
   <a style="color: #999; font-size: 12px; border: none" href="http://www.miitbeian.gov.cn">豫ICP备17016583号</a>
 </div>
 
