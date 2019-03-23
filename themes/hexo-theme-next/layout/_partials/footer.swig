@@ -37,6 +37,10 @@
   {% endif %}
 </div>
 
+<div class="copyright">
+  <a style="color: #999; font-size: 12px; border: none" href="http://www.miitbeian.gov.cn">豫ICP备17016583号</a>
+</div>
+
 {% if theme.footer.powered.enable %}
   <div class="powered-by">{#
   #}{{ __('footer.powered', next_url('https://hexo.io', 'Hexo', {class: 'theme-link'})) }}{#
