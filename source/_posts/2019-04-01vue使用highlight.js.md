@@ -50,6 +50,7 @@ export default {
 <style lang="scss">
 .hljs {
   .line {
+    line-height: 1.4;
     padding: 0;
     .line-label {
       color: #999;
@@ -59,12 +60,4 @@ export default {
   }
 }
 </style>
-
-
-<style lang="scss" scoped>
-.code {
-  line-height: 1.4;
-}
-</style>
-
 ```
