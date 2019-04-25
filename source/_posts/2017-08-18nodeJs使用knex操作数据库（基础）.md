@@ -2,6 +2,8 @@
 title: nodeJs使用knex操作数据库（基础）
 date: 2017-08-18 21:17:47
 ---
+* [knex官网](https://knexjs.org/)
+
 ### knex入门
 ```
 const configs = require('../../config');

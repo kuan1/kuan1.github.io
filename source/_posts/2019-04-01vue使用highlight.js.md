@@ -1,8 +1,8 @@
 ---
 title: vue使用highlight.js
-date: 2019-04-01 12:12:23
+date: 2019-04-01 11:58:06
 ---
-
+## vue使用highlight.js
 ```
 <template>
   <div ref="code" class="code" v-html="html"></div>
@@ -32,7 +32,7 @@ export default {
   methods: {
     init() {
       const codes = this.$refs.code.querySelectorAll('pre code');
-            // 不使用ol样式太丑了
+			// 不使用ol样式太丑了
       codes.forEach((block, num) => {
         hljs.highlightBlock(block)
         let i = 1
@@ -50,8 +50,8 @@ export default {
 <style lang="scss">
 .hljs {
   .line {
-    line-height: 1.4;
     padding: 0;
+		line-height: 1.4;
     .line-label {
       color: #999;
       height: 100%;
@@ -60,4 +60,6 @@ export default {
   }
 }
 </style>
+
 ```
+  

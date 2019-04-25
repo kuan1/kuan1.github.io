@@ -1,9 +1,7 @@
 ---
-title: github访问速度慢
-date: 2019-03-27 13:33:42
-tags: 分享
+title: github访问速度很慢（mac）
+date: 2019-03-26 22:57:55
 ---
-
 公司和家里的电脑访问github一直很快，最近几天家里边的电脑访问速度很慢，速度一秒一k地速度，实在受不了。网上看到了这个修改host文件的方法很管用，github访问和下载速度变得很快  
 [简书](https://www.jianshu.com/p/bb3bb7e57216)
 
@@ -36,3 +34,4 @@ sudo vim /etc/hosts
 ```bash
 dscacheutil -flushcache
 ```
+  
