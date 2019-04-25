@@ -1,5 +1,5 @@
 ---
-title: [js]export一个变量，变量改变后，export出去的结果会变吗
+title: js export一个变量，变量改变后，export出去的结果会变吗
 date: 2018-09-07 11:07:59
 ---
 ## [js]export一个变量，变量改变后，export出去的结果会变吗
