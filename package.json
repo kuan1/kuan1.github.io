@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "hexo serve",
-    "build": "node refresh && hexo clean && hexo g",
+    "prebuild": "node refresh",
+    "build": "hexo clean && hexo g",
     "d": "yarn deploy",
     "deploy": "yarn build && hexo deploy"
   },
