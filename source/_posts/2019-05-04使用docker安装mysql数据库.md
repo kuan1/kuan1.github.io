@@ -1,6 +1,6 @@
 ---
 title: 使用docker安装mysql数据库
-date: 2019-05-04 23:51:56
+date: 2019-05-04 23:51:58
 ---
 
 ## 安装 mysql 步骤
@@ -52,3 +52,5 @@ mysql -uroot -p
 > grant all privileges on *.* to <子账号>@'%' identified by '<子账号密码>';
 > flush privileges;
 ```
+
+  

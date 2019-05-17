@@ -1,6 +1,6 @@
 ---
 title: linux定时任务crontab 
-date: 2019-05-06 16:50:38
+date: 2019-05-06 12:22:25
 ---
 #### 定时任务编辑 
 ```
@@ -29,4 +29,5 @@ tail -f /var/log/cron
 # 每分钟刷新接口数据
 0 7 * * * curl "https://www.luzhongkuan.cn/api/todayEnglish" >> /root/a.log 2>&1 &
 ```
+  
   

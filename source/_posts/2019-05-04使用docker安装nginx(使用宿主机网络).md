@@ -1,6 +1,6 @@
 ---
-title: 使用docker安装nginx
-date: 2019-05-04 23:46:44
+title: 使用docker安装nginx(使用宿主机网络)
+date: 2019-05-04 23:46:40
 ---
 ## 安装nginx步骤
 ```bash
@@ -42,4 +42,5 @@ services:
         published: 443
         mode: host
 ```
+  
   

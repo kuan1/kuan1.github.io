@@ -1,6 +1,6 @@
 ---
 title: Dockerfile文件简介
-date: 2019-05-04 23:37:14
+date: 2019-05-04 23:37:58
 ---
 ## Dockerfile
 
@@ -40,4 +40,5 @@ EXPOSE <port> [<port>/<protocol>...]
 ```
 
 变量：${variable} $variable
+  
   
