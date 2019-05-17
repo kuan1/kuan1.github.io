@@ -2,7 +2,9 @@
 title: 使用docker安装mysql数据库
 date: 2019-05-04 23:51:56
 ---
-## 安装mysql步骤
+
+## 安装 mysql 步骤
+
 ```bash
 # 创建服务
 docker swarm init
@@ -22,21 +24,31 @@ docker stack rm <kuan-mysql>
 ```
 
 #### docker-stack.yml
+
 ```bash
 version: "3.7"
-services: 
+services:
   kuan-mysql:
     image: mysql:5.6.44  # 一直使用5.6版本，没有升级
-    deploy: 
+    deploy:
      replicas: 1
      restart_policy:
       condition: on-failure
     environment:
-      MYSQL_USER: <设置mysql登录账号>
-      MYSQL_PASSWORD: <设置mysql登录密码>
+      MYSQL_USER: <设置子登录账号>
+      MYSQL_PASSWORD: <设置子登录密码>
+      MYSQL_ROOT_PASSWORD: <设置root账号登录密码>
     volumes:
       - <宿主机数据保存地址>:/var/lib/mysql
     ports: # 暴露出连接的端口号
       - "3306:3306"
 ```
-  
+
+### 设置子账号权限
+
+```
+mysql -uroot -p
+> use mysql;
+> grant all privileges on *.* to <子账号>@'%' identified by '<子账号密码>';
+> flush privileges;
+```
