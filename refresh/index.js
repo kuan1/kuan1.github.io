@@ -4,8 +4,10 @@
 const fs = require('fs')
 const axios = require('axios')
 
+const size = 100
+
 async function get() {
-  const { data: { data } } = await axios.get('https://www.luzhongkuan.cn/api/blog/syncData')
+  const { data: { data } } = await axios.get('https://www.luzhongkuan.cn/api/blog/syncData?size=' + size)
   return data
 }
 

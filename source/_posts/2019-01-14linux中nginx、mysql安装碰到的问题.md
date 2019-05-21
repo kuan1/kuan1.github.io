@@ -35,7 +35,8 @@ nginx: [emerg] still could not bind()
 
 ---
 
-## mysql启动卡在启动命令
+## mysql启动卡在启动命令、或者InnoDB: mmap(137363456 bytes) failed; errno 12
+一半是内存过小，centos没有设置swap分区可以通过swap解决
 ```
 cat /var/log/mysqld.log 日志：
 2019-01-14 23:13:29 6051 [Note] InnoDB: Using atomics to ref count buffer pool pages
