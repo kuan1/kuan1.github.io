@@ -10,6 +10,7 @@ date: 2019-05-27 23:49:55
 - 选择 node 编译环境(Provide Node & npm bin/ folder to PATH)
 - 编译成功推送生产服务起(Provide Node & npm bin/ folder to PATH)
 - 钉钉通知状态
+- jenkins代码会滚
 - 账号权限管理(Role-based Authorization Strategy)
 
 ## 一、安装 docker 环境
