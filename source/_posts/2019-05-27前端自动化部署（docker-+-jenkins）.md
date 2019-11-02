@@ -4,7 +4,7 @@ date: 2019-05-27 23:49:55
 ---
 > 此仅为流程笔记版本，详情请看demo
 # halobear-docker [github地址](https://github.com/kuan1/test-docker-jenkins) . 
-#理想流程：
+# 理想流程：
 - 添加 git 项目
 - 配置 webhooks
 - 选择 node 编译环境(Provide Node & npm bin/ folder to PATH)
@@ -121,7 +121,10 @@ case $Status  in
     npm run build
     cd dist
     tar -zcvf ../bak/${JOB_NAME}-${BUILD_NUMBER}.tar.gz *
+    # 保留10天备份
     find $path  -mtime 10 -name "*.tar.gz"  -exec rm -rf {} \;
+    # 保留最新10条数据
+    # ls $path -t | awk 'NR>10{print "rm -rf " $0}' | xargs rm -rf
     echo "Completin!"
     ;;
   RollBack)
