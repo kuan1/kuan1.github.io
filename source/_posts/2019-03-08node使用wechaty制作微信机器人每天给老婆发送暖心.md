@@ -122,6 +122,7 @@ github上wechaty入门代码，里边有多个等级
 
 ## 碰到问题
 - centos服务器部署失败
+
 ```bash
 # https://github.com/Chatie/wechaty/issues/1515
 1.yum install libXScrnSaver*

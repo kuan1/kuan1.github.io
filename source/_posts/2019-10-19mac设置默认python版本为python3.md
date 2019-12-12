@@ -2,9 +2,9 @@
 title: mac设置默认python版本为python3
 date: 2019-10-19 18:17:40
 ---
-#### 一、[下载python3](https://www.python.org/downloads/)
+### 一、[下载python3](https://www.python.org/downloads/)
 
-#### 二、mac设置python版本为python3
+### 二、mac设置python版本为python3
 ```bash
 # 检查命令位置
 which python3
