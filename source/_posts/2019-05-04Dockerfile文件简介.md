@@ -37,6 +37,9 @@ WORKDIR /path/to/workdir
 
 # 暴露变量
 EXPOSE <port> [<port>/<protocol>...]
+
+# 容器启动命令
+CMD ["npm",  "start"]
 ```
 
 变量：${variable} $variable

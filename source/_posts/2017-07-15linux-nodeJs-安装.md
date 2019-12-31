@@ -5,8 +5,13 @@ date: 2017-07-15 22:48:12
 ## linux nodeJs 安装
 ### 方法一：
 ```bash
-> curl --silent --location https://rpm.nodesource.com/setup_8.x | sudo bash -    
-> yum install nodejs -y
+# centos
+curl -sl https://rpm.nodesource.com/setup_10.x | sudo bash -    
+yum install nodejs -y
+
+# ubuntu
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+sudo apt-get install -y nodejs
 ```
 
 ### 方法二：
