@@ -26,8 +26,16 @@ sudo vim /etc/hosts
 192.30.253.1668 training.github.com 
 192.30.253.112 www.github.com 
 151.101.13.194 github.global.ssl.fastly.net 
-151.101.12.133 avatars0.githubusercontent.com 
-151.101.112.133 avatars1.githubusercontent.com
+151.101.76.133     raw.githubusercontent.com
+151.101.184.133    avatars0.githubusercontent.com
+151.101.184.133    avatars1.githubusercontent.com
+151.101.184.133    avatars2.githubusercontent.com
+151.101.184.133    avatars3.githubusercontent.com
+151.101.184.133    avatars4.githubusercontent.com
+151.101.184.133    avatars5.githubusercontent.com
+151.101.184.133    avatars6.githubusercontent.com
+151.101.184.133    avatars7.githubusercontent.com
+151.101.184.133    avatars8.githubusercontent.com
 ```
 
 #### 刷新dns
