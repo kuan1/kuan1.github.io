@@ -2,7 +2,10 @@ name: build-and-deploy
 
 on:
   schedule:
-    - cron: '0 0 * * 5'
+    - cron:  '*/15 * * * *'
+# on:
+#   schedule:
+#     - cron: '0 0 * * 5'
   # push:
   #   branches:
   #     - dev
