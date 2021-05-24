@@ -2,15 +2,15 @@
 title: antd-mobile中listView基本使用和碰到的问题（不想耽误人，这个只是很久前写的一个demo）
 date: 2017-06-09 23:26:28
 ---
-## （不想耽误人，这个只是很久前写的一个demo，没有技术含量）
+## 不想耽误人，这个只是很久前写的一个demo，没有技术含量
 
-[前往->官网地址]( https://mobile.ant.design/components/list-view-cn)
+### 点击进入 [《官网地址》]( https://mobile.ant.design/components/list-view-cn)
 
-#### 在dataSourse中设置了很多数据，即使是本地静态的数据，页面上也只显示10条？ 
+### Q: 在dataSourse中设置了很多数据，即使是本地静态的数据，页面上也只显示10条？ 
 
->listView默认把数据放在页面上10条，如果10条数据在页面显示高度不高过容器，就不会刷新，再次更新（最新文档有设置默认加载个数介绍）
+listView默认把数据放在页面上10条，如果10条数据在页面显示高度不高过容器，就不会刷新，再次更新（最新文档有设置默认加载个数介绍）
 
-```
+```html
 import React from 'react'
 import {Flex, ListView} from '../../component'
 

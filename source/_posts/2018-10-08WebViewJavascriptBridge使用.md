@@ -5,7 +5,7 @@ date: 2018-10-08 18:27:32
 > 重写了app通信的方法，中间碰到了一些兼容问题，看了很多资料，最终确定版，兼容性好&&使用方便
 
 ## app通信WebViewJavascriptBridge方法使用
-```
+```js
 // 注册方法获取WebViewJavascriptBridge对象
 function setupWebViewJavascriptBridge(callback) {
   if (window.WebViewJavascriptBridge) {
@@ -75,7 +75,7 @@ export default bridge
 
 
 ## 使用
-```
+```js
 /**
  * 获取状态栏高度
  * return {Promise}

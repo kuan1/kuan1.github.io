@@ -5,7 +5,7 @@ date: 2017-08-18 21:17:47
 * [knex官网](https://knexjs.org/)
 
 ### knex入门
-```
+```js
 const configs = require('../../config');
 
 module.exports = require('knex')({
@@ -20,9 +20,10 @@ module.exports = require('knex')({
 });
 
 ```
+
 ### 基础查询
 
-```
+```js
 knex.column('title', 'author', 'year').select().from('books')
 
 // select 'title', 'author', 'year' from 'books'
@@ -37,7 +38,8 @@ knex('user')
 ```
 
 ### 修改
-```
+
+```js
 knex('books')
 .where('published_date', '<', 2000)
 .update({
@@ -49,7 +51,8 @@ knex('books')
 ```
 
 ### 删除
-```
+
+```js
 knex('accounts')
 .where('activated', false)
 .del()
@@ -61,18 +64,23 @@ knex('accounts').truncate(); // 清空表
 ```
 
 ### 排序
-```
+
+```js
 knex('users').orderBy('name', 'desc')
 
 // select * from 'users' order by 'name' desc
 ```
+
 ### 模糊查询 like
-```
+
+```js
 knex('users').where('columnName', 'like', '%rowlikeme%')
 Outputs:
 select * from `users` where `columnName` like '%rowlikeme%'
 ```
+
 ### 运算
+
 > count(column)   
 > min(column)  
 > max(column)   

@@ -5,7 +5,7 @@ date: 2019-01-14 23:44:42
 服务器到期新买了一台服务器，记录一下重新安装基本环境碰到了一些问题
 
 ## 安装nginx
-#### 1. 启动失败
+### 1. 启动失败
 `403 forbidden nginx`
 
 解决方案：（个人使用直接用了root账号，修改对应nginx启动用户）  
@@ -14,9 +14,9 @@ date: 2019-01-14 23:44:42
 
 ---
 
-#### 2. 重启失败
+### 2. 重启失败
 
-```
+```bash
 /var/log/nginx 日志文件：
 nginx: [emerg] bind() to [::]:80 failed (98: Address already in use)
 nginx: [emerg] bind() to 0.0.0.0:80 failed (98: Address already in use)
@@ -28,7 +28,6 @@ nginx: [emerg] bind() to [::]:80 failed (98: Address already in use)
 nginx: [emerg] still could not bind()
 ```
 
-
 解决方案：杀死80端口nginx程序重新启动：  
 * lsof -i :80  （发现是nginx在占用）  
 * kill [pid] 
@@ -37,7 +36,8 @@ nginx: [emerg] still could not bind()
 
 ## mysql启动卡在启动命令、或者InnoDB: mmap(137363456 bytes) failed; errno 12
 一半是内存过小，centos没有设置swap分区可以通过swap解决
-```
+
+```bash
 cat /var/log/mysqld.log 日志：
 2019-01-14 23:13:29 6051 [Note] InnoDB: Using atomics to ref count buffer pool pages
 2019-01-14 23:13:29 6051 [Note] InnoDB: The InnoDB memory heap is disabled
@@ -55,7 +55,7 @@ InnoDB: mmap(137363456 bytes) failed; errno 12
 2019-01-14 23:13:29 6051 [ERROR] Aborting
 ```
 
-[解决方案：(以下是网上答案)](https://blog.csdn.net/sxyandapp/article/details/77091007)
+### [解决方案：(以下是网上答案)](https://blog.csdn.net/sxyandapp/article/details/77091007)
 * dd if=/dev/zero of=/swap bs=1M count=512  # 创建一个swap文件，大小为512M
 * mkswap /swap                              # 将swap文件变为swap分区文件
 * swapon /swap                              # 将其映射为swap分区

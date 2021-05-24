@@ -3,18 +3,25 @@ title: 使用nodejs功能化krpano流程回顾
 date: 2019-12-17 22:54:43
 ---
 ### 一、使用nodejs功能化krpano 流程简介
-- [下载krpano](https://krpano.com/download)
-- 注册krpanotools（不注册会有水印）
+
+1. [下载krpano](https://krpano.com/download)
+
+2. 注册krpanotools（不注册会有水印）
+
 ```bash
 # 推荐购买，当然网上还是可以找到注册的密钥
 ./krpanotools register ******
 ```
-- 使用nodejs运行执行krpanotool，进行文件切割，[具体config配置介绍](https://krpano.com/tools/kmakemultires/config/#top)
+
+3. 使用nodejs运行执行krpanotool，进行文件切割，[具体config配置介绍](https://krpano.com/tools/kmakemultires/config/#top)
+
 ```bash
- ./krpanotools makepano -config=config文件路径 全景图片路径`;
+ ./krpanotools makepano -config=config文件路径 全景图片路径
 ```
-- 循环上传七牛生成切割后全景图片，然后使用根据路径使用代码拼接xml
-- 制作docker镜像进行部署
+
+4. 循环上传七牛生成切割后全景图片，然后使用根据路径使用代码拼接xml
+
+5. 制作docker镜像进行部署
 
 ### 二、代码片段
 ####  1. nodejs执行krpanotools切割全景图片

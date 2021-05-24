@@ -8,14 +8,14 @@ date: 2018-02-13 14:54:42
 `npm install simplemde marked highlight.js --save`
 
 ## 引入样式
-```
+```js
 @import '~font-awesome/css/font-awesome.css';
 @import '~simplemde/dist/simplemde.min.css';
 @import '~highlight.js/styles/idea.css';
 ```
 
 ## react组件
-```
+```js
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {shouldUpdate} from 'qy-react';

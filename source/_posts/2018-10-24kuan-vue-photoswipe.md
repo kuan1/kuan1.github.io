@@ -14,7 +14,7 @@ vue 简单包装一下：
 
 ## 安装
 
-```
+```bash
 yarn add kuan-vue-photoswipe
 ```
 
@@ -22,7 +22,7 @@ yarn add kuan-vue-photoswipe
 
 #### 引入
 
-```
+```js
 import Vue from 'vue'
 import photoSwipe from 'kuan-vue-photoswipe'
 
@@ -31,7 +31,7 @@ Vue.use(photoSwipe)
 
 #### 单张快速预览
 
-```
+```js
 /**
   * @param {src} 图片地址
   */
@@ -44,7 +44,7 @@ this.$preview('https://www.google.com.hk/images/branding/googlelogo/2x/googlelog
 
 ### 多张预览、添加图片
 
-```
+```js
 /**
   * 多组图片预览
   * @param {Array} images [{src: '', w: '', h: '', title: ''}] === 图片数组
@@ -58,9 +58,5 @@ photoSwipe.preview(this.images, { index: 1, change: this.callback })
   */
 photoSwipe.push(images)
 ```
-
-## 更新日志
-
-- 1.0.0 基本预览功能
 
   

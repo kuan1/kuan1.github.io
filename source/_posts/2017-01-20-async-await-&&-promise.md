@@ -2,7 +2,7 @@
 title:  async/await && promise
 date: 2017-01-20 13:19:04
 ---
-```
+```html
 <!DOCTYPE html>
 <html lang='en'>
 <head>

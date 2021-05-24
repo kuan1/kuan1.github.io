@@ -9,7 +9,7 @@ dplayer是一个很强大的h5视频播放库，有很多直接可以使用的ap
 - 安装
 
 
-```
+```bash
 yarn add dplayer
 
 yarn add hls.js # 播放m3u8需要另外安装这个
@@ -19,7 +19,7 @@ yarn add hls.js # 播放m3u8需要另外安装这个
 - 引入样式
 
 
-```
+```js
 import 'dplayer/dist/DPlayer.min.css'
 ```
 
@@ -27,7 +27,7 @@ import 'dplayer/dist/DPlayer.min.css'
 - 使用dplayer（服务端渲染需要mounted中引入插件）
 
 
-```
+```js
 // nuxt服务端不可以直接使用dplayer，可以在mounted的钩子中使用。（mounted只会在客户端触发）
 export default {
     mounted() {

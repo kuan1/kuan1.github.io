@@ -3,7 +3,7 @@ title: vue使用highlight.js
 date: 2019-04-01 11:58:06
 ---
 ## vue使用highlight.js
-```
+```html
 <template>
   <div ref="code" class="code" v-html="html"></div>
 </template>

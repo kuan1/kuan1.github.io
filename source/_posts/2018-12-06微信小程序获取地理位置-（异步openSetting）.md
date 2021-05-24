@@ -4,7 +4,7 @@ date: 2018-12-06 18:04:03
 ---
 > 微信小程序打开设置，不可以写在异步方法中，但是可以通过confirm中的success的回掉中。通过封装，同样可以实现异步操作
 
-```
+```js
 import authority from '@/utils/authority'
 import setting from '@/utils/setting'
 

@@ -3,7 +3,8 @@ title: 前端自动化部署（docker + jenkins）
 date: 2019-05-27 23:49:55
 ---
 > 此仅为流程笔记版本，详情请看demo
-# halobear-docker [github地址](https://github.com/kuan1/test-docker-jenkins) . 
+# halobear-docker 
+[点击进入github仓库](https://github.com/kuan1/test-docker-jenkins) . 
 # 理想流程：
 - 添加 git 项目
 - 配置 webhooks
