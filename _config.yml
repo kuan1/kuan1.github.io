@@ -79,4 +79,4 @@ theme: hexo-theme-next
 deploy:
   type: git
   repo: https://github.com/kuan1/kuan1.github.io.git
-  branch: master
+  branch: gh-pages
