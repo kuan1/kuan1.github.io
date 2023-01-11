@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="webpack4 vendor过大解决方案 webpack.config中optimization配置多个cacheGroups，对库进行分类打包     需要注意window和mac正则分割符，已踩坑  optimization配置代码1234567891011121314151617181920212223242526272829303132optimization: &amp;#123;   nam">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webpack4打包vendor过大问题">
+<meta property="og:url" content="https://www.luzhongkuan.cn/2018/07/28/2018-07-28webpack4打包vendor过大问题/index.html">
+<meta property="og:site_name" content="奋斗的宽">
+<meta property="og:description" content="webpack4 vendor过大解决方案 webpack.config中optimization配置多个cacheGroups，对库进行分类打包     需要注意window和mac正则分割符，已踩坑  optimization配置代码1234567891011121314151617181920212223242526272829303132optimization: &amp;#123;   nam">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2023-01-11T09:55:41.687Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="webpack4打包vendor过大问题">
+<meta name="twitter:description" content="webpack4 vendor过大解决方案 webpack.config中optimization配置多个cacheGroups，对库进行分类打包     需要注意window和mac正则分割符，已踩坑  optimization配置代码1234567891011121314151617181920212223242526272829303132optimization: &amp;#123;   nam">
+
+
+
+
+
+
+  <link rel="canonical" href="https://www.luzhongkuan.cn/2018/07/28/2018-07-28webpack4打包vendor过大问题/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>webpack4打包vendor过大问题 | 奋斗的宽</title>
+  
+
+
+
+
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?1d9e0c8ca14aade88324f404e5918fab";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">奋斗的宽</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">做一个安静程序员，只希望自己在写作中有所提升。</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.luzhongkuan.cn/2018/07/28/2018-07-28webpack4打包vendor过大问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="卢忠宽">
+      <meta itemprop="description" content="做一个安静程序员，只希望自己在写作中有所提升。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="奋斗的宽">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">webpack4打包vendor过大问题
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-07-28 10:57:40" itemprop="dateCreated datePublished" datetime="2018-07-28T10:57:40+08:00">2018-07-28</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-01-11 17:55:41" itemprop="dateModified" datetime="2023-01-11T17:55:41+08:00">2023-01-11</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="webpack4-vendor过大解决方案"><a href="#webpack4-vendor过大解决方案" class="headerlink" title="webpack4 vendor过大解决方案"></a>webpack4 vendor过大解决方案</h2><blockquote>
+<p>webpack.config中optimization配置多个cacheGroups，对库进行分类打包  </p>
+</blockquote>
+<ul>
+<li>需要注意window和mac正则分割符，已踩坑</li>
+</ul>
+<h4 id="optimization配置代码"><a href="#optimization配置代码" class="headerlink" title="optimization配置代码"></a>optimization配置代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">optimization: &#123;</span><br><span class="line">   namedChunks: true,</span><br><span class="line">   splitChunks: &#123;</span><br><span class="line">     minSize: 30000,</span><br><span class="line">     cacheGroups: &#123;</span><br><span class="line">       commons: &#123;</span><br><span class="line">         chunks: &apos;initial&apos;, // &apos;initial&apos;, &apos;async&apos;, &apos;all&apos;</span><br><span class="line">         name: &apos;commons&apos;,</span><br><span class="line">         minChunks: 2,</span><br><span class="line">         maxInitialRequests: 5,</span><br><span class="line">         minSize: 0,</span><br><span class="line">         priority: 0, // 优先级</span><br><span class="line">       &#125;,</span><br><span class="line">       // 单独打包vue插件</span><br><span class="line">       &apos;vue-vendor&apos;: &#123;</span><br><span class="line">         chunks: &apos;initial&apos;, // &apos;initial&apos;, &apos;async&apos;, &apos;all&apos;,</span><br><span class="line">         test: /[\/]node_modules[\/]vue/, // &lt;- window | mac -&gt; /node_modules/vue/</span><br><span class="line">         name: &apos;vue-vendor&apos;,</span><br><span class="line">         priority: -9,</span><br><span class="line">         enforce: true,</span><br><span class="line">       &#125;,</span><br><span class="line">       vendor: &#123;</span><br><span class="line">         chunks: &apos;initial&apos;, // &apos;initial&apos;, &apos;async&apos;, &apos;all&apos;</span><br><span class="line">         test: /node_modules/,</span><br><span class="line">         // test: /node_modules/,</span><br><span class="line">         name: &apos;vendor&apos;,</span><br><span class="line">         priority: -10,</span><br><span class="line">         enforce: true,</span><br><span class="line">       &#125;</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;,</span><br></pre></td></tr></table></figure>
+<h4 id="完整webpack-base-conf-js"><a href="#完整webpack-base-conf-js" class="headerlink" title="完整webpack.base.conf.js"></a>完整webpack.base.conf.js</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br></pre></td><td class="code"><pre><span class="line">const path = require(&apos;path&apos;)</span><br><span class="line">const webpack = require(&apos;webpack&apos;)</span><br><span class="line">const VueLoaderPlugin = require(&apos;vue-loader/lib/plugin&apos;)</span><br><span class="line">const HtmlWebpackPlugin = require(&apos;html-webpack-plugin&apos;);</span><br><span class="line">const CopyWebpackPlugin = require(&apos;copy-webpack-plugin&apos;)</span><br><span class="line"></span><br><span class="line">const MiniCssExtractPlugin = require(&apos;mini-css-extract-plugin&apos;)</span><br><span class="line"></span><br><span class="line">const vueLoaderConfig = require(&apos;./vue-loader.conf&apos;)</span><br><span class="line"></span><br><span class="line">function resolve(dir) &#123;</span><br><span class="line">  return path.join(__dirname, &apos;../&apos;, dir)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const isDev = process.env.NODE_ENV === &apos;development&apos;</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">  output: &#123;</span><br><span class="line">    filename: &apos;js/[name].[hash].js&apos;,</span><br><span class="line">    chunkFilename: &apos;js/[id].[hash].js&apos;</span><br><span class="line">  &#125;,</span><br><span class="line">  module: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      &#123;</span><br><span class="line">        test: /.(js|vue)$/,</span><br><span class="line">        loader: &apos;eslint-loader&apos;,</span><br><span class="line">        enforce: &apos;pre&apos;,</span><br><span class="line">        include: [resolve(&apos;src&apos;)],</span><br><span class="line">        options: &#123;</span><br><span class="line">          formatter: require(&apos;eslint-friendly-formatter&apos;),</span><br><span class="line">          emitWarning: true</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;test: /.vue$/, loader: &apos;vue-loader&apos;, options: vueLoaderConfig&#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        test: /.js$/,</span><br><span class="line">        exclude: /node_modules/,</span><br><span class="line">        loader: &apos;babel-loader&apos;,</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        test: /.svg$/,</span><br><span class="line">        loader: &apos;svg-sprite-loader&apos;,</span><br><span class="line">        include: [resolve(&apos;src/components/icons&apos;)],</span><br><span class="line">        options: &#123;</span><br><span class="line">          symbolId: &apos;icon-[name]&apos;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        test: /.(png|jpg|gif)$/,</span><br><span class="line">        loader: &apos;url-loader&apos;,</span><br><span class="line">        options: &#123;</span><br><span class="line">          limit: 10000,</span><br><span class="line">          name: &apos;images/[name].[ext]?[hash]&apos;,</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        test: /.(woff2?|eot|ttf|otf)(?.*)?$/,</span><br><span class="line">        loader: &apos;url-loader&apos;,</span><br><span class="line">        options: &#123;</span><br><span class="line">          limit: 10000,</span><br><span class="line">          name: &apos;fonts/[name].[ext]?[hash]&apos;,</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        test: /.(scss|css)$/,</span><br><span class="line">        use: [isDev ? &apos;style-loader&apos; : MiniCssExtractPlugin.loader, &apos;css-loader&apos;, &apos;sass-loader&apos;],</span><br><span class="line">      &#125;,</span><br><span class="line">    ],</span><br><span class="line">  &#125;,</span><br><span class="line">  resolve: &#123;</span><br><span class="line">    extensions: [&apos;.js&apos;, &apos;.vue&apos;, &apos;.json&apos;],</span><br><span class="line">    alias: &#123;</span><br><span class="line">      &apos;vue$&apos;: &apos;vue/dist/vue.esm.js&apos;,</span><br><span class="line">      &apos;@&apos;: resolve(&apos;src&apos;),</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  optimization: &#123;</span><br><span class="line">    namedChunks: true,</span><br><span class="line">    splitChunks: &#123;</span><br><span class="line">      minSize: 30000,</span><br><span class="line">      cacheGroups: &#123;</span><br><span class="line">        commons: &#123;</span><br><span class="line">          chunks: &apos;initial&apos;, // &apos;initial&apos;, &apos;async&apos;, &apos;all&apos;</span><br><span class="line">          name: &apos;commons&apos;,</span><br><span class="line">          minChunks: 2,</span><br><span class="line">          maxInitialRequests: 5,</span><br><span class="line">          minSize: 0,</span><br><span class="line">          priority: 0, // 优先级</span><br><span class="line">        &#125;,</span><br><span class="line">        // 单独打包vue插件</span><br><span class="line">        &apos;vue-vendor&apos;: &#123;</span><br><span class="line">          chunks: &apos;initial&apos;, // &apos;initial&apos;, &apos;async&apos;, &apos;all&apos;,</span><br><span class="line">          test: /[\/]node_modules[\/]vue/, // &lt;- window | mac -&gt; /node_modules/vue/</span><br><span class="line">          name: &apos;vue-vendor&apos;,</span><br><span class="line">          priority: -9,</span><br><span class="line">          enforce: true,</span><br><span class="line">        &#125;,</span><br><span class="line">        vendor: &#123;</span><br><span class="line">          chunks: &apos;initial&apos;, // &apos;initial&apos;, &apos;async&apos;, &apos;all&apos;</span><br><span class="line">          test: /node_modules/,</span><br><span class="line">          // test: /node_modules/,</span><br><span class="line">          name: &apos;vendor&apos;,</span><br><span class="line">          priority: -10,</span><br><span class="line">          enforce: true,</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [</span><br><span class="line">    // make sure to include the plugin!</span><br><span class="line">    new VueLoaderPlugin(),</span><br><span class="line">    new webpack.DefinePlugin(&#123;</span><br><span class="line">      &apos;process.env&apos;: &#123;</span><br><span class="line">        name: JSON.stringify(process.env.npm_package_name)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;),</span><br><span class="line">    new CopyWebpackPlugin([</span><br><span class="line">      &#123;</span><br><span class="line">        from: resolve(&apos;static&apos;),</span><br><span class="line">        to: &apos;&apos;,</span><br><span class="line">        ignore: [&apos;.*&apos;],</span><br><span class="line">      &#125;,</span><br><span class="line">    ]),</span><br><span class="line">    new HtmlWebpackPlugin(&#123;</span><br><span class="line">      template: &apos;index.html&apos;,</span><br><span class="line">      inject: true,</span><br><span class="line">      favicon: resolve(&apos;static/favicon.ico&apos;),</span><br><span class="line">      minify: &#123;</span><br><span class="line">        removeComments: true,</span><br><span class="line">        collapseWhitespace: true,</span><br><span class="line">        removeAttributeQuotes: true,</span><br><span class="line">        minifyJS: true,</span><br><span class="line">        minifyCSS: true,</span><br><span class="line">      &#125;,</span><br><span class="line">      chunksSortMode: &apos;dependency&apos;,</span><br><span class="line">    &#125;)</span><br><span class="line">  ],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/16/2018-07-16真机调试（mac和iphone手机）/" rel="next" title="真机调试（mac和iphone手机）">
+                <i class="fa fa-chevron-left"></i> 真机调试（mac和iphone手机）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/14/2018-08-14阿里oss断点续传(vue组件)/" rel="prev" title="阿里oss断点续传(vue组件)">
+                阿里oss断点续传(vue组件) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">卢忠宽</p>
+              <div class="site-description motion-element" itemprop="description">做一个安静程序员，只希望自己在写作中有所提升。</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">183</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#webpack4-vendor过大解决方案"><span class="nav-number">1.</span> <span class="nav-text">webpack4 vendor过大解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#optimization配置代码"><span class="nav-number">1.0.1.</span> <span class="nav-text">optimization配置代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#完整webpack-base-conf-js"><span class="nav-number">1.0.2.</span> <span class="nav-text">完整webpack.base.conf.js</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">卢忠宽</span>
+
+  
+
+  
+</div>
+<a style="color: #999; font-size: 12px; border: none" href="https://www.luzhongkuan.cn">友情链接：luzhongkuan.cn</a>
+<div>
+  <a style="color: #999; font-size: 12px; border: none" href="https://beian.miit.gov.cn">豫ICP备17016583号</a>
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

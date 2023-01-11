@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="常识Docker官网Docker CE：社区免费版,  DOcker EE：企业收费版 CentOS 安装docker12345678910111213141516171819202122232425262728293031# 安装必要的一些系统工具sudo yum install -y yum-utils device-mapper-persistent-data lvm2# 添加软件源sudo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker基础入门">
+<meta property="og:url" content="https://www.luzhongkuan.cn/2019/04/25/2019-04-25docker基础入门/index.html">
+<meta property="og:site_name" content="奋斗的宽">
+<meta property="og:description" content="常识Docker官网Docker CE：社区免费版,  DOcker EE：企业收费版 CentOS 安装docker12345678910111213141516171819202122232425262728293031# 安装必要的一些系统工具sudo yum install -y yum-utils device-mapper-persistent-data lvm2# 添加软件源sudo">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2023-01-11T09:55:41.679Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="docker基础入门">
+<meta name="twitter:description" content="常识Docker官网Docker CE：社区免费版,  DOcker EE：企业收费版 CentOS 安装docker12345678910111213141516171819202122232425262728293031# 安装必要的一些系统工具sudo yum install -y yum-utils device-mapper-persistent-data lvm2# 添加软件源sudo">
+
+
+
+
+
+
+  <link rel="canonical" href="https://www.luzhongkuan.cn/2019/04/25/2019-04-25docker基础入门/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>docker基础入门 | 奋斗的宽</title>
+  
+
+
+
+
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?1d9e0c8ca14aade88324f404e5918fab";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">奋斗的宽</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">做一个安静程序员，只希望自己在写作中有所提升。</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.luzhongkuan.cn/2019/04/25/2019-04-25docker基础入门/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="卢忠宽">
+      <meta itemprop="description" content="做一个安静程序员，只希望自己在写作中有所提升。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="奋斗的宽">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">docker基础入门
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-25 22:49:31" itemprop="dateCreated datePublished" datetime="2019-04-25T22:49:31+08:00">2019-04-25</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-01-11 17:55:41" itemprop="dateModified" datetime="2023-01-11T17:55:41+08:00">2023-01-11</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="常识"><a href="#常识" class="headerlink" title="常识"></a>常识</h2><p><a href="https://docs.docker.com/get-started/" target="_blank" rel="noopener">Docker官网</a><br>Docker CE：社区免费版,  DOcker EE：企业收费版</p>
+<h2 id="CentOS-安装docker"><a href="#CentOS-安装docker" class="headerlink" title="CentOS 安装docker"></a>CentOS 安装docker</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装必要的一些系统工具</span></span><br><span class="line">sudo yum install -y yum-utils device-mapper-persistent-data lvm2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加软件源</span></span><br><span class="line">sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo </span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加软国内软件源</span></span><br><span class="line">sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo </span><br><span class="line"></span><br><span class="line"><span class="comment"># 官网推荐</span></span><br><span class="line"><span class="comment"># 更新并安装Docker-CE</span></span><br><span class="line">sudo yum install docker-ce docker-ce-cli containerd.io</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开启Docker服务</span></span><br><span class="line">sudo service docker start</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除docker</span></span><br><span class="line">sudo yum remove docker-ce</span><br><span class="line">sudo rm -rf /var/lib/docker</span><br><span class="line"><span class="comment"># 删除旧版本docker</span></span><br><span class="line">sudo yum remove docker \</span><br><span class="line">           docker-client \</span><br><span class="line">           docker-client-latest \</span><br><span class="line">           docker-common \</span><br><span class="line">           docker-latest \</span><br><span class="line">           docker-latest-logrotate \</span><br><span class="line">           docker-logrotate \</span><br><span class="line">           docker-engine</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看版本信息</span></span><br><span class="line">docker --version</span><br></pre></td></tr></table></figure>
+<h2 id="docker-image"><a href="#docker-image" class="headerlink" title="docker image"></a>docker image</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看安装镜像</span></span><br><span class="line">docker image ls <span class="comment"># docker images</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 拉取镜像</span></span><br><span class="line">docker pull &lt;image&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行容器</span></span><br><span class="line">docker run -p &lt;主机端口&gt;:&lt;容器端口&gt; -v 本地路径:容器路径 -d(后台运行) 【image:tag】</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看运行日志</span></span><br><span class="line">docker logs &lt;&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看运行容器</span></span><br><span class="line">docker ps</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建image</span></span><br><span class="line">docker build -t &lt;nginx:tag&gt; .</span><br><span class="line"></span><br><span class="line"><span class="comment"># 移除image（需先移除container）</span></span><br><span class="line">docker rmi &lt;image&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重启</span></span><br><span class="line">docker start 容器id</span><br></pre></td></tr></table></figure>
+<h2 id="docker-container"><a href="#docker-container" class="headerlink" title="docker container"></a>docker container</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"># 查看container</span><br><span class="line">docker container ls</span><br><span class="line"># 查看container详情</span><br><span class="line">docker inspect &lt;container-id&gt;</span><br><span class="line"></span><br><span class="line"># 重启</span><br><span class="line">docker container restart &lt;container-id&gt;</span><br><span class="line"></span><br><span class="line"># 进入容器内部</span><br><span class="line">docker exec -it &lt;id&gt; sh</span><br><span class="line"></span><br><span class="line"># 停止container</span><br><span class="line">docker container stop &lt;container-id&gt;</span><br><span class="line">docker container kill &lt;container-id&gt; #强制</span><br><span class="line"></span><br><span class="line"># 删除container</span><br><span class="line">docker container stop &lt;container-id&gt;</span><br><span class="line">docker rm &lt;container-id&gt;</span><br><span class="line"></span><br><span class="line"># 或者直接如输入: docker rm -f &lt;container-id&gt;</span><br><span class="line"></span><br><span class="line"># 查看所占内存</span><br><span class="line">docker stats</span><br></pre></td></tr></table></figure>
+<h2 id="推送dockerhub"><a href="#推送dockerhub" class="headerlink" title="推送dockerhub"></a>推送dockerhub</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 登陆</span></span><br><span class="line">docker login</span><br><span class="line"><span class="comment"># 修改成对应远程仓库名称</span></span><br><span class="line">docker tag &lt;image-id&gt; username/repository:tag </span><br><span class="line"><span class="comment"># 推送</span></span><br><span class="line">docker push username/repository:tag</span><br></pre></td></tr></table></figure>
+<h2 id="迁移镜像"><a href="#迁移镜像" class="headerlink" title="迁移镜像"></a>迁移镜像</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker save alpine | gzip &gt; alpine-latest.tar.gz</span><br><span class="line">docker load -i alpine-latest.tar.gz</span><br></pre></td></tr></table></figure>
+<h2 id="docker服务部署-推荐生产环境"><a href="#docker服务部署-推荐生产环境" class="headerlink" title="docker服务部署(推荐生产环境)"></a>docker服务部署(推荐生产环境)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># 创建服务</span><br><span class="line">docker swarm init</span><br><span class="line"></span><br><span class="line"># 创建应用</span><br><span class="line">docker stack deploy -c docker-stack.yml &lt;应用名&gt;</span><br><span class="line"></span><br><span class="line"># 列出与应用关联的服务</span><br><span class="line">docker stack services &lt;appname&gt;      </span><br><span class="line"></span><br><span class="line"># 查看容器列表</span><br><span class="line">docker stack ps &lt;应用名字&gt;</span><br><span class="line"></span><br><span class="line"># 停止应用</span><br><span class="line">docker stack rm &lt;应用名字&gt;</span><br><span class="line"></span><br><span class="line"># 删除服务</span><br><span class="line">docker swarm leave --force</span><br></pre></td></tr></table></figure>
+<h2 id="更多…"><a href="#更多…" class="headerlink" title="更多…"></a>更多…</h2><p><a href="https://docs.docker.com/get-started/part4/" target="_blank" rel="noopener">官网</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/22/2019-04-22mac-把窗口移到另一个桌面，减少等到时间/" rel="next" title="mac 把窗口移到另一个桌面，减少等到时间">
+                <i class="fa fa-chevron-left"></i> mac 把窗口移到另一个桌面，减少等到时间
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/04/2019-05-04Dockerfile文件简介/" rel="prev" title="Dockerfile文件简介">
+                Dockerfile文件简介 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">卢忠宽</p>
+              <div class="site-description motion-element" itemprop="description">做一个安静程序员，只希望自己在写作中有所提升。</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">183</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常识"><span class="nav-number">1.</span> <span class="nav-text">常识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CentOS-安装docker"><span class="nav-number">2.</span> <span class="nav-text">CentOS 安装docker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-image"><span class="nav-number">3.</span> <span class="nav-text">docker image</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-container"><span class="nav-number">4.</span> <span class="nav-text">docker container</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#推送dockerhub"><span class="nav-number">5.</span> <span class="nav-text">推送dockerhub</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#迁移镜像"><span class="nav-number">6.</span> <span class="nav-text">迁移镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker服务部署-推荐生产环境"><span class="nav-number">7.</span> <span class="nav-text">docker服务部署(推荐生产环境)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更多…"><span class="nav-number">8.</span> <span class="nav-text">更多…</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">卢忠宽</span>
+
+  
+
+  
+</div>
+<a style="color: #999; font-size: 12px; border: none" href="https://www.luzhongkuan.cn">友情链接：luzhongkuan.cn</a>
+<div>
+  <a style="color: #999; font-size: 12px; border: none" href="https://beian.miit.gov.cn">豫ICP备17016583号</a>
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

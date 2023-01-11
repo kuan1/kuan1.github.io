@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="一、先看一下如何使用 login：登陆过返回用户信息，没有登陆过执行登陆逻辑 loginForce：强制登陆  12345678910111213import &amp;#123;login, loginForce&amp;#125; from &apos;@/utils/login&apos;// 需要登陆才可以执行async function needLoginFn() &amp;#123;    await login()    //">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信小程序登陆逻辑封装（附比较完整注释）">
+<meta property="og:url" content="https://www.luzhongkuan.cn/2019/07/13/2019-07-13微信小程序登陆逻辑封装（附比较完整注释）/index.html">
+<meta property="og:site_name" content="奋斗的宽">
+<meta property="og:description" content="一、先看一下如何使用 login：登陆过返回用户信息，没有登陆过执行登陆逻辑 loginForce：强制登陆  12345678910111213import &amp;#123;login, loginForce&amp;#125; from &apos;@/utils/login&apos;// 需要登陆才可以执行async function needLoginFn() &amp;#123;    await login()    //">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2023-01-11T09:55:41.685Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="微信小程序登陆逻辑封装（附比较完整注释）">
+<meta name="twitter:description" content="一、先看一下如何使用 login：登陆过返回用户信息，没有登陆过执行登陆逻辑 loginForce：强制登陆  12345678910111213import &amp;#123;login, loginForce&amp;#125; from &apos;@/utils/login&apos;// 需要登陆才可以执行async function needLoginFn() &amp;#123;    await login()    //">
+
+
+
+
+
+
+  <link rel="canonical" href="https://www.luzhongkuan.cn/2019/07/13/2019-07-13微信小程序登陆逻辑封装（附比较完整注释）/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>微信小程序登陆逻辑封装（附比较完整注释） | 奋斗的宽</title>
+  
+
+
+
+
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?1d9e0c8ca14aade88324f404e5918fab";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">奋斗的宽</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">做一个安静程序员，只希望自己在写作中有所提升。</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.luzhongkuan.cn/2019/07/13/2019-07-13微信小程序登陆逻辑封装（附比较完整注释）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="卢忠宽">
+      <meta itemprop="description" content="做一个安静程序员，只希望自己在写作中有所提升。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="奋斗的宽">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">微信小程序登陆逻辑封装（附比较完整注释）
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-13 16:05:56" itemprop="dateCreated datePublished" datetime="2019-07-13T16:05:56+08:00">2019-07-13</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-01-11 17:55:41" itemprop="dateModified" datetime="2023-01-11T17:55:41+08:00">2023-01-11</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、先看一下如何使用"><a href="#一、先看一下如何使用" class="headerlink" title="一、先看一下如何使用"></a>一、先看一下如何使用</h2><ul>
+<li>login：登陆过返回用户信息，没有登陆过执行登陆逻辑</li>
+<li>loginForce：强制登陆</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;login, loginForce&#125; <span class="keyword">from</span> <span class="string">'@/utils/login'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 需要登陆才可以执行</span></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">needLoginFn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">await</span> login()</span><br><span class="line">    <span class="comment">// todo</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 强制登陆</span></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">toRrefreshLogin</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">await</span> loginForce()</span><br><span class="line">    <span class="comment">// todo</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="二、完整微信小程序登陆逻辑"><a href="#二、完整微信小程序登陆逻辑" class="headerlink" title="二、完整微信小程序登陆逻辑"></a>二、完整微信小程序登陆逻辑</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> setting <span class="keyword">from</span> <span class="string">'@/utils/setting'</span> <span class="comment">// 用户设置（具体代码在附录）</span></span><br><span class="line"><span class="keyword">import</span> authority <span class="keyword">from</span> <span class="string">'@/utils/authority'</span> <span class="comment">// localStorage用户信息保存（具体代码在附录）</span></span><br><span class="line"><span class="keyword">import</span> request <span class="keyword">from</span> <span class="string">'@/utils/request/doRequest'</span> <span class="comment">// 类似axios请求方法封装（代码略）</span></span><br><span class="line"><span class="keyword">import</span> &#123; redirectLogin &#125; <span class="keyword">from</span> <span class="string">'@/utils/router'</span> <span class="comment">// 重定向登陆，登陆后返回等逻辑（代码略）</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 并发触发登陆，返回第一次登陆结果</span></span><br><span class="line"><span class="keyword">let</span> prevCodeLogin</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span>: 检查是否有权限获取用户信息，有的话直接可以直接使用wx.getUserInfo</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">validateSetting</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> hasSetting = <span class="keyword">await</span> setting.has(<span class="string">'userInfo'</span>)</span><br><span class="line">  <span class="keyword">if</span> (!hasSetting) &#123;</span><br><span class="line">    <span class="comment">// 没有权限的话，清空保存用户信息，重定向登陆</span></span><br><span class="line">    authority.clear()</span><br><span class="line">    redirectLogin()</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> hasSetting || handleError(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'没有获取UserInfo权限'</span>))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span>: 检查sessionKey是否过期，过期的话需要重新wx.login获取code登陆</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">validateSession</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">    wx.checkSession(&#123;</span><br><span class="line">      success() &#123;</span><br><span class="line">        resolve(<span class="number">1</span>)</span><br><span class="line">      &#125;,</span><br><span class="line">      fail() &#123;</span><br><span class="line">        resolve(<span class="number">0</span>)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span>: 通过code登录</span></span><br><span class="line"><span class="comment"> * 用户登陆过：后台可以获取openid或者unionId直接查询到用户信息，实现静默登陆</span></span><br><span class="line"><span class="comment"> * 用户第一次：需要重定向授权页面，点击getUserInfo的按钮授权登陆</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">codeLogin</span>(<span class="params">force</span>) </span>&#123; <span class="comment">// force：是否强制登陆</span></span><br><span class="line">  <span class="comment">// 获取缓存中的用户信息，有id表示已经登陆过</span></span><br><span class="line">  <span class="keyword">const</span> cacheUser = authority.get() || &#123;&#125;</span><br><span class="line">  <span class="keyword">if</span> (!force &amp;&amp; cacheUser.id) <span class="keyword">return</span> cacheUser</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// isValid：后台code换的session_key是否过期，过期的话不可以解处加密字符串中的用户信息，需要重新登陆</span></span><br><span class="line">  <span class="keyword">const</span> isValid = <span class="keyword">await</span> validateSession() </span><br><span class="line">  <span class="keyword">if</span> (force || !isValid) &#123;</span><br><span class="line">    <span class="keyword">if</span> (prevCodeLogin) <span class="keyword">return</span> prevCodeLogin</span><br><span class="line">    prevCodeLogin = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">      wx.login(&#123;</span><br><span class="line">        <span class="keyword">async</span> success(&#123; code &#125;) &#123;</span><br><span class="line">          <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 将code发送给后台，后台可以获取到openid，session_key等</span></span><br><span class="line">            <span class="keyword">const</span> res = <span class="keyword">await</span> request(&#123;</span><br><span class="line">              url: <span class="string">'/api/client/v1/auth/session'</span>,</span><br><span class="line">              method: <span class="string">'post'</span>,</span><br><span class="line">              data: &#123; code &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">            <span class="comment">// code获取后台返回的用户信息（登陆过返回完整用户信息，没有登陆过返回token，token用户后台关联当前用户的session_key）</span></span><br><span class="line">            <span class="keyword">const</span> &#123; user = &#123;&#125;, token &#125; = res</span><br><span class="line">            user.token = token</span><br><span class="line">            authority.set(user)</span><br><span class="line">            prevCodeLogin = <span class="literal">null</span></span><br><span class="line">            <span class="keyword">return</span> resolve(user)</span><br><span class="line">          &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">            reject(e)</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        fail(e) &#123;</span><br><span class="line">          prevCodeLogin = <span class="literal">null</span></span><br><span class="line">          reject(e)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> prevCodeLogin</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> cache</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span>: 解密用户信息或者手机号(encrypted_data, iv)</span></span><br><span class="line"><span class="comment"> * encrypted_data, iv：有获取用户信息权限可以通过getUserInfo获取，否则通过授权按钮获取</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">toDecode</span>(<span class="params">&#123; encrypted_data, iv &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 此方法header中默认携带了code登陆返回的token，后台通过token查到session_key，然后解密出用户信息</span></span><br><span class="line">  <span class="keyword">const</span> &#123; user, token &#125; = <span class="keyword">await</span> request(&#123;</span><br><span class="line">    url: <span class="string">'/api/client/v1/auth/login'</span>,</span><br><span class="line">    method: <span class="string">'post'</span>,</span><br><span class="line">    data: &#123;</span><br><span class="line">      encrypted_data,</span><br><span class="line">      iv</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">if</span> (user) &#123;</span><br><span class="line">    user.token = token</span><br><span class="line">    authority.set(user)</span><br><span class="line">    <span class="keyword">return</span> user</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'登录decode失败'</span>))</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span>: getUserInfo 获取加密字符串，传给后台解密出用户信息</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">decodeUserInfo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">    wx.getUserInfo(&#123;</span><br><span class="line">      lang: <span class="string">'zh_CN'</span>,</span><br><span class="line">      <span class="keyword">async</span> success(res) &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123; encryptedData, iv &#125; = res</span><br><span class="line">        <span class="keyword">const</span> user = <span class="keyword">await</span> toDecode(&#123;</span><br><span class="line">          encrypted_data: encryptedData,</span><br><span class="line">          iv</span><br><span class="line">        &#125;)</span><br><span class="line">        resolve(user)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span>: 登陆封装</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">login</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 通过wx.login获取code发给后台</span></span><br><span class="line">  <span class="keyword">const</span> user = <span class="keyword">await</span> codeLogin()</span><br><span class="line">  <span class="comment">// 返回id表示静默登陆成功</span></span><br><span class="line">  <span class="keyword">if</span> (user.id) &#123;</span><br><span class="line">    <span class="keyword">return</span> user</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 判断是否有获取用户信息权限，没有的重定向登陆</span></span><br><span class="line">  <span class="keyword">await</span> validateSetting()</span><br><span class="line">  <span class="comment">// 有getUserInfo权限才会走下边代码，不需要授权直接使用getUserInfo登陆</span></span><br><span class="line">  <span class="keyword">return</span> decodeUserInfo()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span>: 强制登录</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">loginForce</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  authority.clear()</span><br><span class="line">  <span class="keyword">await</span> login()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="三、附录：所用工具类"><a href="#三、附录：所用工具类" class="headerlink" title="三、附录：所用工具类"></a>三、附录：所用工具类</h2><h4 id="authority：简单封装localStorage"><a href="#authority：简单封装localStorage" class="headerlink" title="authority：简单封装localStorage"></a>authority：简单封装localStorage</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 储存前缀</span></span><br><span class="line"><span class="keyword">const</span> key = <span class="string">'prefix_key'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 储存有效时间</span></span><br><span class="line"><span class="keyword">const</span> maxAge = <span class="number">1000</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span> * <span class="number">60</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="keyword">get</span>() &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> user = wx.getStorageSync(key)</span><br><span class="line">      <span class="keyword">if</span> (!user || user.time + maxAge &lt; <span class="keyword">new</span> <span class="built_in">Date</span>().getTime()) <span class="keyword">return</span> &#123;&#125;</span><br><span class="line">      <span class="keyword">return</span> user || &#123;&#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="keyword">set</span>(user) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!user) <span class="keyword">return</span> <span class="literal">null</span></span><br><span class="line">    user.time = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime()</span><br><span class="line">    <span class="keyword">const</span> oldUser = <span class="keyword">this</span>.get() || &#123;&#125;</span><br><span class="line">    <span class="keyword">const</span> newUser = &#123; ...oldUser, ...user &#125;</span><br><span class="line">    wx.setStorageSync(key, newUser)</span><br><span class="line">    <span class="keyword">return</span> newUser</span><br><span class="line">  &#125;,</span><br><span class="line">  clear() &#123;</span><br><span class="line">    <span class="keyword">const</span> user = <span class="keyword">this</span>.get() || &#123;&#125;</span><br><span class="line">    wx.clearStorageSync()</span><br><span class="line">    wx.removeStorageSync(key)</span><br><span class="line">    <span class="keyword">this</span>.set(&#123; <span class="attr">user</span>: &#123;&#125; &#125;)</span><br><span class="line">    <span class="keyword">return</span> user</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="setting：用户设置简单封装"><a href="#setting：用户设置简单封装" class="headerlink" title="setting：用户设置简单封装"></a>setting：用户设置简单封装</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> noop = <span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 并发查询setting返回同一个结果</span></span><br><span class="line"><span class="keyword">let</span> preGetSetting</span><br><span class="line"></span><br><span class="line"><span class="comment">// 需要直接点击，不能在异步函数之中（可以使用wx.showModal的success中使用)</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">openSetting</span>(<span class="params">name, callback = noop</span>) </span>&#123;</span><br><span class="line">  wx.getSetting(&#123;</span><br><span class="line">    success(&#123; authSetting &#125;) &#123;</span><br><span class="line">      <span class="keyword">const</span> key = <span class="string">`scope.<span class="subst">$&#123;name&#125;</span>`</span></span><br><span class="line">      <span class="keyword">let</span> success = <span class="literal">false</span></span><br><span class="line">      <span class="keyword">if</span> (authSetting[key] === <span class="literal">false</span>) &#123;</span><br><span class="line">        wx.show</span><br><span class="line">        wx.openSetting(&#123;</span><br><span class="line">          success(&#123; <span class="attr">authSetting</span>: auth &#125;) &#123;</span><br><span class="line">            <span class="keyword">if</span> (callback) &#123;</span><br><span class="line">              success = auth[key] !== <span class="literal">false</span></span><br><span class="line">              callback(success)</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 已经有权限</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span> callback === <span class="string">'function'</span>) &#123;</span><br><span class="line">          callback(success)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取用户授权信息</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">getSetting</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (preGetSetting) <span class="keyword">return</span> preGetSetting</span><br><span class="line">  preGetSetting = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">    wx.getSetting(&#123;</span><br><span class="line">      success(&#123; authSetting &#125;) &#123;</span><br><span class="line">        preGetSetting = <span class="literal">null</span></span><br><span class="line">        resolve(authSetting)</span><br><span class="line">      &#125;,</span><br><span class="line">      fail(e) &#123;</span><br><span class="line">        preGetSetting = <span class="literal">null</span></span><br><span class="line">        reject(e)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">return</span> preGetSetting</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">hasSetting</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> setting = <span class="keyword">await</span> getSetting()</span><br><span class="line">  <span class="keyword">const</span> key = <span class="string">`scope.<span class="subst">$&#123;name&#125;</span>`</span> <span class="comment">// userLocation、userInfo</span></span><br><span class="line">  <span class="keyword">return</span> setting[key]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  open: openSetting,</span><br><span class="line">  <span class="keyword">get</span>: getSetting,</span><br><span class="line">  has: hasSetting</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/12/2019-07-12翻页时钟制作（vue、taro小程序）/" rel="next" title="翻页时钟制作（vue、taro小程序）">
+                <i class="fa fa-chevron-left"></i> 翻页时钟制作（vue、taro小程序）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/25/2019-07-25IOS微信键盘收起，页面不回弹（IOS-12版本）/" rel="prev" title="IOS微信键盘收起，页面不回弹（IOS 12版本）">
+                IOS微信键盘收起，页面不回弹（IOS 12版本） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">卢忠宽</p>
+              <div class="site-description motion-element" itemprop="description">做一个安静程序员，只希望自己在写作中有所提升。</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">183</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、先看一下如何使用"><span class="nav-number">1.</span> <span class="nav-text">一、先看一下如何使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、完整微信小程序登陆逻辑"><span class="nav-number">2.</span> <span class="nav-text">二、完整微信小程序登陆逻辑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、附录：所用工具类"><span class="nav-number">3.</span> <span class="nav-text">三、附录：所用工具类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#authority：简单封装localStorage"><span class="nav-number">3.0.1.</span> <span class="nav-text">authority：简单封装localStorage</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#setting：用户设置简单封装"><span class="nav-number">3.0.2.</span> <span class="nav-text">setting：用户设置简单封装</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">卢忠宽</span>
+
+  
+
+  
+</div>
+<a style="color: #999; font-size: 12px; border: none" href="https://www.luzhongkuan.cn">友情链接：luzhongkuan.cn</a>
+<div>
+  <a style="color: #999; font-size: 12px; border: none" href="https://beian.miit.gov.cn">豫ICP备17016583号</a>
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

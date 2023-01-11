@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="让webpack更简单 根据自己习惯将webpack封装成一个npm包，不再需要安装任何webpack相关包，甚至不需要任何配置。思路借鉴webpack-cli3和umi   发布npm包基础 点击进入  一、安装必需webpack依赖插件 基础webpack配置依赖有：：babel、css、less、postcss、file-loader、url-loader、html-webpack-plug">
+<meta property="og:type" content="article">
+<meta property="og:title" content="让webpack更简单">
+<meta property="og:url" content="https://www.luzhongkuan.cn/2018/09/22/2018-09-22让webpack更简单/index.html">
+<meta property="og:site_name" content="奋斗的宽">
+<meta property="og:description" content="让webpack更简单 根据自己习惯将webpack封装成一个npm包，不再需要安装任何webpack相关包，甚至不需要任何配置。思路借鉴webpack-cli3和umi   发布npm包基础 点击进入  一、安装必需webpack依赖插件 基础webpack配置依赖有：：babel、css、less、postcss、file-loader、url-loader、html-webpack-plug">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2023-01-11T09:55:41.688Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="让webpack更简单">
+<meta name="twitter:description" content="让webpack更简单 根据自己习惯将webpack封装成一个npm包，不再需要安装任何webpack相关包，甚至不需要任何配置。思路借鉴webpack-cli3和umi   发布npm包基础 点击进入  一、安装必需webpack依赖插件 基础webpack配置依赖有：：babel、css、less、postcss、file-loader、url-loader、html-webpack-plug">
+
+
+
+
+
+
+  <link rel="canonical" href="https://www.luzhongkuan.cn/2018/09/22/2018-09-22让webpack更简单/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>让webpack更简单 | 奋斗的宽</title>
+  
+
+
+
+
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?1d9e0c8ca14aade88324f404e5918fab";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">奋斗的宽</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">做一个安静程序员，只希望自己在写作中有所提升。</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.luzhongkuan.cn/2018/09/22/2018-09-22让webpack更简单/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="卢忠宽">
+      <meta itemprop="description" content="做一个安静程序员，只希望自己在写作中有所提升。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="奋斗的宽">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">让webpack更简单
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-09-22 21:42:24" itemprop="dateCreated datePublished" datetime="2018-09-22T21:42:24+08:00">2018-09-22</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-01-11 17:55:41" itemprop="dateModified" datetime="2023-01-11T17:55:41+08:00">2023-01-11</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="让webpack更简单"><a href="#让webpack更简单" class="headerlink" title="让webpack更简单"></a>让webpack更简单</h1><blockquote>
+<p>根据自己习惯将webpack封装成一个npm包，不再需要安装任何webpack相关包，甚至不需要任何配置。思路借鉴<code>webpack-cli3</code>和<code>umi</code></p>
+</blockquote>
+<blockquote>
+<p>发布npm包基础 <a href="https://www.luzhongkuan.cn/detail/149">点击进入</a></p>
+</blockquote>
+<h2 id="一、安装必需webpack依赖插件"><a href="#一、安装必需webpack依赖插件" class="headerlink" title="一、安装必需webpack依赖插件"></a>一、安装必需webpack依赖插件</h2><ul>
+<li><p><strong>基础webpack配置依赖有：</strong>：<br><code>babel、css、less、postcss、file-loader、url-loader、html-webpack-plugin、copy-webpack-plugin</code>【<code>node-sass</code>安装比较慢，不翻墙经常安装失败，这里选择了less】</p>
+</li>
+<li><p><strong>开发模式依赖有：</strong>：<br><code>webpack-dev-server</code></p>
+</li>
+<li><p><strong>开发模式默认依赖有：</strong>：<br><code>clean-webpack-plugin、mini-css-extract-plugin、optimize-css-assets-webpack-plugin、uglifyjs-webpack-plugin</code></p>
+</li>
+</ul>
+<p><strong>注意：</strong><br>需要<code>npm i 依赖包名 -S</code>安装依赖，这样其他项目引入只需要安装这一个包，就不需要再重新安装此包的依赖</p>
+<h2 id="二、webpack-config加入默认配置"><a href="#二、webpack-config加入默认配置" class="headerlink" title="二、webpack.config加入默认配置"></a>二、webpack.config加入默认配置</h2><blockquote>
+<p>具体配置就不展示了，详情请看demo</p>
+</blockquote>
+<p><strong>获取当前项目运行地址：</strong> 下边的resolve都是的这个方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 获取当前项目运行地址</span><br><span class="line">const resolve = (dir) =&gt; path.join(process.cwd(), dir)</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><strong>设置webpack默认配置：</strong></li>
+</ul>
+<ol>
+<li>打包入口 </li>
+<li>cdn地址</li>
+<li>输出文件夹 </li>
+<li>html模板</li>
+<li>输出html地址和名字</li>
+<li>proxy 代理地址</li>
+</ol>
+<ul>
+<li><strong>用户自定义配置文件：</strong><blockquote>
+<p>项目是为了零配置，但特殊情况下还是需要自定义配置。那么就规定一个默认配置文件</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 获取用户webpack配置</span><br><span class="line">const userConfig = (() =&gt; &#123;</span><br><span class="line">  const configPath = resolve(&apos;kuan-pack.js&apos;) // 获取规定的配置文件地址</span><br><span class="line">  if (!fs.existsSync(configPath)) return &#123;&#125;</span><br><span class="line">  return require(configPath)</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+<h2 id="三、将配置npm包设置自定义指令"><a href="#三、将配置npm包设置自定义指令" class="headerlink" title="三、将配置npm包设置自定义指令"></a>三、将配置npm包设置自定义指令</h2><p>在<code>package.json</code>下的<code>bin</code>中定义指向脚本的文件地址，根据特定参数触发webpack的开发和编译</p>
+<p>注意：脚本文件最上方加入<code>#!/usr/bin/env node</code>，说明使用node来运行文件，否则脚本不能运行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">switch (process.argv[2]) &#123;</span><br><span class="line">  case &apos;dev&apos;:</span><br><span class="line">    // 本地开发</span><br><span class="line">    process.env.NODE_ENV = &apos;development&apos;</span><br><span class="line">    const serve = require(&apos;../src/dev&apos;)</span><br><span class="line">    serve()</span><br><span class="line">    break</span><br><span class="line">  case &apos;build&apos;:</span><br><span class="line">    process.env.NODE_ENV = &apos;production&apos;</span><br><span class="line">    const build = require(&apos;../src/build&apos;)</span><br><span class="line">    build()</span><br><span class="line">    break</span><br><span class="line">  default:</span><br><span class="line">    console.error(`Unknown command $&#123;process.argv[2]&#125;`)</span><br><span class="line">    process.exit(1)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="四、kuan-pack"><a href="#四、kuan-pack" class="headerlink" title="四、kuan-pack"></a>四、kuan-pack</h2><p><a href="https://github.com/kuan1/kuan-pack/blob/master/README.md" target="_blank" rel="noopener">demo地址</a></p>
+<p><strong>安装</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yarn add kuan-pack --dev</span><br><span class="line"># or</span><br><span class="line">npm run kuan-pack -D</span><br></pre></td></tr></table></figure></p>
+<p><strong>开发</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kuan-pack dev</span><br></pre></td></tr></table></figure></p>
+<p><strong>编译</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kuan-pack build</span><br></pre></td></tr></table></figure></p>
+<p><strong>自定义webpack配置</strong></p>
+<blockquote>
+<p>项目根目录加入<code>kuan-pack.js</code></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">const path = require(&apos;path&apos;)</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">  entry: path.resolve(__dirname, &apos;test&apos;), // 打包入口 默认： src/index.js</span><br><span class="line">  publicPath: &apos;&apos;, // sdn路径 默认：空</span><br><span class="line">  distPath: path.resolve(__dirname, &apos;dist&apos;), // 输入地址 默认： dist</span><br><span class="line">  htmlTemplate: &apos;index.html&apos;, // 模板html 默认：根目录index.html &gt; 内部自定义模板</span><br><span class="line">  htmlName: &apos;index.html&apos;, // 输出html路径 默认：&apos;index.html&apos;</span><br><span class="line">  proxy: &#123; // 代理地址</span><br><span class="line">    &apos;/api&apos;: &#123;</span><br><span class="line">      target: &apos;https://luzhongkuan.cn/api&apos;,</span><br><span class="line">      changeOrigin: true</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  config: &#123;</span><br><span class="line">    // 会合并到webpack.config</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="五、结语"><a href="#五、结语" class="headerlink" title="五、结语"></a>五、结语</h2><blockquote>
+<p>因为个人描述和能力等问题，可能有些地方不正确或者不清楚, 有问题欢迎联系 QQ:869103451</p>
+</blockquote>
+<h2 id="后期修改"><a href="#后期修改" class="headerlink" title="后期修改"></a>后期修改</h2><blockquote>
+<p>kuan-pack配置文件不能与包名一直，在mac运行没有问题，但是window10环境运行 kuan-pack 自动打开配置文件，而没有运行node_module 下的bin</p>
+</blockquote>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/22/2018-09-22前端-简化后台项目【增删该查禁用启用】/" rel="next" title="前端 简化后台项目【增删该查禁用启用】">
+                <i class="fa fa-chevron-left"></i> 前端 简化后台项目【增删该查禁用启用】
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/27/2018-09-27git下载仓库指定文件夹/" rel="prev" title="git下载仓库指定文件夹">
+                git下载仓库指定文件夹 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">卢忠宽</p>
+              <div class="site-description motion-element" itemprop="description">做一个安静程序员，只希望自己在写作中有所提升。</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">183</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#让webpack更简单"><span class="nav-number">1.</span> <span class="nav-text">让webpack更简单</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、安装必需webpack依赖插件"><span class="nav-number">1.1.</span> <span class="nav-text">一、安装必需webpack依赖插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、webpack-config加入默认配置"><span class="nav-number">1.2.</span> <span class="nav-text">二、webpack.config加入默认配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、将配置npm包设置自定义指令"><span class="nav-number">1.3.</span> <span class="nav-text">三、将配置npm包设置自定义指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、kuan-pack"><span class="nav-number">1.4.</span> <span class="nav-text">四、kuan-pack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、结语"><span class="nav-number">1.5.</span> <span class="nav-text">五、结语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后期修改"><span class="nav-number">1.6.</span> <span class="nav-text">后期修改</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">卢忠宽</span>
+
+  
+
+  
+</div>
+<a style="color: #999; font-size: 12px; border: none" href="https://www.luzhongkuan.cn">友情链接：luzhongkuan.cn</a>
+<div>
+  <a style="color: #999; font-size: 12px; border: none" href="https://beian.miit.gov.cn">豫ICP备17016583号</a>
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

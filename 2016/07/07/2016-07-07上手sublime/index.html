@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="快捷键： Ctrl+P：快速打开文件 Ctrl+K+B : 开启/关闭侧边栏 Ctrl + Shift + P：调出命令板（Command Palette） Ctrl + `：打开控制台 Ctrl + Shift + N：新建窗口 Ctrl + N：创建标签 ctril+F || ctrl + H：搜索替换 F3：下一个 Ctrl + Enter：在当前行下面新增一行然后跳至该行 Ctrl+K+L">
+<meta property="og:type" content="article">
+<meta property="og:title" content="上手sublime">
+<meta property="og:url" content="https://www.luzhongkuan.cn/2016/07/07/2016-07-07上手sublime/index.html">
+<meta property="og:site_name" content="奋斗的宽">
+<meta property="og:description" content="快捷键： Ctrl+P：快速打开文件 Ctrl+K+B : 开启/关闭侧边栏 Ctrl + Shift + P：调出命令板（Command Palette） Ctrl + `：打开控制台 Ctrl + Shift + N：新建窗口 Ctrl + N：创建标签 ctril+F || ctrl + H：搜索替换 F3：下一个 Ctrl + Enter：在当前行下面新增一行然后跳至该行 Ctrl+K+L">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2023-01-11T09:55:41.777Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="上手sublime">
+<meta name="twitter:description" content="快捷键： Ctrl+P：快速打开文件 Ctrl+K+B : 开启/关闭侧边栏 Ctrl + Shift + P：调出命令板（Command Palette） Ctrl + `：打开控制台 Ctrl + Shift + N：新建窗口 Ctrl + N：创建标签 ctril+F || ctrl + H：搜索替换 F3：下一个 Ctrl + Enter：在当前行下面新增一行然后跳至该行 Ctrl+K+L">
+
+
+
+
+
+
+  <link rel="canonical" href="https://www.luzhongkuan.cn/2016/07/07/2016-07-07上手sublime/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>上手sublime | 奋斗的宽</title>
+  
+
+
+
+
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?1d9e0c8ca14aade88324f404e5918fab";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">奋斗的宽</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">做一个安静程序员，只希望自己在写作中有所提升。</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.luzhongkuan.cn/2016/07/07/2016-07-07上手sublime/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="卢忠宽">
+      <meta itemprop="description" content="做一个安静程序员，只希望自己在写作中有所提升。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="奋斗的宽">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">上手sublime
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2016-07-07 13:25:04" itemprop="dateCreated datePublished" datetime="2016-07-07T13:25:04+08:00">2016-07-07</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-01-11 17:55:41" itemprop="dateModified" datetime="2023-01-11T17:55:41+08:00">2023-01-11</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="快捷键："><a href="#快捷键：" class="headerlink" title="快捷键："></a>快捷键：</h2><ul>
+<li>Ctrl+P：快速打开文件</li>
+<li>Ctrl+K+B : 开启/关闭侧边栏</li>
+<li>Ctrl + Shift + P：调出命令板（Command Palette）</li>
+<li>Ctrl + `：打开控制台</li>
+<li>Ctrl + Shift + N：新建窗口</li>
+<li>Ctrl + N：创建标签</li>
+<li>ctril+F || ctrl + H：搜索替换</li>
+<li>F3：下一个</li>
+<li>Ctrl + Enter：在当前行下面新增一行然后跳至该行</li>
+<li>Ctrl+K+L : 改为小写</li>
+<li>Ctrl+K+U : 改为大写</li>
+<li>Alt + Shift + 2：左右分屏</li>
+<li></li>
+<li>快捷键设置（预览代码、格式化、删除整行）</li>
+<li>在sublime text3首选项菜单（preferences）下找到“按键-用户”（key bindings user）选项<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">	&#123; &apos;keys&apos;: [&apos;f12&apos;], &apos;command&apos;: &apos;open_in_browser&apos; &#125;,</span><br><span class="line">	&#123; &apos;keys&apos;: [&apos;ctrl+alt+l&apos;], &apos;command&apos;: &apos;reindent&apos; &#125;,</span><br><span class="line">	&#123; &apos;keys&apos;: [&apos;ctrl+d&apos;], &apos;command&apos;: &apos;run_macro_file&apos;, &apos;args&apos;: &#123;&apos;file&apos;: &apos;res://Packages/Default/Delete Line.sublime-macro&apos;&#125; &#125;,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="安装插件："><a href="#安装插件：" class="headerlink" title="- 安装插件："></a>- 安装插件：</h2><ul>
+<li>html5</li>
+<li>emmet</li>
+<li>SideBarEnhancements： 右键增强</li>
+<li>autofilename：路径自动补全</li>
+<li>import urllib.request,os,hashlib; h = ‘df21e130d211cfc94d9b0905775a7c0f’ + ‘1e3d39e33b79698005270310898eea76’; pf = ‘Package Control.sublime-package’; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( ‘<a href="http://packagecontrol.io/&#39;" target="_blank" rel="noopener">http://packagecontrol.io/&#39;</a> + pf.replace(‘ ‘, ‘%20’)).read(); dh = hashlib.sha256(by).hexdigest(); print(‘Error validating download (got %s instead of %s), please try manual install’ % (dh, h)) if dh != h else open(os.path.join( ipp, pf), ‘wb’ ).write(by)</li>
+<li></li>
+</ul>
+<h2 id="全部快捷键"><a href="#全部快捷键" class="headerlink" title="全部快捷键"></a>全部快捷键</h2><ul>
+<li>Ctrl+D : 选择单词，重复可增加选择下一个相同的单词</li>
+<li>Ctrl+F : 查找内容</li>
+<li>Ctrl+G : 跳转到指定行</li>
+<li>Ctrl+H : 替换    </li>
+<li>Ctrl+J : 合并行（已选择需要合并的多行时）</li>
+<li>Ctrl+K0 : 展开所有</li>
+<li>Ctrl+K+T : 折叠属性</li>
+<li>Ctrl+K+B : 开启/关闭侧边栏</li>
+<li>Ctrl+K+K : 从光标处删除至行尾</li>
+<li>Ctrl+K+Backspace : 从光标处删除至行首</li>
+<li>Ctrl+K+L : 改为小写</li>
+<li>Ctrl+K+U : 改为大写</li>
+<li>Ctrl+L : 选择整行，重复可依次增加选择下一行</li>
+<li>Ctrl+M : 跳转到对应括号</li>
+<li>Ctrl+N : 新建窗口</li>
+<li>Ctrl+P : 搜索项目中的文件</li>
+<li>Ctrl+R : 搜索指定文件的函数标签</li>
+<li>Ctrl+T : 词互换</li>
+<li>Ctrl+U : 软撤销，撤销光标位置</li>
+<li>Ctrl+W : 关闭当前打开文件</li>
+<li>Ctrl+X : 删除当前行</li>
+<li>Ctrl+Y : 恢复撤销</li>
+<li>Ctrl+Z : 撤销</li>
+<li>Ctrl+/ : 注释当前行</li>
+<li>Ctrl+F2 : 设置/删除标记</li>
+<li>Ctrl+Enter : 插入行后（快速换行）</li>
+<li>Ctrl+Tab : 当前窗口中的标签页切换</li>
+<li>Ctrl+PageDown 、Ctrl+PageUp : 文件按开启的前后顺序切换</li>
+<li>Ctrl+鼠标左键 : 可以同时选择要编辑的多处文本</li>
+<li>Ctrl+Shift+A : 选择当前标签前后，修改标签用的</li>
+<li>Ctrl+Shift+D : 复制光标所在整行，插入在该行之前</li>
+<li>Ctrl+Shift+F : 查找并替换，在文件夹内查找，sublime允许添加多个文件夹进行查找</li>
+<li>Ctrl+Shift+K : 删除整行</li>
+<li>Ctrl+Shift+L : 鼠标选中多行（按下快捷键），即可同时编辑这些行</li>
+<li>Ctrl+Shift+M : 选择括号内的内容（按住-继续选择父括号）    </li>
+<li>Ctrl+Shift+P : 打开命令面板</li>
+<li></li>
+<li>Ctrl+Shift+W : 关闭所有打开文件</li>
+<li>Ctrl+Shift+V : 粘贴并格式化</li>
+<li>Ctrl+Shift+/ : 注释已选择内容, 或在当前位置插入块注释，并Focus到首行，写注释说明用的</li>
+<li>Ctrl+Shift+Enter : 在当前行前插入新行</li>
+<li>Ctrl+Shift+↑ : 可以移动此行代码，与上行互换</li>
+<li>Ctrl+Shift+↓ : 可以移动此行代码，与下行互换</li>
+<li>Ctrl+Shift+[ : 折叠代码</li>
+<li>Ctrl+Shift+] : 展开代码</li>
+<li>Ctrl+Shift+分屏序号 : 将当前焦点页分配到分屏序号页</li>
+<li></li>
+<li>Shift+F2 : 上一个书签</li>
+<li>Shift+F11 : 全屏免打扰模式，只编辑当前文件</li>
+<li>Shift+鼠标右键（或使用鼠标中键） : 可以用鼠标进行竖向多行选择</li>
+<li>Shift+Tab : 去除缩进</li>
+<li></li>
+<li>Alt+Shift+1 : （非小键盘）窗口分屏，恢复默认1屏</li>
+<li>Alt+Shift+2 : 左右分屏-2列</li>
+<li>Alt+Shift+3 : 左右分屏-3列</li>
+<li>Alt+Shift+4 : 左右分屏-4列</li>
+<li>Alt+Shift+5 : 等分4屏</li>
+<li>Alt+Shift+8 : 垂直分屏-2屏</li>
+<li>Alt+Shift+9 : 垂直分屏-3屏        </li>
+<li></li>
+<li>F2 : 下一个书签</li>
+<li>F6 : 检测语法错误    </li>
+<li>F9 : 行排序(按a-z)</li>
+<li>F11 : 全屏模式</li>
+<li></li>
+<li>Alt+F3 : 选中文本，按下快捷键，即可一次性选择全部的相同文本进行同时编辑</li>
+<li>Alt+. : 闭合当前标签</li>
+<li>Alt+数字 :　切换打开第N个文件</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/05/2016-07-05html兼容问题/" rel="next" title="html兼容问题">
+                <i class="fa fa-chevron-left"></i> html兼容问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/09/2016-07-09js基础数据操作/" rel="prev" title="js基础数据操作">
+                js基础数据操作 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">卢忠宽</p>
+              <div class="site-description motion-element" itemprop="description">做一个安静程序员，只希望自己在写作中有所提升。</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">183</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#快捷键："><span class="nav-number">1.</span> <span class="nav-text">快捷键：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装插件："><span class="nav-number">2.</span> <span class="nav-text">- 安装插件：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全部快捷键"><span class="nav-number">3.</span> <span class="nav-text">全部快捷键</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">卢忠宽</span>
+
+  
+
+  
+</div>
+<a style="color: #999; font-size: 12px; border: none" href="https://www.luzhongkuan.cn">友情链接：luzhongkuan.cn</a>
+<div>
+  <a style="color: #999; font-size: 12px; border: none" href="https://beian.miit.gov.cn">豫ICP备17016583号</a>
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

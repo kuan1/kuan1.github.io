@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="透明属性：1div &amp;#123;opacity：0.5；filter：alpha（opacity=50）&amp;#125; margin-top的bug：给子元素设置margin-top；父元素也会掉下来 img将div撑大3像素 hack1：将div和img写在一行 hack2：将img转化为块元素 hack3：设置 div{vertical：middle}  倒角不够圆1border-radius：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="html兼容问题">
+<meta property="og:url" content="https://www.luzhongkuan.cn/2016/07/05/2016-07-05html兼容问题/index.html">
+<meta property="og:site_name" content="奋斗的宽">
+<meta property="og:description" content="透明属性：1div &amp;#123;opacity：0.5；filter：alpha（opacity=50）&amp;#125; margin-top的bug：给子元素设置margin-top；父元素也会掉下来 img将div撑大3像素 hack1：将div和img写在一行 hack2：将img转化为块元素 hack3：设置 div{vertical：middle}  倒角不够圆1border-radius：">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2023-01-11T09:55:41.970Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="html兼容问题">
+<meta name="twitter:description" content="透明属性：1div &amp;#123;opacity：0.5；filter：alpha（opacity=50）&amp;#125; margin-top的bug：给子元素设置margin-top；父元素也会掉下来 img将div撑大3像素 hack1：将div和img写在一行 hack2：将img转化为块元素 hack3：设置 div{vertical：middle}  倒角不够圆1border-radius：">
+
+
+
+
+
+
+  <link rel="canonical" href="https://www.luzhongkuan.cn/2016/07/05/2016-07-05html兼容问题/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>html兼容问题 | 奋斗的宽</title>
+  
+
+
+
+
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?1d9e0c8ca14aade88324f404e5918fab";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">奋斗的宽</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">做一个安静程序员，只希望自己在写作中有所提升。</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.luzhongkuan.cn/2016/07/05/2016-07-05html兼容问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="卢忠宽">
+      <meta itemprop="description" content="做一个安静程序员，只希望自己在写作中有所提升。">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="奋斗的宽">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">html兼容问题
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2016-07-05 12:08:40" itemprop="dateCreated datePublished" datetime="2016-07-05T12:08:40+08:00">2016-07-05</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2023-01-11 17:55:41" itemprop="dateModified" datetime="2023-01-11T17:55:41+08:00">2023-01-11</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="透明属性："><a href="#透明属性：" class="headerlink" title="透明属性："></a>透明属性：</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">div &#123;opacity：0.5；filter：alpha（opacity=50）&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="margin-top的bug："><a href="#margin-top的bug：" class="headerlink" title="margin-top的bug："></a>margin-top的bug：</h3><p>给子元素设置margin-top；父元素也会掉下来</p>
+<h3 id="img将div撑大3像素"><a href="#img将div撑大3像素" class="headerlink" title="img将div撑大3像素"></a>img将div撑大3像素</h3><ul>
+<li>hack1：将div和img写在一行</li>
+<li>hack2：将img转化为块元素</li>
+<li>hack3：设置 <code>div{vertical：middle}</code></li>
+</ul>
+<h3 id="倒角不够圆"><a href="#倒角不够圆" class="headerlink" title="倒角不够圆"></a>倒角不够圆</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">border-radius</span>：100%</span><br></pre></td></tr></table></figure>
+<h3 id="默认高度问题"><a href="#默认高度问题" class="headerlink" title="默认高度问题"></a>默认高度问题</h3><p>IE6及以下版本块元素拥有默认高度（不低于18px）。<br>hack1：给元素声明font-size:0<br>hack2：给元素声明overflow：hidden</p>
+<h3 id="最小高度"><a href="#最小高度" class="headerlink" title="最小高度"></a>最小高度</h3><p>min-height： _height：<br>min-height： height：auto !important height：</p>
+<h3 id="双倍浮向问题"><a href="#双倍浮向问题" class="headerlink" title="双倍浮向问题"></a>双倍浮向问题</h3><p>IE6及以下版本错误的将浮动元素错误解析浮向边距为双倍；<br>hack1：给浮动元素添加display：inline；</p>
+<h3 id="表单元素行高不一致"><a href="#表单元素行高不一致" class="headerlink" title="表单元素行高不一致"></a>表单元素行高不一致</h3><p>给元素添加float</p>
+<h3 id="按钮默认大小和样式不一样"><a href="#按钮默认大小和样式不一样" class="headerlink" title="按钮默认大小和样式不一样"></a>按钮默认大小和样式不一样</h3><p>hack1：统一大小和样式，用a标签模拟<br>hack2：input外套一个标签，在这个标签里写按钮的样式，把input的边框去掉<br>hack3：如果这个按钮是一个图片，直接把图片作为按钮的背景图片即可</p>
+<h3 id="指针bug："><a href="#指针bug：" class="headerlink" title="指针bug："></a>指针bug：</h3><p>cursor属性的hand属性只有ie8浏览器可以识别，使用pointer</p>
+<h3 id="li中的a标签float：left；或者display：block；出现行高不一致，多出三像素"><a href="#li中的a标签float：left；或者display：block；出现行高不一致，多出三像素" class="headerlink" title="li中的a标签float：left；或者display：block；出现行高不一致，多出三像素"></a>li中的a标签float：left；或者display：block；出现行高不一致，多出三像素</h3><p>hack1：给a添加dispaly：inline-block<br>hack2：给a添加diaplay：inline<br>hack3：给float：float；并加固定宽度  </p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/05/2016-07-05砸砖块小游戏/" rel="next" title="砸砖块小游戏">
+                <i class="fa fa-chevron-left"></i> 砸砖块小游戏
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/07/2016-07-07上手sublime/" rel="prev" title="上手sublime">
+                上手sublime <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">卢忠宽</p>
+              <div class="site-description motion-element" itemprop="description">做一个安静程序员，只希望自己在写作中有所提升。</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">183</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#透明属性："><span class="nav-number">1.</span> <span class="nav-text">透明属性：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#margin-top的bug："><span class="nav-number">2.</span> <span class="nav-text">margin-top的bug：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#img将div撑大3像素"><span class="nav-number">3.</span> <span class="nav-text">img将div撑大3像素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#倒角不够圆"><span class="nav-number">4.</span> <span class="nav-text">倒角不够圆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#默认高度问题"><span class="nav-number">5.</span> <span class="nav-text">默认高度问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最小高度"><span class="nav-number">6.</span> <span class="nav-text">最小高度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#双倍浮向问题"><span class="nav-number">7.</span> <span class="nav-text">双倍浮向问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表单元素行高不一致"><span class="nav-number">8.</span> <span class="nav-text">表单元素行高不一致</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#按钮默认大小和样式不一样"><span class="nav-number">9.</span> <span class="nav-text">按钮默认大小和样式不一样</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指针bug："><span class="nav-number">10.</span> <span class="nav-text">指针bug：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#li中的a标签float：left；或者display：block；出现行高不一致，多出三像素"><span class="nav-number">11.</span> <span class="nav-text">li中的a标签float：left；或者display：block；出现行高不一致，多出三像素</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">卢忠宽</span>
+
+  
+
+  
+</div>
+<a style="color: #999; font-size: 12px; border: none" href="https://www.luzhongkuan.cn">友情链接：luzhongkuan.cn</a>
+<div>
+  <a style="color: #999; font-size: 12px; border: none" href="https://beian.miit.gov.cn">豫ICP备17016583号</a>
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
