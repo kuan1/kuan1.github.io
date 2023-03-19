@@ -4,9 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "hexo serve",
-    "prebuild": "node refresh",
     "build": "hexo clean && hexo g",
-    "d": "yarn deploy",
     "deploy": "yarn build && hexo deploy"
   },
   "hexo": {
@@ -17,6 +15,7 @@
     "hexo-generator-archive": "^0.1.4",
     "hexo-generator-category": "^0.1.3",
     "hexo-generator-index": "^0.2.0",
+    "hexo-generator-searchdb": "^1.4.1",
     "hexo-generator-tag": "^0.2.0",
     "hexo-renderer-ejs": "^0.3.0",
     "hexo-renderer-marked": "^0.3.0",
