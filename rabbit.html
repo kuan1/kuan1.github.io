@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小兔子吃胡萝卜 - 街机游戏</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            background: linear-gradient(180deg, #0a0a0a 0%, #1a1a2e 100%);
+            padding: 10px;
+            overflow-y: auto;
+        }
+
+        h1 {
+            font-size: 32px;
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+            margin: 5px 0 10px 0;
+            font-weight: bold;
+            letter-spacing: 2px;
+            animation: glitch 0.3s infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes glitch {
+            0%, 100% { text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00; }
+            50% { text-shadow: 0 0 20px #00ff00, 0 0 30px #00ff00, 2px 2px 0 #ff00ff; }
+        }
+
+        .game-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            background: radial-gradient(ellipse at center, #2a2a3e 0%, #0a0a0a 100%);
+            padding: 12px;
+            border: 6px solid #00ff00;
+            box-shadow: 0 0 30px #00ff00, inset 0 0 20px rgba(0, 255, 0, 0.1);
+            border-radius: 2px;
+            margin: 0 10px 10px 10px;
+            flex-shrink: 0;
+            max-width: 650px;
+        }
+
+        .game-area {
+            display: grid;
+            grid-template-columns: repeat(10, 45px);
+            grid-template-rows: repeat(10, 45px);
+            gap: 2px;
+            padding: 8px;
+            background: #000;
+            border: 3px solid #00ff00;
+            box-shadow: inset 0 0 15px rgba(0, 255, 0, 0.3), 0 0 20px #00ff00;
+            flex-shrink: 0;
+        }
+
+        .cell {
+            width: 45px;
+            height: 45px;
+            border: 1px solid #00aa00;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            background: #001a00;
+            cursor: pointer;
+            transition: all 0.1s;
+            position: relative;
+        }
+
+        .cell::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 255, 0, 0.03) 2px,
+                rgba(0, 255, 0, 0.03) 4px
+            );
+            pointer-events: none;
+        }
+
+        .cell:hover {
+            background: #003300;
+            box-shadow: inset 0 0 8px rgba(0, 255, 0, 0.5);
+        }
+
+        .steps-section {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+
+        .steps-label {
+            color: #00ff00;
+            font-size: 12px;
+            font-weight: bold;
+            text-shadow: 0 0 10px #00ff00;
+            text-align: center;
+        }
+
+        #steps-display {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            padding: 8px;
+            background: #000;
+            border: 2px solid #00ff00;
+            min-height: 60px;
+            max-height: 130px;
+            overflow-y: auto;
+            box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.2), 0 0 15px #00ff00;
+            border-radius: 2px;
+            justify-content: flex-start;
+            align-content: flex-start;
+            width: 100%;
+            flex-shrink: 0;
+        }
+
+        .step-block {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            border: 2px solid #00ff00;
+            color: #00ff00;
+            font-weight: bold;
+            box-shadow: 0 0 10px #00ff00, inset 0 0 4px rgba(0, 255, 0, 0.5);
+            background: #001a00;
+            text-shadow: 0 0 6px #00ff00;
+            font-family: 'Courier New', monospace;
+            flex-shrink: 0;
+        }
+
+        .step-block.animate {
+            animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .step-block.up {
+            border-color: #ff00ff;
+            color: #ff00ff;
+            box-shadow: 0 0 8px #ff00ff, inset 0 0 4px rgba(255, 0, 255, 0.3);
+            text-shadow: 0 0 5px #ff00ff;
+        }
+
+        .step-block.down {
+            border-color: #00ffff;
+            color: #00ffff;
+            box-shadow: 0 0 8px #00ffff, inset 0 0 4px rgba(0, 255, 255, 0.3);
+            text-shadow: 0 0 5px #00ffff;
+        }
+
+        .step-block.left {
+            border-color: #ffff00;
+            color: #ffff00;
+            box-shadow: 0 0 8px #ffff00, inset 0 0 4px rgba(255, 255, 0, 0.3);
+            text-shadow: 0 0 5px #ffff00;
+        }
+
+        .step-block.right {
+            border-color: #ff4400;
+            color: #ff4400;
+            box-shadow: 0 0 8px #ff4400, inset 0 0 4px rgba(255, 68, 0, 0.3);
+            text-shadow: 0 0 5px #ff4400;
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: scale(0) rotate(-180deg);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            width: 100%;
+            flex-shrink: 0;
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            border: 3px solid #00ff00;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Courier New', monospace;
+            background: #001a00;
+            color: #00ff00;
+            text-shadow: 0 0 5px #00ff00;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-radius: 3px;
+        }
+
+        button:hover {
+            background: #003300;
+            box-shadow: 0 0 20px #00ff00, inset 0 0 10px rgba(0, 255, 0, 0.3);
+            text-shadow: 0 0 10px #00ff00;
+        }
+
+        button:active {
+            transform: scale(0.98);
+            box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.5);
+        }
+
+        /* 弹窗样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: #0a0a0a;
+            margin: 20% auto;
+            padding: 40px;
+            border: 5px solid #00ff00;
+            width: 85%;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 0 40px #00ff00, 0 0 60px rgba(0, 255, 0, 0.5), inset 0 0 20px rgba(0, 255, 0, 0.2);
+            animation: slideDown 0.4s;
+            border-radius: 0;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-content h2 {
+            font-size: 44px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #00ff00;
+        }
+
+        .modal-content.success h2 {
+            color: #00ff00;
+            animation: pulse 0.6s infinite;
+        }
+
+        .modal-content.fail h2 {
+            color: #ff0000;
+            text-shadow: 0 0 10px #ff0000;
+        }
+
+        .modal-content p {
+            color: #00ff00;
+            font-size: 16px;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .modal-content button {
+            margin-top: 30px;
+            padding: 15px 40px;
+            font-size: 18px;
+        }
+
+        /* 彩带效果 */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            pointer-events: none;
+        }
+
+        @keyframes confettiFall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .hint {
+            color: #00ff00;
+            font-size: 12px;
+            text-shadow: 0 0 5px #00ff00;
+            margin-top: 8px;
+        }
+
+        #message {
+            display: none;
+        }
+
+        .level-display {
+            color: #00ff00;
+            font-size: 14px;
+            font-weight: bold;
+            text-shadow: 0 0 10px #00ff00;
+            margin-bottom: 5px;
+        }
+
+        /* 障碍物样式 */
+        .obstacle {
+            background: radial-gradient(circle, #ff6600 0%, #990000 100%) !important;
+            border-color: #ff0000 !important;
+            box-shadow: inset 0 0 8px rgba(255, 100, 0, 0.8), 0 0 10px #ff3300 !important;
+            font-size: 20px !important;
+        }
+
+        /* 爆炸动画 */
+        @keyframes explosion {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.3) rotate(45deg);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(0.5) rotate(90deg);
+                opacity: 0;
+            }
+        }
+
+        .explode {
+            animation: explosion 0.6s ease-out !important;
+        }
+    </style>
+</head>
+<body>
+    <h1>🐰 小兔子吃胡萝卜 🥕</h1>
+    
+    <div class="game-wrapper">
+        <div id="level-display" class="level-display">第1关 - 6×6 网格</div>
+        <div id="game-area" class="game-area"></div>
+        
+        <div class="steps-section">
+            <div class="steps-label">▶ 录入步骤 (↑↓←→ 录入 | BACKSPACE 删除 | ENTER 执行)</div>
+            <div id="steps-display"></div>
+        </div>
+        
+        <div class="button-group">
+            <button id="execute-btn">▶ 执 行</button>
+            <button id="reset-btn">⟲ 重 置</button>
+        </div>
+    </div>
+
+    <!-- 成功弹窗 -->
+    <div id="successModal" class="modal">
+        <div class="modal-content success">
+            <h2>✓ GAME OVER - WIN ✓</h2>
+            <p id="successMessage">🎉 太棒了！小兔子吃到胡萝卜啦！</p>
+            <button onclick="nextLevel()">下一关</button>
+        </div>
+    </div>
+
+    <!-- 失败弹窗 -->
+    <div id="failModal" class="modal">
+        <div class="modal-content fail">
+            <h2>✗ GAME OVER - LOSE ✗</h2>
+            <p id="failMessage"></p>
+            <button onclick="closeModal('failModal')">重试</button>
+        </div>
+    </div>
+
+    <div id="message"></div>
+
+    <script>
+        // 关卡配置
+        const levels = [
+            { gridSize: 6, obstacles: [] },
+            { gridSize: 7, obstacles: [] },
+            { gridSize: 8, obstacles: [] },
+            { gridSize: 9, obstacles: [] },
+            { gridSize: 10, obstacles: 'random' } // 第5关有障碍物
+        ];
+
+        let currentLevel = 0;
+        let gridSize = 6;
+        let rabbitPos = { x: 0, y: 0 };
+        let carrotPos = { x: 0, y: 0 };
+        let obstacles = [];
+        let steps = [];
+        let isExecuting = false;
+        let previousStepsCount = 0;
+        const gameArea = document.getElementById('game-area');
+        const stepsDisplay = document.getElementById('steps-display');
+        const levelDisplay = document.getElementById('level-display');
+
+        // 音频工具类
+        class SoundManager {
+            constructor() {
+                this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+
+            playStepSound() {
+                const now = this.audioContext.currentTime;
+                const osc = this.audioContext.createOscillator();
+                const gain = this.audioContext.createGain();
+                
+                osc.connect(gain);
+                gain.connect(this.audioContext.destination);
+                
+                osc.frequency.setValueAtTime(800, now);
+                osc.frequency.exponentialRampToValueAtTime(1000, now + 0.1);
+                gain.gain.setValueAtTime(0.3, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+                
+                osc.start(now);
+                osc.stop(now + 0.1);
+            }
+
+            playExecuteSound() {
+                const now = this.audioContext.currentTime;
+                const osc = this.audioContext.createOscillator();
+                const gain = this.audioContext.createGain();
+                
+                osc.connect(gain);
+                gain.connect(this.audioContext.destination);
+                
+                osc.frequency.setValueAtTime(600, now);
+                gain.gain.setValueAtTime(0.2, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.15);
+                
+                osc.start(now);
+                osc.stop(now + 0.15);
+            }
+
+            playSuccessSound() {
+                const now = this.audioContext.currentTime;
+                const notes = [523, 659, 784];
+                
+                notes.forEach((freq, index) => {
+                    const osc = this.audioContext.createOscillator();
+                    const gain = this.audioContext.createGain();
+                    
+                    osc.connect(gain);
+                    gain.connect(this.audioContext.destination);
+                    
+                    osc.frequency.setValueAtTime(freq, now);
+                    gain.gain.setValueAtTime(0.2, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.5);
+                    
+                    osc.start(now + index * 0.05);
+                    osc.stop(now + 0.5);
+                });
+            }
+
+            playFailSound() {
+                const now = this.audioContext.currentTime;
+                const osc = this.audioContext.createOscillator();
+                const gain = this.audioContext.createGain();
+                
+                osc.connect(gain);
+                gain.connect(this.audioContext.destination);
+                
+                osc.frequency.setValueAtTime(300, now);
+                osc.frequency.linearRampToValueAtTime(200, now + 0.3);
+                gain.gain.setValueAtTime(0.3, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+                
+                osc.start(now);
+                osc.stop(now + 0.3);
+            }
+        }
+
+        const soundManager = new SoundManager();
+
+        function createConfetti() {
+            const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA502', '#FF6348'];
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animation = `confettiFall ${2 + Math.random() * 1}s linear forwards`;
+                document.body.appendChild(confetti);
+
+                setTimeout(() => confetti.remove(), 3000);
+            }
+        }
+
+        function showModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            if (modalId === 'successModal' || modalId === 'failModal') {
+                resetGame();
+            }
+        }
+
+        function initGrid() {
+            gameArea.innerHTML = '';
+            gameArea.style.gridTemplateColumns = `repeat(${gridSize}, 45px)`;
+            gameArea.style.gridTemplateRows = `repeat(${gridSize}, 45px)`;
+            
+            for (let y = 0; y < gridSize; y++) {
+                for (let x = 0; x < gridSize; x++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'cell';
+                    cell.dataset.x = x;
+                    cell.dataset.y = y;
+                    gameArea.appendChild(cell);
+                }
+            }
+            
+            // 生成随机胡萝卜位置
+            do {
+                carrotPos = { x: Math.floor(Math.random() * gridSize), y: Math.floor(Math.random() * gridSize) };
+            } while (carrotPos.x === rabbitPos.x && carrotPos.y === rabbitPos.y);
+            
+            // 第5关生成随机障碍物
+            obstacles = [];
+            if (currentLevel === 4) { // 第5关（索引为4）
+                const obstacleCount = Math.floor(gridSize / 2);
+                for (let i = 0; i < obstacleCount; i++) {
+                    let obsPos;
+                    do {
+                        obsPos = { x: Math.floor(Math.random() * gridSize), y: Math.floor(Math.random() * gridSize) };
+                    } while (
+                        (obsPos.x === rabbitPos.x && obsPos.y === rabbitPos.y) ||
+                        (obsPos.x === carrotPos.x && obsPos.y === carrotPos.y) ||
+                        obstacles.some(o => o.x === obsPos.x && o.y === obsPos.y)
+                    );
+                    obstacles.push(obsPos);
+                }
+            }
+            
+            updateGrid();
+        }
+
+        function updateGrid() {
+            document.querySelectorAll('.cell').forEach(cell => {
+                const x = parseInt(cell.dataset.x);
+                const y = parseInt(cell.dataset.y);
+                cell.textContent = '';
+                cell.classList.remove('obstacle', 'explode');
+                if (x === rabbitPos.x && y === rabbitPos.y) {
+                    cell.textContent = '🐰';
+                } else if (x === carrotPos.x && y === carrotPos.y) {
+                    cell.textContent = '🥕';
+                } else if (obstacles.some(o => o.x === x && o.y === y)) {
+                    cell.textContent = '💣';
+                    cell.classList.add('obstacle');
+                }
+            });
+        }
+
+        function getDirectionClass(step) {
+            switch(step) {
+                case '↑': return 'up';
+                case '↓': return 'down';
+                case '←': return 'left';
+                case '→': return 'right';
+                default: return '';
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (isExecuting) return;
+            let stepAdded = false;
+            if (e.key === 'ArrowUp') {
+                steps.push('↑');
+                soundManager.playStepSound();
+                stepAdded = true;
+            } else if (e.key === 'ArrowDown') {
+                steps.push('↓');
+                soundManager.playStepSound();
+                stepAdded = true;
+            } else if (e.key === 'ArrowLeft') {
+                steps.push('←');
+                soundManager.playStepSound();
+                stepAdded = true;
+            } else if (e.key === 'ArrowRight') {
+                steps.push('→');
+                soundManager.playStepSound();
+                stepAdded = true;
+            } else if (e.key === 'Backspace') {
+                steps.pop();
+                soundManager.playStepSound();
+                stepAdded = true;
+            } else if (e.key === 'Enter') {
+                e.preventDefault();
+                executeSteps();
+            }
+            if (stepAdded) {
+                updateStepsDisplay();
+                // 滚动到最后
+                setTimeout(() => {
+                    stepsDisplay.scrollLeft = stepsDisplay.scrollWidth;
+                }, 0);
+            }
+        });
+
+        function updateStepsDisplay() {
+            stepsDisplay.innerHTML = '';
+            const currentCount = steps.length;
+            steps.forEach((step, index) => {
+                const block = document.createElement('div');
+                block.className = `step-block ${getDirectionClass(step)}`;
+                block.textContent = step;
+                // 仅对新增的步骤添加动画class
+                if (index >= previousStepsCount) {
+                    block.classList.add('animate');
+                }
+                stepsDisplay.appendChild(block);
+            });
+            previousStepsCount = currentCount;
+        }
+
+        function executeSteps() {
+            if (isExecuting) return;
+            if (steps.length === 0) {
+                alert('请先录入步骤！');
+                return;
+            }
+            
+            isExecuting = true;
+            let index = 0;
+            let hasError = false;
+            let errorType = ''; // 'boundary' 或 'obstacle'
+            
+            const interval = setInterval(() => {
+                if (index >= steps.length) {
+                    clearInterval(interval);
+                    isExecuting = false;
+                    if (hasError) {
+                        // 已经在之前处理了错误
+                        return;
+                    }
+                    checkWin();
+                    return;
+                }
+
+                soundManager.playExecuteSound();
+                const step = steps[index];
+                let newX = rabbitPos.x;
+                let newY = rabbitPos.y;
+
+                if (step === '↑') newY--;
+                else if (step === '↓') newY++;
+                else if (step === '←') newX--;
+                else if (step === '→') newX++;
+
+                // 检查边界
+                if (newX < 0 || newX >= gridSize || newY < 0 || newY >= gridSize) {
+                    hasError = true;
+                    errorType = 'boundary';
+                    index++;
+                    return;
+                }
+
+                // 检查障碍物碰撞
+                if (obstacles.some(o => o.x === newX && o.y === newY)) {
+                    hasError = true;
+                    errorType = 'obstacle';
+                    rabbitPos = { x: newX, y: newY };
+                    // 播放爆炸动画
+                    setTimeout(() => {
+                        const cells = document.querySelectorAll('.cell');
+                        cells.forEach(cell => {
+                            if (parseInt(cell.dataset.x) === newX && parseInt(cell.dataset.y) === newY) {
+                                cell.classList.add('explode');
+                            }
+                        });
+                    }, 0);
+                    index++;
+                    return;
+                }
+
+                rabbitPos = { x: newX, y: newY };
+                updateGrid();
+                index++;
+            }, 400);
+            
+            // 在所有步骤执行后检查错误
+            setTimeout(() => {
+                if (hasError) {
+                    isExecuting = false;
+                    soundManager.playFailSound();
+                    if (errorType === 'boundary') {
+                        document.getElementById('failMessage').textContent = '哎呀！小兔子跑出边界了！';
+                    } else {
+                        document.getElementById('failMessage').textContent = '嘭！小兔子碰到炸弹了！';
+                    }
+                    showModal('failModal');
+                }
+            }, steps.length * 400);
+        }
+
+        function checkWin() {
+            if (rabbitPos.x === carrotPos.x && rabbitPos.y === carrotPos.y) {
+                soundManager.playSuccessSound();
+                createConfetti();
+                if (currentLevel === 4) {
+                    // 最后一关
+                    document.getElementById('successMessage').textContent = '🎉 恭喜通关！你已经完成了所有5个关卡！';
+                } else {
+                    document.getElementById('successMessage').textContent = '🎉 太棒了！小兔子吃到胡萝卜啦！';
+                }
+                showModal('successModal');
+            } else {
+                soundManager.playFailSound();
+                document.getElementById('failMessage').textContent = '哎呀！小兔子没有吃到胡萝卜！';
+                showModal('failModal');
+            }
+        }
+
+        function resetGame() {
+            rabbitPos = { x: 0, y: 0 };
+            steps = [];
+            previousStepsCount = 0;
+            updateStepsDisplay();
+            initGrid();
+        }
+
+        function nextLevel() {
+            if (currentLevel < levels.length - 1) {
+                currentLevel++;
+                gridSize = levels[currentLevel].gridSize;
+                levelDisplay.textContent = `第${currentLevel + 1}关 - ${gridSize}×${gridSize} 网格${currentLevel === 4 ? ' (有障碍物)' : ''}`;
+                resetGame();
+                closeModal('successModal');
+            } else {
+                // 所有关卡完成
+                currentLevel = 0;
+                gridSize = levels[currentLevel].gridSize;
+                levelDisplay.textContent = `第${currentLevel + 1}关 - ${gridSize}×${gridSize} 网格`;
+                resetGame();
+                closeModal('successModal');
+            }
+        }
+
+        document.getElementById('execute-btn').addEventListener('click', executeSteps);
+
+        document.getElementById('reset-btn').addEventListener('click', () => {
+            resetGame();
+        });
+
+        // 初始化第一关
+        gridSize = levels[currentLevel].gridSize;
+        levelDisplay.textContent = `第${currentLevel + 1}关 - ${gridSize}×${gridSize} 网格`;
+        initGrid();
+    </script>
+</body>
+</html>
